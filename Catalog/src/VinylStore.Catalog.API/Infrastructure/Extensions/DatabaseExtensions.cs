@@ -15,9 +15,9 @@ namespace VinylStore.Catalog.API.Infrastructure.Extensions
                 {
                     opt.UseSqlServer(
                         connectionString,
-                        _ =>
+                        x =>
                         {
-                            _.MigrationsAssembly(typeof(Startup)
+                            x.MigrationsAssembly(typeof(Startup)
                                 .GetTypeInfo()
                                 .Assembly
                                 .GetName().Name);

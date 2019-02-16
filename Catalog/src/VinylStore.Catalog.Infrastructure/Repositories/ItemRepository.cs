@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VinylStore.Catalog.Domain.Entities;
@@ -21,20 +22,22 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
 
         public async Task<IList<Item>> GetAsync()
         {
-            return await _context.Items.ToListAsync();
+            return await _context.Items
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Item> GetAsync(Guid id)
         {
-            var item = await _context.Items.FindAsync(id);
+            var item = await _context.Items
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .Include(x => x.Genre)
+                .Include(x => x.Artist).FirstOrDefaultAsync();
 
             if (item == null) return null;
 
-            await _context.Entry(item)
-                .Reference(i => i.Artist).LoadAsync();
-            await _context.Entry(item)
-                .Reference(i => i.Genre).LoadAsync();
-
+            _context.Entry(item).State = EntityState.Detached;
             return item;
         }
 

@@ -9,10 +9,10 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
             builder.ToTable("Artists", CatalogContext.DEFAULT_SCHEMA);
-            builder.HasKey(_ => _.ArtistId);
-            builder.Property(_ => _.ArtistId);
+            builder.HasKey(x => x.ArtistId);
+            builder.Property(x => x.ArtistId);
 
-            builder.Property(_ => _.ArtistName)
+            builder.Property(x => x.ArtistName)
                 .IsRequired()
                 .HasMaxLength(200);
         }

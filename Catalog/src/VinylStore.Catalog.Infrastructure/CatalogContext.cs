@@ -14,7 +14,9 @@ namespace VinylStore.Catalog.Infrastructure
         public DbSet<Item> Items { get; set; }
 
 
-        public CatalogContext(DbContextOptions<CatalogContext> options) : base (options) { }
+        public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
+        {
+        }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +28,6 @@ namespace VinylStore.Catalog.Infrastructure
         {
             await SaveChangesAsync(cancellationToken);
             return true;
-        }        
+        }
     }
 }

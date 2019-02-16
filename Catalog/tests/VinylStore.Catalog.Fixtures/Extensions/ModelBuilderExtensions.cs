@@ -2,7 +2,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace VinylStore.Catalog.Infrastructure.Tests.Extensions
+namespace VinylStore.Catalog.Fixtures.Extensions
 {
     public static class ModelBuilderExtensions
     {

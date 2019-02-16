@@ -9,9 +9,9 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
             builder.ToTable("Genres", CatalogContext.DEFAULT_SCHEMA);
-            builder.HasKey(_ => _.GenreId);
-            builder.Property(_ => _.GenreId);
-            builder.Property(_ => _.GenreDescription)
+            builder.HasKey(x => x.GenreId);
+            builder.Property(x => x.GenreId);
+            builder.Property(x => x.GenreDescription)
                 .IsRequired()
                 .HasMaxLength(1000);
         }

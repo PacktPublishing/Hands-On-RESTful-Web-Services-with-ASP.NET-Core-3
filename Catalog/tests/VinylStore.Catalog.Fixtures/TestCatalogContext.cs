@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using VinylStore.Catalog.Domain.Entities;
-using VinylStore.Catalog.Infrastructure.Tests.Extensions;
+using VinylStore.Catalog.Fixtures.Extensions;
+using VinylStore.Catalog.Infrastructure;
 
-namespace VinylStore.Catalog.Infrastructure.Tests
+namespace VinylStore.Catalog.Fixtures
 {
     public class TestCatalogContext : CatalogContext
     {
@@ -13,7 +14,7 @@ namespace VinylStore.Catalog.Infrastructure.Tests
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Seed<Artist>("./Data/artist.json");
             modelBuilder.Seed<Genre>("./Data/genre.json");
             modelBuilder.Seed<Item>("./Data/item.json");

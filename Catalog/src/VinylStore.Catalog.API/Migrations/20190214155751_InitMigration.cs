@@ -17,10 +17,7 @@ namespace VinylStore.Catalog.API.Migrations
                     ArtistId = table.Column<Guid>(nullable: false),
                     ArtistName = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Artist", x => x.ArtistId);
-                });
+                constraints: table => { table.PrimaryKey("PK_Artist", x => x.ArtistId); });
 
             migrationBuilder.CreateTable(
                 name: "Genre",
@@ -29,10 +26,7 @@ namespace VinylStore.Catalog.API.Migrations
                     GenreId = table.Column<Guid>(nullable: false),
                     GenreDescription = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Genre", x => x.GenreId);
-                });
+                constraints: table => { table.PrimaryKey("PK_Genre", x => x.GenreId); });
 
             migrationBuilder.CreateTable(
                 name: "Items",
