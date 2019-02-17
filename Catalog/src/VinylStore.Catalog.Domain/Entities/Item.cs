@@ -14,9 +14,9 @@ namespace VinylStore.Catalog.Domain.Entities
         public string Format { get; set; }
         public int AvailableStock { get; set; }
         public Guid GenreId { get; set; }
-        public Genre Genre { get; private set; }
+        public Genre Genre { get; set; }
         public Guid ArtistId { get; set; }
-        public Artist Artist { get; private set; }
+        public Artist Artist { get; set; }
         public bool IsInactive { get; set; }
     }
 }

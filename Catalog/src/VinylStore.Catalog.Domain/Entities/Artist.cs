@@ -7,6 +7,6 @@ namespace VinylStore.Catalog.Domain.Entities
     {
         public Guid ArtistId { get; set; }
         public string ArtistName { get; set; }
-        public ICollection<Item> Items { get; private set; }
+        public ICollection<Item> Items { get; set; }
     }
 }

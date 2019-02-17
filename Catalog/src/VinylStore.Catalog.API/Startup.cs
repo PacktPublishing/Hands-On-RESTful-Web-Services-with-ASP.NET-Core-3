@@ -1,10 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VinylStore.Catalog.API.Infrastructure.Extensions;
+using VinylStore.Catalog.Domain.Commands.Genre;
+using VinylStore.Catalog.Domain.Infrastructure.Extensions;
+using VinylStore.Catalog.Domain.Infrastructure.Repositories;
+using VinylStore.Catalog.Infrastructure.Repositories;
 
 namespace VinylStore.Catalog.API
 {
@@ -21,9 +24,11 @@ namespace VinylStore.Catalog.API
         {
             services
                 .AddCatalogContext(Configuration.GetSection("DataSource:ConnectionString").Value)
-                .AddAutoMapper();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .AddScoped<IItemRepository, ItemRepository>()
+                .AddScoped<IArtistRepository, ArtistRepository>()
+                .AddScoped<IGenreRepository, GenreRepository>()
+                .AddMediatorComponents()
+                .AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

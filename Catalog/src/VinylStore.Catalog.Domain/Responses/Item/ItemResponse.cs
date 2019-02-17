@@ -14,8 +14,8 @@ namespace VinylStore.Catalog.Domain.Responses.Item
         public string Format { get; set; }
         public int AvailableStock { get; set; }
         public Guid GenreId { get; set; }
-        public GenreResponse Genre { get; private set; }
+        public GenreResponse Genre { get; set; }
         public Guid ArtistId { get; set; }
-        public ArtistResponse Artist { get; private set; }
+        public ArtistResponse Artist { get; set; }
     }
 }

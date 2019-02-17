@@ -9,6 +9,8 @@ namespace VinylStore.Catalog.Domain.Infrastructure.Repositories
     {
         Task<IList<Item>> GetAsync();
         Task<Item> GetAsync(Guid id);
+        Task<IList<Item>> GetItemByArtistIdAsync(Guid id);
+        Task<IList<Item>> GetItemByGenreIdAsync(Guid id);
         Item Add(Item item);
         Item Update(Item item);
         Item Delete(Item item);

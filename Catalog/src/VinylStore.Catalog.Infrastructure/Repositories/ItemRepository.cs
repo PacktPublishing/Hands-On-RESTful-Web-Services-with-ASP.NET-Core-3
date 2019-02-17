@@ -40,10 +40,26 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
             _context.Entry(item).State = EntityState.Detached;
             return item;
         }
-
-        public Item Add(Item order)
+        
+        public async Task<IList<Item>> GetItemByArtistIdAsync(Guid id)
         {
-            return _context.Items.Add(order).Entity;
+            var items = await _context.Items
+                .Where(item => item.ArtistId == id).ToListAsync();
+
+            return items;
+        }
+
+        public async Task<IList<Item>> GetItemByGenreIdAsync(Guid id)
+        {
+            var items = await _context.Items
+                .Where(item => item.GenreId == id).ToListAsync();
+
+            return items;
+        }
+
+        public Item Add(Item item)
+        {
+            return _context.Items.Add(item).Entity;
         }
 
         public Item Update(Item item)
