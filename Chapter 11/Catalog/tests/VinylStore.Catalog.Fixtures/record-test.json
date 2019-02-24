@@ -1,0 +1,61 @@
+{
+  "item_with_id": [
+    [
+      {
+        "Id": "86bff4f7-05a7-46b6-ba73-d43e2c45840f",
+        "Name": "DAMN.",
+        "Description": "DAMN. by Kendrick Lamar",
+        "LabelName": "TDE, Top Dawg Entertainment",
+        "Price": {
+          "Amount": 34.5,
+          "Currency": "EUR"
+        },
+        "PictureUri": "https://mycdn.com/pictures/45345345",
+        "ReleaseDate": "2017-01-01T00:00:00+00:00",
+        "Format": "Vinyl 33g",
+        "AvailableStock": 5,
+        "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+        "Genre": null,
+        "ArtistId": "3eb00b42-a9f0-4012-841d-70ebf3ab7474",
+        "Artist": null
+      }
+    ]
+  ],
+  "item_without_id": [
+    [
+      {
+        "Name": "DAMN.",
+        "Description": "DAMN. by Kendrick Lamar",
+        "LabelName": "TDE, Top Dawg Entertainment",
+        "Price": {
+          "Amount": 34.5,
+          "Currency": "EUR"
+        },
+        "PictureUri": "https://mycdn.com/pictures/45345345",
+        "ReleaseDate": "2017-01-01T00:00:00+00:00",
+        "Format": "Vinyl 33g",
+        "AvailableStock": 5,
+        "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+        "Genre": null,
+        "ArtistId": "f08a333d-30db-4dd1-b8ba-3b0473c7cdab",
+        "Artist": null
+      }
+    ]
+  ],
+  "genre_with_id": [
+    [
+      {
+        "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+        "GenreDescription": "Hip-Hop"
+      }
+    ]
+  ],
+  "artist_with_id": [
+    [
+      {
+        "ArtistId": "f08a333d-30db-4dd1-b8ba-3b0473c7cdab",
+        "ArtistName": "Anderson Paak."
+      }
+    ]
+  ]
+}
