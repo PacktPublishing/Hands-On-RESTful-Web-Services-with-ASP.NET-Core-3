@@ -1,0 +1,30 @@
+#docker-compose.yml
+version: "3.7"
+services:
+    cart_api:
+        container_name: cart_api
+        environment:
+            - ASPNETCORE_URLS=http://*:5002
+            - ASPNETCORE_ENVIRONMENT=Integration
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - my_network
+        ports:
+            - 5002:5002
+            - 5003:5003
+        depends_on:
+            - cart_db
+            
+    cart_db:
+        container_name: cart_db
+        networks:
+            - my_network
+        ports:
+            - 6378:6378
+        image: redis:alpine
+
+networks:
+    my_network:
+        driver: bridge
