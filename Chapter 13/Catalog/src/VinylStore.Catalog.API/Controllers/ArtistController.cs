@@ -44,14 +44,14 @@ namespace VinylStore.Catalog.API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetArtistCommand {Id = id});
+            var result = await _mediator.Send(new GetArtistCommand { Id = id });
             return Ok(result);
         }
 
         [HttpGet("{id:guid}/items")]
         public async Task<IActionResult> GetItemsById(Guid id)
         {
-            var result = await _mediator.Send(new GetItemsByArtistCommand() {Id = id});
+            var result = await _mediator.Send(new GetItemsByArtistCommand() { Id = id });
             return Ok(result);
         }
 
@@ -59,7 +59,7 @@ namespace VinylStore.Catalog.API.Controllers
         public async Task<IActionResult> Post(AddArtistCommand request)
         {
             var result = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetById), new {id = result.ArtistId}, null);
+            return CreatedAtAction(nameof(GetById), new { id = result.ArtistId }, null);
         }
     }
 }

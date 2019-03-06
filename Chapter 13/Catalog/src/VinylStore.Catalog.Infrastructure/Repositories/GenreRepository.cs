@@ -12,7 +12,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
         private readonly CatalogContext _catalogContext;
         public IUnitOfWork UnitOfWork => _catalogContext;
 
-        
+
         public GenreRepository(CatalogContext catalogContext)
         {
             _catalogContext = catalogContext;
@@ -20,14 +20,14 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
 
         public async Task<IList<Genre>> GetAsync()
         {
-            return await _catalogContext.Genre
+            return await _catalogContext.Genres
                 .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Genre> GetAsync(Guid id)
         {
-            var item = await _catalogContext.Genre
+            var item = await _catalogContext.Genres
                 .FindAsync(id);
 
             if (item == null) return null;
@@ -38,7 +38,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
 
         public Genre Add(Genre item)
         {
-            return _catalogContext.Genre.Add(item).Entity;
+            return _catalogContext.Genres.Add(item).Entity;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
         {
             return await _context.Items
                 .AsNoTracking()
-                .Where(_=> !_.IsInactive)
+                .Where(_ => !_.IsInactive)
                 .ToListAsync();
         }
 
@@ -32,7 +32,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
         {
             var item = await _context.Items
                 .AsNoTracking()
-                .Where(_=> !_.IsInactive)
+                .Where(_ => !_.IsInactive)
                 .Where(x => x.Id == id)
                 .Include(x => x.Genre)
                 .Include(x => x.Artist).FirstOrDefaultAsync();
@@ -42,11 +42,11 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
             _context.Entry(item).State = EntityState.Detached;
             return item;
         }
-        
+
         public async Task<IList<Item>> GetItemByArtistIdAsync(Guid id)
         {
             var items = await _context.Items
-                .Where(_=> !_.IsInactive)
+                .Where(_ => !_.IsInactive)
                 .Where(item => item.ArtistId == id).ToListAsync();
 
             return items;
@@ -55,7 +55,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
         public async Task<IList<Item>> GetItemByGenreIdAsync(Guid id)
         {
             var items = await _context.Items
-                .Where(_=> !_.IsInactive)
+                .Where(_ => !_.IsInactive)
                 .Where(item => item.GenreId == id).ToListAsync();
 
             return items;

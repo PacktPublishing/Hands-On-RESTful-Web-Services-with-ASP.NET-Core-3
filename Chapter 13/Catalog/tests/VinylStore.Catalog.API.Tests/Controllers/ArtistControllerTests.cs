@@ -91,7 +91,7 @@ namespace VinylStore.Catalog.API.Tests.Controllers
         [Fact]
         public async Task add_should_create_new_artist()
         {
-            var genreDescription = new {ArtistName = "The Braze"};
+            var genreDescription = new { ArtistName = "The Braze" };
 
             var client = _factory.CreateClient();
 

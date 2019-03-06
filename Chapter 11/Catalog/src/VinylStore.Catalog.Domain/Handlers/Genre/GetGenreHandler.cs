@@ -23,7 +23,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Genre
 
             var result = await _genreRepository.GetAsync(command.Id);
 
-            return new GenreResponse {GenreId = result.GenreId, GenreDescription = result.GenreDescription};
+            return result == null ? null : new GenreResponse { GenreId = result.GenreId, GenreDescription = result.GenreDescription };
         }
     }
 }

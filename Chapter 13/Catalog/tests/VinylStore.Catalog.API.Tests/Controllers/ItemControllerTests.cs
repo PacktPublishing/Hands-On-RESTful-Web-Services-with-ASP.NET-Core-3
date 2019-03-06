@@ -24,9 +24,9 @@ namespace VinylStore.Catalog.API.Tests.Controllers
         }
 
         [Theory]
-        [InlineData("/api/items/?pageSize=1&pageIndex=0", 1,0)]
-        [InlineData("/api/items/?pageSize=2&pageIndex=0", 2,0)]
-        [InlineData("/api/items/?pageSize=1&pageIndex=1", 1,1)]
+        [InlineData("/api/items/?pageSize=1&pageIndex=0", 1, 0)]
+        [InlineData("/api/items/?pageSize=2&pageIndex=0", 2, 0)]
+        [InlineData("/api/items/?pageSize=1&pageIndex=1", 1, 1)]
         public async Task get_should_return_paginated_data(string url, int pageSize, int pageIndex)
 
         {
@@ -65,7 +65,7 @@ namespace VinylStore.Catalog.API.Tests.Controllers
             responseEntity.GenreId.ShouldBe(request.GenreId);
             responseEntity.ArtistId.ShouldBe(request.ArtistId);
         }
-        
+
         [Fact]
         public async Task getbyid_should_returns_not_found_when_item_is_not_present()
         {
@@ -74,11 +74,11 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
             response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
-        
-        
+
+
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-         public async Task add_should_create_new_record(object jsonPayload)
+        public async Task add_should_create_new_record(object jsonPayload)
         {
             var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
@@ -87,27 +87,48 @@ namespace VinylStore.Catalog.API.Tests.Controllers
             var response = await client.PostAsync($"/api/items", httpContent);
 
             response.EnsureSuccessStatusCode();
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var responseEntity = JsonConvert.DeserializeObject<Item>(responseContent);
+            response.Headers.Location.ShouldNotBeNull();
             
-            responseEntity.Name.ShouldBe(request.Name);
-            responseEntity.Description.ShouldBe(request.Description);
-            responseEntity.Price.ToString().ShouldBe(request.Price.ToString());
-            responseEntity.Format.ShouldBe(request.Format);
-            responseEntity.PictureUri.ShouldBe(request.PictureUri);
-            responseEntity.GenreId.ShouldBe(request.GenreId);
-            responseEntity.ArtistId.ShouldBe(request.ArtistId);
+        }
+
+        [Theory]
+        [LoadTestData("record-test.json", "item_without_id")]
+        public async Task add_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
+        {
+            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
+            var client = _factory.CreateClient();
+
+            request.ArtistId = Guid.NewGuid();
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"/api/items", httpContent);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        }
+
+        [Theory]
+        [LoadTestData("record-test.json", "item_without_id")]
+        public async Task add_should_returns_bad_request_if_genreid_not_exist(object jsonPayload)
+        {
+            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
+            var client = _factory.CreateClient();
+
+            request.GenreId = Guid.NewGuid();
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"/api/items", httpContent);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-         public async Task update_should_modify_existing_items(object jsonPayload)
+        public async Task update_should_modify_existing_items(object jsonPayload)
         {
             var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
 
             var client = _factory.CreateClient();
-            
+
             var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
             var response = await client.PutAsync($"/api/items/{request.Id}", httpContent);
 
@@ -124,37 +145,68 @@ namespace VinylStore.Catalog.API.Tests.Controllers
             responseEntity.GenreId.ShouldBe(request.GenreId);
             responseEntity.ArtistId.ShouldBe(request.ArtistId);
         }
-         
-         [Theory]
-         [LoadTestData("record-test.json", "item_with_id")]
-         public async Task update_should_returns_not_found_when_item_is_not_present(object jsonPayload)
-         {
-             var client = _factory.CreateClient();
 
-             var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
-             var response = await client.PutAsync($"/api/items/{Guid.NewGuid()}", httpContent);
+        [Theory]
+        [LoadTestData("record-test.json", "item_with_id")]
+        public async Task update_should_returns_not_found_when_item_is_not_present(object jsonPayload)
+        {
+            var client = _factory.CreateClient();
 
-             response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-         }
-         
-         [Theory]
-         [LoadTestData("record-test.json", "item_with_id")]
-         public async Task delete_should_returns_no_content_when_called_with_right_id(object jsonPayload)
-         {
-             var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
-             var client = _factory.CreateClient();
+            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"/api/items/{Guid.NewGuid()}", httpContent);
 
-             var response = await client.DeleteAsync($"/api/items/{request.Id}");
+            response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+        }
 
-             response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-         }
-        
-         [Fact]
-         public async Task delete_should_returns_not_found_when_called_with_not_existing_id()
-         {
-             var client = _factory.CreateClient();
-             var response = await client.DeleteAsync($"/api/items/{Guid.NewGuid()}");
-             response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-         }
+
+        [Theory]
+        [LoadTestData("record-test.json", "item_without_id")]
+        public async Task update_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
+        {
+            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
+            var client = _factory.CreateClient();
+
+            request.ArtistId = Guid.NewGuid();
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"/api/items/{request.Id}", httpContent);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        }
+
+        [Theory]
+        [LoadTestData("record-test.json", "item_without_id")]
+        public async Task update_should_returns_bad_request_if_genreid_not_exist(object jsonPayload)
+        {
+            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
+            var client = _factory.CreateClient();
+
+            request.GenreId = Guid.NewGuid();
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"/api/items/{request.Id}", httpContent);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        }
+
+        [Theory]
+        [LoadTestData("record-test.json", "item_with_id")]
+        public async Task delete_should_returns_no_content_when_called_with_right_id(object jsonPayload)
+        {
+            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
+            var client = _factory.CreateClient();
+
+            var response = await client.DeleteAsync($"/api/items/{request.Id}");
+
+            response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+        }
+
+        [Fact]
+        public async Task delete_should_returns_not_found_when_called_with_not_existing_id()
+        {
+            var client = _factory.CreateClient();
+            var response = await client.DeleteAsync($"/api/items/{Guid.NewGuid()}");
+            response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+        }
     }
 }

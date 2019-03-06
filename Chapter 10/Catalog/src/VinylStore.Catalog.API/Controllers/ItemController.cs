@@ -43,7 +43,7 @@ namespace VinylStore.Catalog.API.Controllers
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetItemCommand {Id = id});
+            var result = await _mediator.Send(new GetItemCommand { Id = id });
             return Ok(result);
         }
 
@@ -51,7 +51,7 @@ namespace VinylStore.Catalog.API.Controllers
         public async Task<IActionResult> Post(AddItemCommand request)
         {
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
         [HttpPut("{id:guid}")]

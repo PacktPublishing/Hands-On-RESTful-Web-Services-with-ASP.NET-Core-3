@@ -28,12 +28,13 @@ namespace VinylStore.Catalog.API.Infrastructure.Filters
             public void OnException(ExceptionContext context)
             {
                 var eventId = new EventId(context.Exception.HResult);
-                
+
                 _logger.LogError(eventId,
                     context.Exception,
                     context.Exception.Message);
 
-                var json = new JsonErrorPayload{
+                var json = new JsonErrorPayload
+                {
                     EventId = eventId.Id
                 };
 
@@ -42,10 +43,10 @@ namespace VinylStore.Catalog.API.Infrastructure.Filters
                     json.DetailedMessage = context.Exception;
                 }
 
-                var exceptionObject = new ObjectResult(json) {StatusCode = 500};
+                var exceptionObject = new ObjectResult(json) { StatusCode = 500 };
 
                 context.Result = exceptionObject;
-                context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
     }

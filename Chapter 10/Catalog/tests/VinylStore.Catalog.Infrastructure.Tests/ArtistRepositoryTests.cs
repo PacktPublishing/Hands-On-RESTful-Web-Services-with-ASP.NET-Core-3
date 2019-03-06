@@ -14,7 +14,7 @@ namespace VinylStore.Catalog.Infrastructure.Tests
     {
         private readonly CatalogDataContextFactory _testDataContextFactory;
 
-        
+
         public ArtistRepositoryTests(CatalogDataContextFactory testDataContextFactory)
         {
             _testDataContextFactory = testDataContextFactory;
@@ -39,14 +39,14 @@ namespace VinylStore.Catalog.Infrastructure.Tests
         public async Task should_add_new_item(object jsonPayload)
         {
             var artist = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
-            artist.ArtistId=Guid.NewGuid();
-            
+            artist.ArtistId = Guid.NewGuid();
+
             var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);
             sut.Add(artist);
 
             await sut.UnitOfWork.SaveEntitiesAsync();
 
-            _testDataContextFactory.ContextInstance.Artist
+            _testDataContextFactory.ContextInstance.Artists
                 .FirstOrDefault(x => x.ArtistId == artist.ArtistId)
                 .ShouldNotBeNull();
         }

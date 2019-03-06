@@ -19,14 +19,14 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
 
         public async Task<IList<Artist>> GetAsync()
         {
-            return await _catalogContext.Artist
+            return await _catalogContext.Artists
                 .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Artist> GetAsync(Guid id)
         {
-            var item = await _catalogContext.Artist
+            var item = await _catalogContext.Artists
                 .FindAsync(id);
 
             if (item == null) return null;
@@ -37,7 +37,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
 
         public Artist Add(Artist item)
         {
-            return _catalogContext.Artist.Add(item).Entity;
+            return _catalogContext.Artists.Add(item).Entity;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Artist
         {
             if (command?.Id == null) throw new ArgumentNullException();
             var result = await _artistRepository.GetAsync(command.Id);
-            return new ArtistResponse {ArtistId = result.ArtistId, ArtistName = result.ArtistName};
+            return result == null ? null : new ArtistResponse { ArtistId = result.ArtistId, ArtistName = result.ArtistName };
         }
     }
 }

@@ -24,13 +24,13 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
             CancellationToken cancellationToken)
         {
             if (command?.Id == null) throw new ArgumentNullException();
-            
+
             var result = await _itemsRepository.GetAsync(command.Id);
             result.IsInactive = false;
 
             _itemsRepository.Update(result);
             await _itemsRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            
+
             return _mapper.Map<ItemResponse>(result);
         }
     }

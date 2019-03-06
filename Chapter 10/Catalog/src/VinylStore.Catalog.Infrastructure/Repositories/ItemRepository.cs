@@ -40,7 +40,7 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
             _context.Entry(item).State = EntityState.Detached;
             return item;
         }
-        
+
         public async Task<IList<Item>> GetItemByArtistIdAsync(Guid id)
         {
             var items = await _context.Items

@@ -52,7 +52,7 @@ namespace VinylStore.Catalog.API.Tests.Infrastructure.Filters
             var mediator = new Mock<IMediator>();
             mediator
                 .Setup(_ => _.Send(It.IsAny<GetItemCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new ItemResponse {Id = id});
+                .ReturnsAsync(new ItemResponse { Id = id });
 
             var filter = new ItemExistsAttribute.ItemExistsFilterImpl(mediator.Object);
 

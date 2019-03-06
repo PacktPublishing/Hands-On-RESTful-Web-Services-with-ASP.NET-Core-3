@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RiskFirst.Hateoas;
@@ -11,6 +14,7 @@ using VinylStore.Catalog.API.ResponseModels;
 using VinylStore.Catalog.Domain.Commands.Genre;
 using VinylStore.Catalog.Domain.Infrastructure.Extensions;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
+using VinylStore.Catalog.Infrastructure;
 using VinylStore.Catalog.Infrastructure.Repositories;
 
 namespace VinylStore.Catalog.API
@@ -32,7 +36,9 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddMediatorComponents()
-                .AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation();
 
             services.AddLinks(config =>
             {
@@ -41,25 +47,26 @@ namespace VinylStore.Catalog.API
                     policy
                         .RequireRoutedLink(nameof(ItemsHateoasController.Get), nameof(ItemsHateoasController.Get))
                         .RequireRoutedLink(nameof(ItemsHateoasController.GetById),
-                            nameof(ItemsHateoasController.GetById), _ => new {id = _.Data.Id})
+                            nameof(ItemsHateoasController.GetById), _ => new { id = _.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Post), nameof(ItemsHateoasController.Post))
                         .RequireRoutedLink(nameof(ItemsHateoasController.Put), nameof(ItemsHateoasController.Put),
-                            x => new {id = x.Data.Id})
+                            x => new { id = x.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Delete), nameof(ItemsHateoasController.Delete),
-                            x => new {id = x.Data.Id});
+                            x => new { id = x.Data.Id });
                 });
             });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+
+            try
             {
-                app.UseDeveloperExceptionPage();
+                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
             }
-            else
+            catch (Exception e)
             {
-                app.UseHsts();
+                Console.WriteLine(e);
             }
 
             app.UseHttpsRedirection();

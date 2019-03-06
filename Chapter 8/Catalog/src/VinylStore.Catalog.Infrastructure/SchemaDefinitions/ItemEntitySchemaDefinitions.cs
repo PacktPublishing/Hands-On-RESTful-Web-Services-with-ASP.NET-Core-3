@@ -10,12 +10,12 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
         public void Configure(EntityTypeBuilder<Item> builder)
         {
             builder.ToTable("Items", CatalogContext.DEFAULT_SCHEMA);
-            
+
             builder.HasKey(_ => _.Id);
-            
+
             builder.Property(_ => _.Name)
                 .IsRequired();
-            
+
             builder.Property(_ => _.Description)
                 .IsRequired()
                 .HasMaxLength(1000);
@@ -23,13 +23,13 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
             builder
                 .HasOne(e => e.Genre)
                 .WithMany(c => c.Items)
-                .HasForeignKey(_=>_.GenreId);
+                .HasForeignKey(_ => _.GenreId);
 
             builder
                 .HasOne(e => e.Artist)
                 .WithMany(c => c.Items)
-                .HasForeignKey(_=>_.ArtistId);
-            
+                .HasForeignKey(_ => _.ArtistId);
+
             builder.Property(_ => _.Price).HasConversion(
                 _ => $"{_.Amount}:{_.Currency}",
                 _ => new Money

@@ -26,7 +26,7 @@ namespace VinylStore.Catalog.InfrastructureSP
 
         public async Task<Item> GetAsync(Guid id)
         {
-            return await _sqlConnection.ExecuteScalarAsync<Item>("GetAllItems", new {Id = id.ToString()},
+            return await _sqlConnection.ExecuteScalarAsync<Item>("GetAllItems", new { Id = id.ToString() },
                 commandType: CommandType.StoredProcedure);
         }
 

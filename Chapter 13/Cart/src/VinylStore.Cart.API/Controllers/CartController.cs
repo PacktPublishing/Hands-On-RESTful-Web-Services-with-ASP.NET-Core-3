@@ -22,7 +22,7 @@ namespace VinylStore.Cart.API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetCartCommand {Id = id});
+            var result = await _mediator.Send(new GetCartCommand { Id = id });
             return Ok(result);
         }
 
@@ -30,7 +30,7 @@ namespace VinylStore.Cart.API.Controllers
         public async Task<IActionResult> Post(CreateCartCommand request)
         {
             var result = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetById), new {id = result.Id}, null);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
         [HttpPut("{cartId:guid}/items/{id:guid}")]

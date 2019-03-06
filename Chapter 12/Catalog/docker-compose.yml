@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+    catalog_api:
+        container_name: catalog_api
+        build: 
+            context: .
+        environment:
+            - ASPNETCORE_URLS=http://*:5000
+            - ASPNETCORE_ENVIRONMENT=Integration
+        networks:
+            - my_network
+        ports:
+            - 5000:5000
+        depends_on:
+            - catalog_db
+
+    catalog_db:
+        container_name: catalog_db
+        image: microsoft/mssql-server-linux
+        networks:
+            - my_network
+        environment:
+            SA_PASSWORD: <SA_PASSWORD>
+            ACCEPT_EULA: "Y"
+networks:
+    my_network:
+        driver: bridge

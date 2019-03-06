@@ -29,7 +29,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Item
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
 
             var result =
-                await sut.Handle(new GetItemCommand {Id = new Guid(guid)}, CancellationToken.None);
+                await sut.Handle(new GetItemCommand { Id = new Guid(guid) }, CancellationToken.None);
 
             result.Id.ShouldBe(new Guid(guid));
         }

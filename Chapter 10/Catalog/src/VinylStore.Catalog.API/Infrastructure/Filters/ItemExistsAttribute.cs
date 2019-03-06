@@ -32,11 +32,11 @@ namespace VinylStore.Catalog.API.Infrastructure.Filters
                     return;
                 }
 
-                var result = await _mediator.Send(new GetItemCommand {Id = id});
+                var result = await _mediator.Send(new GetItemCommand { Id = id });
 
                 if (result == null)
                 {
-                    context.Result = new NotFoundObjectResult( new JsonErrorPayload {DetailedMessage = $"Item with id {id} not exist."});
+                    context.Result = new NotFoundObjectResult(new JsonErrorPayload { DetailedMessage = $"Item with id {id} not exist." });
                     return;
                 }
 

@@ -12,12 +12,12 @@ namespace VinylStore.Catalog.Domain.Entities
             if (a.Currency != b.Currency)
                 throw new InvalidOperationException("Cannot perform arithmetic on Money of two different types.");
 
-            return new Money {Amount = a.Amount + b.Amount, Currency = a.Currency};
+            return new Money { Amount = a.Amount + b.Amount, Currency = a.Currency };
         }
 
         public static Money operator *(Money a, int b)
         {
-            return new Money {Amount = a.Amount * b, Currency = a.Currency};
+            return new Money { Amount = a.Amount * b, Currency = a.Currency };
         }
     }
 }

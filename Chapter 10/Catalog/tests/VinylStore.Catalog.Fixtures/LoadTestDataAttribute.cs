@@ -41,7 +41,7 @@ namespace VinylStore.Catalog.Fixtures
             }
 
             var allData = JObject.Parse(fileData);
-            
+
             var data = allData[_section];
             return data.ToObject<List<object[]>>();
         }

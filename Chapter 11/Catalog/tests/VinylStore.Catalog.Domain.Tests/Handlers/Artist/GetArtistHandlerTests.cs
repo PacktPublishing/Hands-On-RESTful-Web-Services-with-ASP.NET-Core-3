@@ -28,7 +28,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Artist
 
             var sut = new GetArtistHandler(repository);
 
-            var result = await sut.Handle(new GetArtistCommand {Id = new Guid(id)}, CancellationToken.None);
+            var result = await sut.Handle(new GetArtistCommand { Id = new Guid(id) }, CancellationToken.None);
 
             result.ShouldNotBeNull();
         }

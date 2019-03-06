@@ -18,6 +18,7 @@ namespace VinylStore.Catalog.Domain.Infrastructure.Extensions
                 .AddTransient<IValidator<EditItemCommand>, EditItemCommandValidator>()
                 .AddTransient<IValidator<AddItemCommand>, AddItemCommandValidator>();
 
+
             return services;
         }
     }

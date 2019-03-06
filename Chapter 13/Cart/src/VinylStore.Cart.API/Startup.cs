@@ -49,7 +49,7 @@ namespace VinylStore.Cart.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseHsts()
+            app
                 .UseHttpsRedirection()
                 .UseMvc();
         }

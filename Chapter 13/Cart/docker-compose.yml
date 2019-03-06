@@ -1,4 +1,3 @@
-#docker-compose.yml
 version: "3.7"
 services:
     cart_api:
@@ -8,15 +7,12 @@ services:
             - ASPNETCORE_ENVIRONMENT=Integration
         build:
             context: .
-            dockerfile: Dockerfile
         networks:
             - my_network
         ports:
             - 5002:5002
-            - 5003:5003
         depends_on:
             - cart_db
-            
     cart_db:
         container_name: cart_db
         networks:

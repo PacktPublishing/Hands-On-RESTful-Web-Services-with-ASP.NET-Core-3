@@ -18,12 +18,12 @@ namespace VinylStore.Catalog.Domain.Handlers.Genre
 
         public async Task<GenreResponse> Handle(AddGenreCommand command, CancellationToken cancellationToken)
         {
-            var item = new Entities.Genre {GenreDescription = command.GenreDescription};
+            var item = new Entities.Genre { GenreDescription = command.GenreDescription };
 
             var result = _genreRepository.Add(item);
             await _genreRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return new GenreResponse {GenreId = result.GenreId, GenreDescription = result.GenreDescription};
+            return new GenreResponse { GenreId = result.GenreId, GenreDescription = result.GenreDescription };
         }
     }
 }

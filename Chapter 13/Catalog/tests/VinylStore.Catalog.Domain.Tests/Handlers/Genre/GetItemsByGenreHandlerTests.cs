@@ -31,7 +31,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Genre
             var sut = new GetItemsByGenreHandler(repository,
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
 
-            var result = await sut.Handle(new GetItemsByGenreCommand {Id = new Guid(id)}, CancellationToken.None);
+            var result = await sut.Handle(new GetItemsByGenreCommand { Id = new Guid(id) }, CancellationToken.None);
 
             result.ShouldNotBeNull();
         }

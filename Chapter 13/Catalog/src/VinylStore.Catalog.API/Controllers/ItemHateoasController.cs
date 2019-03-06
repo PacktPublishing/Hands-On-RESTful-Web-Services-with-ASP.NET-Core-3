@@ -25,7 +25,7 @@ namespace VinylStore.Catalog.API.Controllers
             _linksService = linkService;
         }
 
-        [HttpGet( Name = nameof(Get))]
+        [HttpGet(Name = nameof(Get))]
         public async Task<IActionResult> Get([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
             var result = await _mediator.Send(new GetItemsCommand());
@@ -41,12 +41,12 @@ namespace VinylStore.Catalog.API.Controllers
 
             foreach (var itemResponse in itemsOnPage)
             {
-                var hateoasResult = new ItemHateoasResponse {Data = itemResponse};
+                var hateoasResult = new ItemHateoasResponse { Data = itemResponse };
                 await _linksService.AddLinksAsync(hateoasResult);
 
                 hateoasResults.Add(hateoasResult);
             }
-            
+
             var model = new PaginatedItemResponseModel<ItemHateoasResponse>(
                 pageIndex, pageSize, totalItems, hateoasResults);
 
@@ -58,39 +58,39 @@ namespace VinylStore.Catalog.API.Controllers
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetItemCommand {Id = id});
+            var result = await _mediator.Send(new GetItemCommand { Id = id });
 
-            var hateoasResult = new ItemHateoasResponse {Data = result};
+            var hateoasResult = new ItemHateoasResponse { Data = result };
             await _linksService.AddLinksAsync(hateoasResult);
 
             return Ok(hateoasResult);
         }
 
-        [HttpPost( Name = nameof(Post))]
+        [HttpPost(Name = nameof(Post))]
         public async Task<IActionResult> Post(AddItemCommand request)
         {
             var result = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetById), new {id = result.Id}, null);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
-        [HttpPut("{id:guid}",  Name = nameof(Put))]
+        [HttpPut("{id:guid}", Name = nameof(Put))]
         [ItemExists]
         public async Task<IActionResult> Put(Guid id, EditItemCommand request)
         {
             request.Id = id;
             var result = await _mediator.Send(request);
 
-            var hateoasResult = new ItemHateoasResponse {Data = result};
+            var hateoasResult = new ItemHateoasResponse { Data = result };
             await _linksService.AddLinksAsync(hateoasResult);
-            
+
             return Ok(hateoasResult);
         }
-        
-        [HttpDelete("{id:guid}",  Name = nameof(Delete))]
+
+        [HttpDelete("{id:guid}", Name = nameof(Delete))]
         [ItemExists]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var request = new DeleteItemCommand {Id = id};
+            var request = new DeleteItemCommand { Id = id };
             await _mediator.Send(request);
             return NoContent();
         }

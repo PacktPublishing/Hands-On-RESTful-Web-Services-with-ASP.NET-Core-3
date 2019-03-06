@@ -28,7 +28,7 @@ namespace VinylStore.Cart.Domain.Tests.Handlers.Events
             bool found = false;
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent {Id = Guid.NewGuid().ToString()}, context);
+                new ItemSoldOutEvent { Id = Guid.NewGuid().ToString() }, context);
 
             var cartsIds = repository.GetCarts();
 
@@ -53,7 +53,7 @@ namespace VinylStore.Cart.Domain.Tests.Handlers.Events
 
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent {Id = itemSoldOutId}, context);
+                new ItemSoldOutEvent { Id = itemSoldOutId }, context);
 
             foreach (string cartId in repository.GetCarts())
             {

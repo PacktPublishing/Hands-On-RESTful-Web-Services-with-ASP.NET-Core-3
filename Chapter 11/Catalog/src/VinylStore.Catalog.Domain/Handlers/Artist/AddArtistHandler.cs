@@ -18,12 +18,12 @@ namespace VinylStore.Catalog.Domain.Handlers.Artist
 
         public async Task<ArtistResponse> Handle(AddArtistCommand command, CancellationToken cancellationToken)
         {
-            var item = new Entities.Artist {ArtistName = command.ArtistName};
+            var item = new Entities.Artist { ArtistName = command.ArtistName };
 
             var result = _artistRepository.Add(item);
             await _artistRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return new ArtistResponse {ArtistId = result.ArtistId, ArtistName = result.ArtistName};
+            return new ArtistResponse { ArtistId = result.ArtistId, ArtistName = result.ArtistName };
         }
     }
 }

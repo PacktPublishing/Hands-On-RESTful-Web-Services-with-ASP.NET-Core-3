@@ -28,7 +28,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Genre
 
             var sut = new GetGenreHandler(repository);
 
-            var result = await sut.Handle(new GetGenreCommand {Id = new Guid(id)}, CancellationToken.None);
+            var result = await sut.Handle(new GetGenreCommand { Id = new Guid(id) }, CancellationToken.None);
 
             result.ShouldNotBeNull();
         }
