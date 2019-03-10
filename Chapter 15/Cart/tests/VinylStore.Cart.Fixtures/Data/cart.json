@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "dfb54f88-caea-4e25-83af-e6ff0e2ea1aa",
+    "Items": [
+      {
+        "CartItemId": "f5da5ce4-091e-492e-a70a-22b073d75a52",
+        "Quantity": "1"
+      },
+      {
+        "CartItemId": "be05537d-5e80-45c1-bd8c-aa21c0f1251e",
+        "Quantity": "2"
+      }
+    ],
+    "User": {
+      "Email": "test@testdomain.com"
+    }
+  },
+  {
+    "Id": "9ced6bfa-9659-462e-aece-49fe50613e96",
+    "Items": [
+      {
+        "CartItemId": "f5da5ce4-091e-492e-a70a-22b073d75a52",
+        "Quantity": "1"
+      },
+      {
+        "CartItemId": "be05537d-5e80-45c1-bd8c-aa21c0f1251e",
+        "Quantity": "1"
+      }
+    ],
+    "User": {
+      "Email": "test2@testdomain.com"
+    }
+  }
+]

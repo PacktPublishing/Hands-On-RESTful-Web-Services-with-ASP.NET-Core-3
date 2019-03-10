@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\VinylStore.Cart.Domain\VinylStore.Cart.Domain.csproj" />
+        <ProjectReference Include="..\..\src\VinylStore.Cart.Infrastructure\VinylStore.Cart.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Moq" Version="4.10.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+        <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Data\items.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Data\cart.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="NServiceBus.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c">
+        <HintPath>..\..\..\..\..\..\.nuget\packages\nservicebus\7.0.0\lib\netstandard2.0\NServiceBus.Core.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+</Project>
