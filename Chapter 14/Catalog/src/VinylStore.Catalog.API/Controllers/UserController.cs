@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Catalog.API.Infrastructure.Filters;
-using VinylStore.Catalog.Domain.Commands.Users;
+using VinylStore.Catalog.Domain.Commands.User;
 
 namespace VinylStore.Catalog.API.Controllers
 {
@@ -13,11 +13,11 @@ namespace VinylStore.Catalog.API.Controllers
     [ApiController]
     [Route("api/user")]
     [JsonException]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UsersController(IMediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -13,11 +13,11 @@ namespace VinylStore.Catalog.API.Controllers
     [ApiController]
     [Route("api/user")]
     [JsonException]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UsersController(IMediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }

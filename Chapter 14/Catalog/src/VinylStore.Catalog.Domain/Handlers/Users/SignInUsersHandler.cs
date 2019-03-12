@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using VinylStore.Catalog.Domain.Commands.Users;
+using VinylStore.Catalog.Domain.Commands.User;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 using VinylStore.Catalog.Domain.Responses.Users;
 

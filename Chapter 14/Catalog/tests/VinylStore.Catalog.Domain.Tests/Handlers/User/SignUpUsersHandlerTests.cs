@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Shouldly;
-using VinylStore.Catalog.Domain.Commands.Users;
+using VinylStore.Catalog.Domain.Commands.User;
 using VinylStore.Catalog.Domain.Handlers.Users;
 using VinylStore.Catalog.Fixtures;
 using Xunit;
