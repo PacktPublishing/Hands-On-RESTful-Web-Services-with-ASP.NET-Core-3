@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
 using VinylStore.Catalog.Domain.Entities;
-using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 
 namespace VinylStore.Catalog.InfrastructureSP
 {

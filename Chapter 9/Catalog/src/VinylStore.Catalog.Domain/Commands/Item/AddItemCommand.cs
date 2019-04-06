@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using MediatR;
 using VinylStore.Catalog.Domain.Entities;
 using VinylStore.Catalog.Domain.Responses.Item;
