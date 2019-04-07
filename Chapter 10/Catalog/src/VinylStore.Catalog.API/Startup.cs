@@ -3,11 +3,10 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using VinylStore.Catalog.API.Infrastructure.Extensions;
-using VinylStore.Catalog.Domain.Commands.Genre;
 using VinylStore.Catalog.Domain.Infrastructure.Extensions;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 using VinylStore.Catalog.Infrastructure.Repositories;
@@ -35,7 +34,7 @@ namespace VinylStore.Catalog.API
                 .AddFluentValidation();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
