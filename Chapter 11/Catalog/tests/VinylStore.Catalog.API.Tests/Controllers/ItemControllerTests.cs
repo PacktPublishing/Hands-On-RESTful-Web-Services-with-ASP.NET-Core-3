@@ -156,7 +156,7 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
             response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
-        
+
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
         public async Task update_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
