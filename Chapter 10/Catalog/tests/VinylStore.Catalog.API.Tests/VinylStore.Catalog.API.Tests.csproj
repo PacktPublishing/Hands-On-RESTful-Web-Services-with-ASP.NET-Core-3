@@ -22,5 +22,4 @@
     <ProjectReference Include="..\VinylStore.Catalog.Fixtures\VinylStore.Catalog.Fixtures.csproj" />
     <ProjectReference Include="..\..\src\VinylStore.Catalog.API\VinylStore.Catalog.API.csproj" />
   </ItemGroup>
-
 </Project>
