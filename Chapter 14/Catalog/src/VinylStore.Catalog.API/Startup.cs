@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentValidation.AspNetCore;
+//using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +38,8 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddMediatorComponents()
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation();
+                .AddNewtonsoftJson();
+            //  .AddFluentValidation();
 
 
             services.AddLinks(config =>
@@ -59,7 +59,7 @@ namespace VinylStore.Catalog.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             try
             {
