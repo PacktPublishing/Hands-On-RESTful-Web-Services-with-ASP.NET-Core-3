@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Catalog.API.Infrastructure.Filters;
 using VinylStore.Catalog.API.ResponseModels;
+using VinylStore.Catalog.Domain.Commands.Artist;
 using VinylStore.Catalog.Domain.Commands.Artists;
 using VinylStore.Catalog.Domain.Responses.Item;
 

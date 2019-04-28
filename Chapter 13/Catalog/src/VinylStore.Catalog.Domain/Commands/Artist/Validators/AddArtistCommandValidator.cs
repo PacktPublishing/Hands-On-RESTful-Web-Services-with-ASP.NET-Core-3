@@ -1,4 +1,5 @@
 using FluentValidation;
+using VinylStore.Catalog.Domain.Commands.Artist;
 
 namespace VinylStore.Catalog.Domain.Commands.Artists.Validators
 {
