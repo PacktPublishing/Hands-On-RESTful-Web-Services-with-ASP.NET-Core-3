@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -20,6 +19,22 @@
     <ProjectReference Include="..\..\src\VinylStore.Catalog.Domain\VinylStore.Catalog.Domain.csproj" />
     <ProjectReference Include="..\..\src\VinylStore.Catalog.Infrastructure\VinylStore.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\VinylStore.Catalog.Infrastructure.Tests\VinylStore.Catalog.Infrastructure.Tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\Item\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Commands\Item\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\Item\**" />
   </ItemGroup>
 
 </Project>
