@@ -8,7 +8,7 @@
   <ItemGroup>
     <FrameworkRefence Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview3-19153-02" />
-    <PackageReference Include="RiskFirst.Hateoas" Version="3.1.0" />
+    <PackageReference Include="RiskFirst.Hateoas" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>

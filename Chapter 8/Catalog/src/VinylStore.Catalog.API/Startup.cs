@@ -19,7 +19,7 @@ namespace VinylStore.Catalog.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCatalogContext(Configuration.GetSection("DataSource:ConnectionString").Value);
-            services.AddMvc();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

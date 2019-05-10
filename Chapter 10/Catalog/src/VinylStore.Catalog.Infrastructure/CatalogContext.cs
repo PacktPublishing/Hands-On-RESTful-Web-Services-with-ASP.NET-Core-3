@@ -30,9 +30,9 @@ namespace VinylStore.Catalog.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            await SaveChangesAsync(cancellationToken);
+            await base.SaveChangesAsync(cancellationToken);
             return true;
         }
     }
