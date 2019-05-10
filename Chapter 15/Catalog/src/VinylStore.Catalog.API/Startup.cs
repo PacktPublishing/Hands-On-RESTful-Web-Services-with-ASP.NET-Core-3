@@ -42,7 +42,7 @@ namespace VinylStore.Catalog.API
                 {
                     options.Configuration = Configuration.GetSection("Caching:ConnectionString").Value;
                 })
-                .AddMvc()
+                .AddControllers()
                 .AddNewtonsoftJson();
             //    .AddFluentValidation();
 
@@ -76,11 +76,16 @@ namespace VinylStore.Catalog.API
                 Console.WriteLine(e);
             }
 
-            app.UseHttpsRedirection()
+            app.UseRouting()
+               .UseHttpsRedirection()
                .UseMiddleware<ResponseTimeMiddlewareAsync>()
                .UseResponseCaching()
                .UseAuthentication()
-               .UseMvc();
+               .UseAuthorization()
+               .UseEndpoints(endpoints =>
+                            {
+                                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                            });
         }
     }
 }

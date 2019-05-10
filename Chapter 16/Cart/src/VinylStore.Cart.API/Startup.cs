@@ -30,15 +30,15 @@ namespace VinylStore.Cart.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMvc()
+                .AddControllers()
                 .AddNewtonsoftJson();
 
             services
                 .AddScoped<ICartRepository, CartRepository>()
                 .AddScoped<ICatalogService, CatalogService>()
                 .AddCatalogService(new Uri(Configuration["CatalogApiUrl"]))
-                .AddMediatR()
-                .AddAutoMapper()
+                .AddMediatR(AppDomain.CurrentDomain.GetAssemblies())
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddRabbitMQ(Configuration.GetSection("ESB:EndPointName").Value,
                     Configuration.GetSection("ESB:ConnectionString").Value,
                     CurrentEnvironment.EnvironmentName)
@@ -50,9 +50,12 @@ namespace VinylStore.Cart.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app
+            app.UseRouting()
                 .UseHttpsRedirection()
-                .UseMvc();
+                .UseEndpoints(endpoints =>
+                               {
+                                   endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                               });
         }
     }
 }

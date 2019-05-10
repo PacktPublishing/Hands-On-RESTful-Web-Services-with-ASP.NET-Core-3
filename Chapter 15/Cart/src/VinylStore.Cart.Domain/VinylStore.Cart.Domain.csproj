@@ -4,10 +4,10 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="8.0.0" />
-        <PackageReference Include="MediatR" Version="6.0.0" />
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="AutoMapper" Version="8.1.0" />
+        <PackageReference Include="MediatR" Version="7.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Handlers" />
