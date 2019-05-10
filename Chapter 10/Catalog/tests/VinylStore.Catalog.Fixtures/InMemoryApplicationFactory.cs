@@ -1,30 +1,35 @@
 using System;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using VinylStore.Catalog.Infrastructure;
 
 namespace VinylStore.Catalog.Fixtures
 {
-    public class CatalogDataContextFactory : IDisposable
+    public class InMemoryApplicationFactory<TStartup>
+        : WebApplicationFactory<TStartup> where TStartup : class
     {
-        public readonly TestCatalogContext ContextInstance;
-        public readonly DbContextOptions<CatalogContext> ContextOptions;
-
-        public CatalogDataContextFactory()
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            ContextOptions = new DbContextOptionsBuilder<CatalogContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .EnableSensitiveDataLogging()
-                .Options;
+            builder.UseEnvironment("Testing")
+                .ConfigureTestServices(services =>
+                {
+                    var options = new DbContextOptionsBuilder<CatalogContext>()
+                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                        .Options;
 
-            ContextInstance = new TestCatalogContext(ContextOptions);
+                    services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options));
+                    var sp = services.BuildServiceProvider();
 
-            ContextInstance.Database.EnsureCreated();
-        }
-
-        public void Dispose()
-        {
-            ContextInstance.Database.EnsureDeleted();
-            ContextInstance.Dispose();
+                    using (var scope = sp.CreateScope())
+                    {
+                        var scopedServices = scope.ServiceProvider;
+                        var db = scopedServices.GetRequiredService<CatalogContext>();
+                        db.Database.EnsureCreated();
+                    }
+                });
         }
     }
 }

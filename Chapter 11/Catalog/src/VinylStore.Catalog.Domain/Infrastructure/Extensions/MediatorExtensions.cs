@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 //using FluentValidation;
 using MediatR;
@@ -11,8 +12,8 @@ namespace VinylStore.Catalog.Domain.Infrastructure.Extensions
     {
         public static IServiceCollection AddMediatorComponents(this IServiceCollection services)
         {
-            services.AddMediatR();
-            services.AddAutoMapper();
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //            services
             //                .AddTransient<IValidator<EditItemCommand>, EditItemCommandValidator>()
