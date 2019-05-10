@@ -35,7 +35,7 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
                 x => new Money
                 {
                     Amount = Convert.ToDecimal(x.Split(':', StringSplitOptions.None)[0]),
-                    Currency = x.Split(':',StringSplitOptions.None)[1]
+                    Currency = x.Split(':', StringSplitOptions.None)[1]
                 });
         }
     }

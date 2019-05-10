@@ -88,7 +88,7 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
             response.EnsureSuccessStatusCode();
             response.Headers.Location.ShouldNotBeNull();
-            
+
         }
 
         [Theory]

@@ -37,7 +37,7 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddMediatorComponents()
-                .AddMvc()
+                .AddControllers()
                 .AddNewtonsoftJson();
             //  .AddFluentValidation();
 
@@ -70,10 +70,15 @@ namespace VinylStore.Catalog.API
                 Console.WriteLine(e);
             }
 
+            app.UseRouting();
             app.UseHttpsRedirection();
+            app.UseAuthorization();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
