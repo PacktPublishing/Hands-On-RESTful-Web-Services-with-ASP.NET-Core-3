@@ -31,7 +31,7 @@ namespace VinylStore.Catalog.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ItemEntitySchemaDefinition());
-            modelBuilder.ApplyConfiguration(new ArtistEntitySchemaConfiguration());
+            //  modelBuilder.ApplyConfiguration(new ArtistEntitySchemaConfiguration());
             modelBuilder.ApplyConfiguration(new GenreEntitySchemaConfiguration());
 
             base.OnModelCreating(modelBuilder);

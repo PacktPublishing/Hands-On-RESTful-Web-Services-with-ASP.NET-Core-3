@@ -61,13 +61,13 @@ namespace VinylStore.Catalog.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

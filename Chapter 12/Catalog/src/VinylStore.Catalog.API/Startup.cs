@@ -74,7 +74,7 @@ namespace VinylStore.Catalog.API
                 .UseMiddleware<ResponseTimeMiddlewareAsync>()
                 .UseEndpoints(endpoints =>
                                 {
-                                    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                                    endpoints.MapControllers();
                                 });
         }
     }

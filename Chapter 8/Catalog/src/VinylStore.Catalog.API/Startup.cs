@@ -32,7 +32,7 @@ namespace VinylStore.Catalog.API
             app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

@@ -98,7 +98,7 @@ namespace VinylStore.Catalog.API
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                              {
-                                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                                 endpoints.MapControllers();
                              });
         }
     }
