@@ -1,7 +1,7 @@
 using MediatR;
 using VinylStore.Catalog.Domain.Responses.Item;
 
-namespace VinylStore.Catalog.Domain.Commands.Artists
+namespace VinylStore.Catalog.Domain.Commands.Artist
 {
     public class AddArtistCommand : IRequest<ArtistResponse>
     {

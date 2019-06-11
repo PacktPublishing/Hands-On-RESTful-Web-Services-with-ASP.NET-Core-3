@@ -2,6 +2,7 @@ using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace VinylStore.Catalog.API.Infrastructure.Filters
@@ -15,10 +16,10 @@ namespace VinylStore.Catalog.API.Infrastructure.Filters
 
         private class HttpCustomExceptionFilterImpl : IExceptionFilter
         {
-            private readonly IHostingEnvironment _env;
+            private readonly IWebHostEnvironment _env;
             private readonly ILogger<HttpCustomExceptionFilterImpl> _logger;
 
-            public HttpCustomExceptionFilterImpl(IHostingEnvironment env,
+            public HttpCustomExceptionFilterImpl(IWebHostEnvironment env,
                 ILogger<HttpCustomExceptionFilterImpl> logger)
             {
                 _env = env;

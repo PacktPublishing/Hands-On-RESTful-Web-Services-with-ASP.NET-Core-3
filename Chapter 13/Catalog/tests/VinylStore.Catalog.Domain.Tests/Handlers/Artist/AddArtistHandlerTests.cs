@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Shouldly;
+using VinylStore.Catalog.Domain.Commands.Artist;
 using VinylStore.Catalog.Domain.Commands.Artists;
 using VinylStore.Catalog.Domain.Handlers.Artist;
 using VinylStore.Catalog.Fixtures;

@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentValidation.AspNetCore;
+//using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +36,8 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddMediatorComponents()
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation();
+                .AddControllers()
+                .AddNewtonsoftJson();
 
             services.AddLinks(config =>
             {
@@ -57,9 +56,8 @@ namespace VinylStore.Catalog.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-
             try
             {
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
@@ -69,9 +67,13 @@ namespace VinylStore.Catalog.API
                 Console.WriteLine(e);
             }
 
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

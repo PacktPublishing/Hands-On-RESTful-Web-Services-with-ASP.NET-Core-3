@@ -1,15 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using VinylStore.Catalog.Domain.Commands.Item;
 using VinylStore.Catalog.Domain.Handlers.Item;
 using VinylStore.Catalog.Domain.Infrastructure.Mapper;
 using VinylStore.Catalog.Fixtures;
-using VinylStore.Catalog.Infrastructure;
 using VinylStore.Catalog.Infrastructure.Repositories;
-using VinylStore.Catalog.Infrastructure.Tests;
 using Xunit;
 
 namespace VinylStore.Catalog.Domain.Tests.Handlers.Item

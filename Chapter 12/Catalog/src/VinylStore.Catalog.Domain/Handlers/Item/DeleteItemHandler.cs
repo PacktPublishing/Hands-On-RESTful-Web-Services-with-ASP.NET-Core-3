@@ -11,12 +11,12 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
 {
     public class DeleteItemHandler : IRequestHandler<DeleteItemCommand, ItemResponse>
     {
-        private readonly IItemRepository _itemsRepository;
+        private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
 
-        public DeleteItemHandler(IItemRepository itemsRepository, IMapper mapper)
+        public DeleteItemHandler(IItemRepository itemRepository, IMapper mapper)
         {
-            _itemsRepository = itemsRepository;
+            _itemRepository = itemRepository;
             _mapper = mapper;
         }
 
@@ -25,11 +25,11 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
         {
             if (command?.Id == null) throw new ArgumentNullException();
 
-            var result = await _itemsRepository.GetAsync(command.Id);
+            var result = await _itemRepository.GetAsync(command.Id);
             result.IsInactive = false;
 
-            _itemsRepository.Update(result);
-            await _itemsRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            _itemRepository.Update(result);
+            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<ItemResponse>(result);
         }

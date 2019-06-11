@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentValidation.AspNetCore;
+//using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -51,9 +51,9 @@ namespace VinylStore.Catalog.API
                 {
                     options.Configuration = cachingConnectionString.Get<CacheSettings>().ConnectionString;
                 })
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation();
+                .AddControllers()
+                .AddNewtonsoftJson();
+            //.AddFluentValidation();
 
             services
                 .AddHealthChecks()
@@ -77,7 +77,7 @@ namespace VinylStore.Catalog.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             try
             {
@@ -88,12 +88,18 @@ namespace VinylStore.Catalog.API
                 Console.WriteLine(e);
             }
 
-            app.UseHttpsRedirection()
+            app
+                .UseRouting()
+                .UseHttpsRedirection()
                 .UseMiddleware<ResponseTimeMiddlewareAsync>()
                 .UseResponseCaching()
                 .UseHealthChecks("/health")
                 .UseAuthentication()
-                .UseMvc();
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
+                             {
+                                 endpoints.MapControllers();
+                             });
         }
     }
 }

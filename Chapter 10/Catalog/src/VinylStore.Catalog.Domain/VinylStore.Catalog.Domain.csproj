@@ -5,13 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Automapper" Version="8.0.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="FluentValidation" Version="8.1.3" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Automapper" Version="8.1.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <!--<PackageReference Include="FluentValidation" Version="8.1.3" />-->
+    <!--<PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />-->
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-preview5.19227.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\Artists\Validators\**" />
+    <Compile Remove="Commands\Genre\Validators\**" />
+    <Compile Remove="Commands\Item\Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Commands\Artists\Validators\**" />
+    <EmbeddedResource Remove="Commands\Genre\Validators\**" />
+    <EmbeddedResource Remove="Commands\Item\Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\Artists\Validators\**" />
+    <None Remove="Commands\Genre\Validators\**" />
+    <None Remove="Commands\Item\Validators\**" />
   </ItemGroup>
 
 </Project>

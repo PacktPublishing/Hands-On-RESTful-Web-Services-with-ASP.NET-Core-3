@@ -16,10 +16,10 @@ namespace VinylStore.Cart.API.Infrastructure.Filters
 
         public class HttpCustomExceptionFilterImpl : IExceptionFilter
         {
-            private readonly IHostingEnvironment _env;
+            private readonly IWebHostEnvironment _env;
             private readonly ILogger<HttpCustomExceptionFilterImpl> _logger;
 
-            public HttpCustomExceptionFilterImpl(IHostingEnvironment env,
+            public HttpCustomExceptionFilterImpl(IWebHostEnvironment env,
                 ILogger<HttpCustomExceptionFilterImpl> logger)
             {
                 _env = env;

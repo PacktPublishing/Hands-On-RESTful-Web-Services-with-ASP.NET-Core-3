@@ -13,13 +13,13 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
 {
     public class DeleteItemHandler : IRequestHandler<DeleteItemCommand, ItemResponse>
     {
-        private readonly IItemRepository _itemsRepository;
+        private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public DeleteItemHandler(IItemRepository itemsRepository, IMapper mapper, ILogger<DeleteItemHandler> logger)
+        public DeleteItemHandler(IItemRepository itemRepository, IMapper mapper, ILogger<DeleteItemHandler> logger)
         {
-            _itemsRepository = itemsRepository;
+            _itemRepository = itemRepository;
             _mapper = mapper;
             _logger = logger;
         }
@@ -29,11 +29,11 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
         {
             if (command?.Id == null) throw new ArgumentNullException();
 
-            var result = await _itemsRepository.GetAsync(command.Id);
+            var result = await _itemRepository.GetAsync(command.Id);
             result.IsInactive = false;
 
-            _itemsRepository.Update(result);
-            var modifiedRecords = await _itemsRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            _itemRepository.Update(result);
+            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             _logger.LogInformation(LoggingEvents.Delete, LoggingMessages.NumberOfRecordAffected_modifiedRecords,
                 modifiedRecords);

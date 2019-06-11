@@ -13,9 +13,9 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
         private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
 
-        public AddItemHandler(IItemRepository itemsRepository, IMapper mapper)
+        public AddItemHandler(IItemRepository itemRepository, IMapper mapper)
         {
-            _itemRepository = itemsRepository;
+            _itemRepository = itemRepository;
             _mapper = mapper;
         }
 

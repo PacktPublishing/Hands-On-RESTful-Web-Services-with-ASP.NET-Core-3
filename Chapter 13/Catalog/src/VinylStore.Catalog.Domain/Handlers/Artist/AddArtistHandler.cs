@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using VinylStore.Catalog.Domain.Commands.Artist;
 using VinylStore.Catalog.Domain.Commands.Artists;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 using VinylStore.Catalog.Domain.Responses.Item;

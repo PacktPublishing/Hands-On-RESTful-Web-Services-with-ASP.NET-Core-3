@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Moq" Version="4.10.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="Moq" Version="4.11.0-rc1" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
         <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
     </ItemGroup>
@@ -23,11 +23,5 @@
       <None Update="Data\cart.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="NServiceBus.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c">
-        <HintPath>..\..\..\..\..\..\.nuget\packages\nservicebus\7.0.0\lib\netstandard2.0\NServiceBus.Core.dll</HintPath>
-      </Reference>
     </ItemGroup>
 </Project>

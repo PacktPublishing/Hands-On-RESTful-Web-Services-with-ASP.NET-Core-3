@@ -16,9 +16,16 @@ namespace VinylStore.Catalog.Fixtures
                 .EnableSensitiveDataLogging()
                 .Options;
 
+            EnsureCreation(ContextOptions);
             ContextInstance = new TestCatalogContext(ContextOptions);
+        }
 
-            ContextInstance.Database.EnsureCreated();
+        private void EnsureCreation(DbContextOptions<CatalogContext> contextOptions)
+        {
+            using (var context = new TestCatalogContext(contextOptions))
+            {
+                context.Database.EnsureCreated();
+            }
         }
 
         public void Dispose()

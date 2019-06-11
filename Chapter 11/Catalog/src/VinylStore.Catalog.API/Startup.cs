@@ -1,9 +1,10 @@
-﻿using FluentValidation.AspNetCore;
+﻿// using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RiskFirst.Hateoas;
 using VinylStore.Catalog.API.Controllers;
 using VinylStore.Catalog.API.Infrastructure.Extensions;
@@ -33,9 +34,9 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddMediatorComponents()
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation();
+                .AddControllers()
+                .AddNewtonsoftJson();
+            //.AddFluentValidation();
 
             services.AddLinks(config =>
             {
@@ -54,20 +55,20 @@ namespace VinylStore.Catalog.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
