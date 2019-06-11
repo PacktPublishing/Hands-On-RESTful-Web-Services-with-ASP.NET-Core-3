@@ -12,12 +12,12 @@ namespace VinylStore.Catalog.Domain.Handlers.Genre
 {
     public class GetItemsByGenreHandler : IRequestHandler<GetItemsByGenreCommand, IList<ItemResponse>>
     {
-        private readonly IItemRepository _itemsRepository;
+        private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
 
-        public GetItemsByGenreHandler(IItemRepository itemsRepository, IMapper mapper)
+        public GetItemsByGenreHandler(IItemRepository itemRepository, IMapper mapper)
         {
-            _itemsRepository = itemsRepository;
+            _itemRepository = itemRepository;
             _mapper = mapper;
         }
 
@@ -25,7 +25,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Genre
             CancellationToken cancellationToken)
         {
             if (command?.Id == null) throw new ArgumentNullException();
-            var result = await _itemsRepository.GetItemByGenreIdAsync(command.Id);
+            var result = await _itemRepository.GetItemByGenreIdAsync(command.Id);
             return _mapper.Map<List<ItemResponse>>(result);
         }
     }

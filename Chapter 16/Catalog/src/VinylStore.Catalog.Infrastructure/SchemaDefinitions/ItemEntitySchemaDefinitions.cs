@@ -20,35 +20,23 @@ namespace VinylStore.Catalog.Infrastructure.SchemaDefinitions
                 .IsRequired()
                 .HasMaxLength(1000);
 
+            builder
+                .HasOne(e => e.Genre)
+                .WithMany(c => c.Items)
+                .HasForeignKey(x => x.GenreId);
 
-            builder.OwnsOne(x => x.Artist, navigationBuilder =>
-            {
-                navigationBuilder.WithOwner()
-                    .HasForeignKey(e => e.ArtistId)
-                    .HasConstraintName("FK_Artists");
-
-                navigationBuilder.ToTable("Artists");
-                navigationBuilder.HasKey(e => e.ArtistId);
-
-            });
+            builder
+                .HasOne(e => e.Artist)
+                .WithMany(c => c.Items)
+                .HasForeignKey(x => x.ArtistId);
 
             builder.Property(x => x.Price).HasConversion(
                 x => $"{x.Amount}:{x.Currency}",
                 x => new Money
                 {
-                    Amount = Convert.ToDecimal(x.Split(':')[0]),
-                    Currency = x.Split(':')[1]
+                    Amount = Convert.ToDecimal(x.Split(':', StringSplitOptions.None)[0]),
+                    Currency = x.Split(':', StringSplitOptions.None)[1]
                 });
-
-            //            builder
-            //                .HasOne(e => e.Genre)
-            //                .WithMany(c => c.Items)
-            //                .HasForeignKey(x => x.GenreId);
-            //
-            //            builder
-            //                .HasOne(e => e.Artist)
-            //                .WithMany(c => c.Items)
-            //                .HasForeignKey(x => x.ArtistId);
         }
     }
 }

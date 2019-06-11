@@ -22,10 +22,12 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
+            }
+
+            using (var context = new TestCatalogContext(options))
+            {
                 var sut = new ItemRepository(context);
-
                 var result = await sut.GetAsync();
-
                 result
                     .Count
                     .ShouldBe(4);
@@ -38,14 +40,16 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             var options = new DbContextOptionsBuilder<CatalogContext>()
                 .UseInMemoryDatabase(databaseName: "should_returns_null_with_id_not_present")
                 .Options;
-
+            
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
+            }
+            
+            using (var context = new TestCatalogContext(options))
+            {
                 var sut = new ItemRepository(context);
-
                 var result = await sut.GetAsync(Guid.NewGuid());
-
                 result.ShouldBeNull();
             }
         }
@@ -62,10 +66,12 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
+            }
+            
+            using (var context = new TestCatalogContext(options))
+            {
                 var sut = new ItemRepository(context);
-
                 var result = await sut.GetAsync(new Guid(guid));
-
                 result.Id.ShouldBe(new Guid(guid));
             }
         }
@@ -83,6 +89,10 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
+            }
+            
+            using (var context = new TestCatalogContext(options))
+            {
                 var sut = new ItemRepository(context);
                 sut.Add(entity);
 
@@ -113,6 +123,10 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
+            }
+            
+            using (var context = new TestCatalogContext(options))
+            {
                 var sut = new ItemRepository(context);
 
                 sut.Update(entity);
