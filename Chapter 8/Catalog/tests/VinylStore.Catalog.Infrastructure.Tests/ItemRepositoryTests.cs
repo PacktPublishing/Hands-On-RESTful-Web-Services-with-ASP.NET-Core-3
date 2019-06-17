@@ -40,12 +40,12 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             var options = new DbContextOptionsBuilder<CatalogContext>()
                 .UseInMemoryDatabase(databaseName: "should_returns_null_with_id_not_present")
                 .Options;
-            
+
             using (var context = new TestCatalogContext(options))
             {
                 context.Database.EnsureCreated();
             }
-            
+
             using (var context = new TestCatalogContext(options))
             {
                 var sut = new ItemRepository(context);
@@ -67,7 +67,7 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             {
                 context.Database.EnsureCreated();
             }
-            
+
             using (var context = new TestCatalogContext(options))
             {
                 var sut = new ItemRepository(context);
@@ -90,7 +90,7 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             {
                 context.Database.EnsureCreated();
             }
-            
+
             using (var context = new TestCatalogContext(options))
             {
                 var sut = new ItemRepository(context);
@@ -124,7 +124,7 @@ namespace VinylStore.Catalog.Infrastructure.Tests
             {
                 context.Database.EnsureCreated();
             }
-            
+
             using (var context = new TestCatalogContext(options))
             {
                 var sut = new ItemRepository(context);
