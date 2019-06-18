@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentValidation.AspNetCore;
 //using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,8 +53,8 @@ namespace VinylStore.Catalog.API
                     options.Configuration = cachingConnectionString.Get<CacheSettings>().ConnectionString;
                 })
                 .AddControllers()
-                .AddNewtonsoftJson();
-            //.AddFluentValidation();
+                .AddNewtonsoftJson()
+                .AddFluentValidation();
 
             services
                 .AddHealthChecks()
