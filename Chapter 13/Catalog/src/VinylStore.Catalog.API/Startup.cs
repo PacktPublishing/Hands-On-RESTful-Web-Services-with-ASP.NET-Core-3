@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentValidation.AspNetCore;
 //using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,8 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddMediatorComponents()
                 .AddControllers()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson()
+                .AddFluentValidation();
 
             services.AddLinks(config =>
             {
