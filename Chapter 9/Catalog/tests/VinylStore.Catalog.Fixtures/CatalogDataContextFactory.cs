@@ -15,7 +15,7 @@ namespace VinylStore.Catalog.Fixtures
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .EnableSensitiveDataLogging()
                 .Options;
-            
+
             EnsureCreation(ContextOptions);
             ContextInstance = new TestCatalogContext(ContextOptions);
         }
