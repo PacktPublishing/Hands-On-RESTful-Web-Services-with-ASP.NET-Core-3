@@ -46,7 +46,7 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddResponseCaching()
-                .AddMediatorComponents()
+                .AddDomainComponents()
                 .AddLogging(_ => _.AddConsole())
                 .AddDistributedRedisCache(options =>
                 {
