@@ -52,7 +52,7 @@ namespace VinylStore.Catalog.API.Controllers
         [HttpGet("{id:guid}/items")]
         public async Task<IActionResult> GetItemsById(Guid id)
         {
-            var result = await _mediator.Send(new GetItemsByArtistCommand() { Id = id });
+            var result = await _mediator.Send(new PaginatedItemsResponseModel() { Id = id });
             return Ok(result);
         }
 

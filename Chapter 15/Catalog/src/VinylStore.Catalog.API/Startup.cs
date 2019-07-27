@@ -36,7 +36,7 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddResponseCaching()
-                .AddMediatorComponents()
+                .AddDomainComponents()
                 .AddDistributedRedisCache(options =>
                 {
                     options.Configuration = Configuration.GetSection("Caching:ConnectionString").Value;

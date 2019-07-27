@@ -10,7 +10,7 @@ using VinylStore.Catalog.Domain.Responses.Item;
 
 namespace VinylStore.Catalog.Domain.Handlers.Artist
 {
-    public class GetItemsByArtistHandler : IRequestHandler<GetItemsByArtistCommand, IList<ItemResponse>>
+    public class GetItemsByArtistHandler : IRequestHandler<PaginatedItemsResponseModel, IList<ItemResponse>>
     {
         private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Artist
             _mapper = mapper;
         }
 
-        public async Task<IList<ItemResponse>> Handle(GetItemsByArtistCommand command,
+        public async Task<IList<ItemResponse>> Handle(PaginatedItemsResponseModel command,
             CancellationToken cancellationToken)
         {
             if (command?.Id == null) throw new ArgumentNullException();

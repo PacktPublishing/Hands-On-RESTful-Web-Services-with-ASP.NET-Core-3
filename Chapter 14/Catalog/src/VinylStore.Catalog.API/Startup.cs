@@ -35,7 +35,7 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
-                .AddMediatorComponents()
+                .AddDomainComponents()
                 .AddControllers()
                 .AddNewtonsoftJson()
                 .AddFluentValidation();
