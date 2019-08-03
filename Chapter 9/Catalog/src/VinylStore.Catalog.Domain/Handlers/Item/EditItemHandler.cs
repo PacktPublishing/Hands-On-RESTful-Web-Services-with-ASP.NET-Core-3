@@ -20,7 +20,6 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
             _mapper = mapper;
         }
 
-
         public async Task<ItemResponse> Handle(EditItemCommand command, CancellationToken cancellationToken)
         {
             var existingRecord = await _itemRepository.GetAsync(command.Id);
