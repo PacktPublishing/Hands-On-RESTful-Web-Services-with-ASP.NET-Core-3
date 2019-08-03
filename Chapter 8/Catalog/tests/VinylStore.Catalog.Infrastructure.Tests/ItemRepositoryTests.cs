@@ -101,7 +101,6 @@ namespace VinylStore.Catalog.Infrastructure.Tests
 
             using (var context = new TestCatalogContext(options))
             {
-
                 context.Items
                     .FirstOrDefault(_ => _.Id == entity.Id)
                     .ShouldNotBeNull();
@@ -139,7 +138,6 @@ namespace VinylStore.Catalog.Infrastructure.Tests
                     .FirstOrDefault(_ => _.Id == entity.Id)
                     ?.Description.ShouldBe("Updated");
             }
-
         }
     }
 }
