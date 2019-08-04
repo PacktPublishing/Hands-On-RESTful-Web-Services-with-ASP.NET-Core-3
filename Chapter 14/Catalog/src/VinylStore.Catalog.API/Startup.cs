@@ -71,9 +71,9 @@ namespace VinylStore.Catalog.API
 
             app.UseRouting();
             app.UseHttpsRedirection();
-            app.UseAuthorization();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
