@@ -57,6 +57,25 @@ namespace VinylStore.Catalog.API.Tests.Controllers
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
             responseContent.ShouldNotBeEmpty();
         }
+        
+        [Theory]
+        [InlineData("/api/user")]
+        public async Task sign_in_should_retrieve_unauthorized_with_invalid_token(string url)
+        {
+            var client = _factory.CreateClient();
+
+            // Token with wrong signature
+            var token = 
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbXVlbGUucmVzY2FAZXhhbXBsZS5jb20iLCJuYmYiOjE1NjQ4NDg0MjMsImV4cCI6MTU2NTQ1MzIyMywiaWF0IjoxNTY0ODQ4NDIzfQ.5iC9_aXdAZPFFic622T7T_NWBpKoAfp_vEd1M_HUMh0";
+
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var restrictedResponse = await client.GetAsync(url);
+
+
+            restrictedResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
 
         [Theory]
         [InlineData("/api/user")]
