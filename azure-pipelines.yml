@@ -23,9 +23,9 @@ steps:
   displayName: 'Building'
   inputs:
     command: 'build'
-    projects: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/Catalog'
 - task: DotNetCoreCLI@2
+  displayName: 'Testing'
   inputs:
-    displayName: 'Testing'
     command: 'test'
-    projects: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/Catalog'
