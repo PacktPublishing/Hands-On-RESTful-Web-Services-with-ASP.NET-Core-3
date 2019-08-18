@@ -9,113 +9,109 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
   inputs:
     version: '3.0.100-preview8-013656'
+
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 8 - Build'
+  displayName: 'Chapter 8 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 8 - Tests'
+  displayName: 'Chapter 8 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 9 - Build'
+  displayName: 'Chapter 9 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 9/**/*.sln'
+    workingDirectory: './Chapter 9/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 9 - Tests'
+  displayName: 'Chapter 9 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 9/**/*.sln'
+    workingDirectory: './Chapter 9/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 10 - Build'
+  displayName: 'Chapter 10 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 10/**/*.sln'
+    workingDirectory: './Chapter 10/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 10 - Tests'
+  displayName: 'Chapter 10 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 10/**/*.sln'
+    workingDirectory: './Chapter 10/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 11 - Build'
+  displayName: 'Chapter 11 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 11/**/*.sln'
+    workingDirectory: './Chapter 11/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 11 - Tests'
+  displayName: 'Chapter 11 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 11/**/*.sln'
+    workingDirectory: './Chapter 11/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 12 - Build'
+  displayName: 'Chapter 12 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 12/**/*.sln'
+    workingDirectory: './Chapter 12/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 12 - Tests'
+  displayName: 'Chapter 12 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 12/**/*.sln'
+    workingDirectory: './Chapter 12/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 13 - Build'
+  displayName: 'Chapter 13 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 13/**/*.sln'
+    workingDirectory: './Chapter 13/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 13 - Tests'
+  displayName: 'Chapter 13 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 13/**/*.sln'
+    workingDirectory: './Chapter 13/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 14 - Build'
+  displayName: 'Chapter 14 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 14/**/*.sln'
+    workingDirectory: './Chapter 14/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 14 - Tests'
+  displayName: 'Chapter 14 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 14/**/*.sln'
+    workingDirectory: './Chapter 14/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 15 - Build'
+  displayName: 'Chapter 15 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 15/**/*.sln'
+    workingDirectory: './Chapter 15/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 15 - Tests'
+  displayName: 'Chapter 15 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 15/**/*.sln'
+    workingDirectory: './Chapter 15/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 16 - Build'
+  displayName: 'Chapter 16 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 16/**/*.sln'
+    workingDirectory: './Chapter 16/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 16 - Tests'
+  displayName: 'Chapter 16 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 16/**/*.sln'
+    workingDirectory: './Chapter 16/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 17 - Build'
+  displayName: 'Chapter 17 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 17/**/*.sln'
+    workingDirectory: './Chapter 17/Catalog'
 - task: DotNetCoreCLI@2
-  displayName: 'Chapter 17 - Tests'
+  displayName: 'Chapter 17 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 17/**/*.sln'
+    workingDirectory: './Chapter 17/Catalog'
