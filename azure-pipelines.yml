@@ -20,12 +20,102 @@ steps:
   inputs:
     version: '3.0.100-preview8-013656'
 - task: DotNetCoreCLI@2
-  displayName: 'Building'
+  displayName: 'Chapter 8 - Build'
   inputs:
     command: 'build'
-    projects: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/**/*.sln'
 - task: DotNetCoreCLI@2
+  displayName: 'Chapter 8 - Tests'
   inputs:
-    displayName: 'Testing'
     command: 'test'
-    projects: './Chapter 8/**/*.sln'
+    workingDirectory: './Chapter 8/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 9 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 9/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 9 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 9/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 10 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 10/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 10 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 10/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 11 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 11/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 11 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 11/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 12 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 12/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 12 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 12/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 13 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 13/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 13 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 13/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 14 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 14/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 14 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 14/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 15 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 15/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 15 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 15/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 16 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 16/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 16 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 16/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 17 - Build'
+  inputs:
+    command: 'build'
+    workingDirectory: './Chapter 17/**/*.sln'
+- task: DotNetCoreCLI@2
+  displayName: 'Chapter 17 - Tests'
+  inputs:
+    command: 'test'
+    workingDirectory: './Chapter 17/**/*.sln'
