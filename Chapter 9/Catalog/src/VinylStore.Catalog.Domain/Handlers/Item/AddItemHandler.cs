@@ -19,7 +19,6 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
             _mapper = mapper;
         }
 
-
         public async Task<ItemResponse> Handle(AddItemCommand command, CancellationToken cancellationToken)
         {
             var item = _mapper.Map<Entities.Item>(command);

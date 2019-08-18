@@ -5,15 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Automapper" Version="8.1.1" />
+    <PackageReference Include="Automapper" Version="9.0.0" />
     <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="FluentValidation" Version="8.5.0-preview2" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview2" />
+    <PackageReference Include="FluentValidation" Version="8.5.0-preview4" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview4" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview-18579-0056" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0-preview5-19227-01" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-preview6.19304.6" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0-preview8.19405.7" />
   </ItemGroup>
 </Project>

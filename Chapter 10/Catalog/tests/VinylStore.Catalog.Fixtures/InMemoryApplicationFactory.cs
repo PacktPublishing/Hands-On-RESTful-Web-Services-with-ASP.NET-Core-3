@@ -13,7 +13,9 @@ namespace VinylStore.Catalog.Fixtures
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.UseEnvironment("Testing")
+            builder
+                .UseEnvironment("Testing")
+                .UseSolutionRelativeContentRoot("")
                 .ConfigureTestServices(services =>
                 {
                     var options = new DbContextOptionsBuilder<CatalogContext>()
@@ -30,6 +32,7 @@ namespace VinylStore.Catalog.Fixtures
                         db.Database.EnsureCreated();
                     }
                 });
+
         }
     }
 }

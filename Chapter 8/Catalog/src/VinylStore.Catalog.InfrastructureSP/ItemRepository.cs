@@ -14,7 +14,6 @@ namespace VinylStore.Catalog.InfrastructureSP
 
         public ItemRepository(string connectionString)
         {
-
             _sqlConnection = new SqlConnection(connectionString);
         }
 

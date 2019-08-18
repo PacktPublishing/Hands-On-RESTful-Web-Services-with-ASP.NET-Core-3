@@ -15,7 +15,6 @@ namespace VinylStore.Catalog.Domain.Infrastructure.Mediator
             _serviceProvider = serviceProvider;
         }
 
-
         public async Task<TResponse> Send<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
         {
             if (command == null) throw new ArgumentNullException(nameof(command));

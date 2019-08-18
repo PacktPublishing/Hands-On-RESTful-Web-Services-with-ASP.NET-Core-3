@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview7 AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview8 AS builder
 WORKDIR /app
 COPY . . 
 RUN dotnet restore ./VinylStore.Catalog.API.sln

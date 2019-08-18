@@ -29,7 +29,8 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddDomainComponents()
                 .AddControllers()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson()
+                .AddFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

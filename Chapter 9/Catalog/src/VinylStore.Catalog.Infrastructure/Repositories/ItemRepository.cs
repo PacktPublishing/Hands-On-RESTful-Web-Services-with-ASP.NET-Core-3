@@ -33,7 +33,8 @@ namespace VinylStore.Catalog.Infrastructure.Repositories
                 .AsNoTracking()
                 .Where(x => x.Id == id)
                 .Include(x => x.Genre)
-                .Include(x => x.Artist).FirstOrDefaultAsync();
+                .Include(x => x.Artist)
+                .FirstOrDefaultAsync();
 
             if (item == null) return null;
 
