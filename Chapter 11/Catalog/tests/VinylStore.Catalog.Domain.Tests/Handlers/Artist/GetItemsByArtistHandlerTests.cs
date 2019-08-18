@@ -31,7 +31,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Artist
             var sut = new GetItemsByArtistHandler(repository,
                 new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
 
-            var result = await sut.Handle(new GetItemsByArtistCommand { Id = new Guid(id) }, CancellationToken.None);
+            var result = await sut.Handle(new PaginatedItemsResponseModel { Id = new Guid(id) }, CancellationToken.None);
 
             result.ShouldNotBeNull();
         }

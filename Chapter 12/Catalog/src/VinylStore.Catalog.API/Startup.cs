@@ -32,7 +32,7 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IItemRepository, ItemRepository>()
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
-                .AddMediatorComponents()
+                .AddDomainComponents()
                 .AddControllers()
                 .AddNewtonsoftJson()
                 .AddFluentValidation();
