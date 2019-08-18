@@ -19,20 +19,13 @@ steps:
   displayName: 'Install .net core 3.0 (preview)'
   inputs:
     version: '3.0.100-preview8-013656'
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Building'
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
+    command: 'build'
+    projects: './Chapter 8/**/*.sln'
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    displayName: 'Testing'
+    command: 'test'
+    projects: './Chapter 8/**/*.sln'
