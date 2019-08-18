@@ -19,99 +19,99 @@ steps:
   displayName: 'Chapter 8 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 8/Catalog'
+    projects: './Chapter 8/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 8 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 8/Catalog'
+    projects: './Chapter 8/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 9 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 9/Catalog'
+    projects: './Chapter 9/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 9 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 9/Catalog'
+    projects: './Chapter 9/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 10 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 10/Catalog'
+    projects: './Chapter 10/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 10 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 10/Catalog'
+    projects: './Chapter 10/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 11 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 11/Catalog'
+    projects: './Chapter 11/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 11 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 11/Catalog'
+    projects: './Chapter 11/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 12 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 12/Catalog'
+    projects: './Chapter 12/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 12 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 12/Catalog'
+    projects: './Chapter 12/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 13 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 13/Catalog'
+    projects: './Chapter 13/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 13 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 13/Catalog'
+    projects: './Chapter 13/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 14 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 14/Catalog'
+    projects: './Chapter 14/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 14 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 14/Catalog'
+    projects: './Chapter 14/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 15 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 15/Catalog'
+    projects: './Chapter 15/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 15 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 15/Catalog'
+    projects: './Chapter 15/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 16 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 16/Catalog'
+    projects: './Chapter 16/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 16 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 16/Catalog'
+    projects: './Chapter 16/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 17 Catalog - Build'
   inputs:
     command: 'build'
-    workingDirectory: './Chapter 17/Catalog'
+    projects: './Chapter 17/Catalog/VinylStore.Catalog.API.sln'
 - task: DotNetCoreCLI@2
   displayName: 'Chapter 17 Catalog - Tests'
   inputs:
     command: 'test'
-    workingDirectory: './Chapter 17/Catalog'
+    projects: './Chapter 17/Catalog/VinylStore.Catalog.API.sln'
