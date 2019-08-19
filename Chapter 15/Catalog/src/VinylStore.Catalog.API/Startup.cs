@@ -42,10 +42,7 @@ namespace VinylStore.Catalog.API
                     options.Configuration = Configuration.GetSection("Caching:ConnectionString").Value;
                 })
                 .AddControllers()
-                .AddNewtonsoftJson()
                 .AddFluentValidation();
-
-
 
             services.AddLinks(config =>
             {

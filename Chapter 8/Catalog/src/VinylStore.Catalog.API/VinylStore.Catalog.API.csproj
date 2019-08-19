@@ -4,13 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Infrastructure\Extensions" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\VinylStore.Catalog.Infrastructure\VinylStore.Catalog.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

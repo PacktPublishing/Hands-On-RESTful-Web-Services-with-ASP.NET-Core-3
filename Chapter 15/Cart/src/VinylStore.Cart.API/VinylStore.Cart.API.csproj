@@ -6,21 +6,9 @@
 
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview8.19405.7" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\VinylStore.Cart.Domain\VinylStore.Cart.Domain.csproj" />
       <ProjectReference Include="..\VinylStore.Cart.Infrastructure\VinylStore.Cart.Infrastructure.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Content Update="appsettings.Integration.json">
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Update="appsettings.json">
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
 </Project>

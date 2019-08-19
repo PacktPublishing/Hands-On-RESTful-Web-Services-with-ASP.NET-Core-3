@@ -6,7 +6,7 @@ namespace VinylStore.Cart.Domain.Commands.Cart
 {
     public class CreateCartCommand : IRequest<CartExtendedResponse>
     {
-        public IList<string> ItemsIds { get; set; }
+        public List<string> ItemsIds { get; set; }
 
         public string UserEmail { get; set; }
     }

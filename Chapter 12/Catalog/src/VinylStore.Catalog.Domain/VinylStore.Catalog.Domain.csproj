@@ -10,6 +10,5 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview4" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0-preview8.19405.4" />
   </ItemGroup>
 </Project>

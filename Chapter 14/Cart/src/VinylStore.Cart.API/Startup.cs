@@ -30,8 +30,7 @@ namespace VinylStore.Cart.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers()
-                .AddNewtonsoftJson();
+                .AddControllers();
 
             services
                 .AddScoped<ICartRepository, CartRepository>()

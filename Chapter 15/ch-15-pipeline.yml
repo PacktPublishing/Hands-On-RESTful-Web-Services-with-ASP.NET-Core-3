@@ -10,20 +10,36 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  workingDir: './Chapter 15/Catalog'
-  solutionPath: './Chapter 15/Catalog/VinylStore.Catalog.API.sln'
+  workingDirCatalog: './Chapter 15/Catalog'
+  solutionPathCatalog: './Chapter 15/Catalog/VinylStore.Catalog.API.sln'
+  workingDirCart: './Chapter 15/Cart'
+  solutionPathCart: './Chapter 15/Cart/VinylStore.Cart.API.sln'
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
   inputs:
     version: '3.0.100-preview8-013656'
 - task: DotNetCoreCLI@2
-  displayName: 'Building'
+  displayName: 'Building Catalog'
   inputs:
     command: 'build'
-    projects: $(solutionPath)
+    projects: $(solutionPathCatalog)
 - task: DotNetCoreCLI@2
-  displayName: 'Testing'
+  displayName: 'Testing Catalog'
   inputs:
     command: 'test'
-    workingDirectory: $(workingDir)
+    workingDirectory: $(workingDirCatalog)
+- task: DotNetCoreInstaller@0
+  displayName: 'Install .net core 3.0 (preview)'
+  inputs:
+    version: '3.0.100-preview8-013656'
+- task: DotNetCoreCLI@2
+  displayName: 'Building Cart'
+  inputs:
+    command: 'build'
+    projects: $(solutionPathCart)
+- task: DotNetCoreCLI@2
+  displayName: 'Testing Cart'
+  inputs:
+    command: 'test'
+    workingDirectory: $(workingDirCart)
