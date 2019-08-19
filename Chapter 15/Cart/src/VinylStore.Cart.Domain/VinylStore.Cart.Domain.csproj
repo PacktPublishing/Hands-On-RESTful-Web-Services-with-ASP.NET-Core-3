@@ -10,10 +10,6 @@
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Handlers" />
-    </ItemGroup>
-    <ItemGroup>
       <ProjectReference Include="..\VinylStore.Cart.Events\VinylStore.Cart.Events.csproj" />
     </ItemGroup>
-
 </Project>
