@@ -24,7 +24,7 @@
 
     <ItemGroup>
       <None Update="record-data.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 </Project>
