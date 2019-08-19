@@ -10,8 +10,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  workingDir: './Chapter 9/Catalog'
-  solutionPath: './Chapter 9/Catalog/VinylStore.Catalog.API.sln'
+  workingDir: './Chapter 11/Catalog'
+  solutionPath: './Chapter 11/Catalog/VinylStore.Catalog.API.sln'
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
