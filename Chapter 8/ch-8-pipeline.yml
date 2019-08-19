@@ -1,0 +1,29 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solutionPath: './Chapter 8/Catalog/VinylStore.Catalog.API.sln'
+
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Install .net core 3.0 (preview)'
+  inputs:
+    version: '3.0.100-preview8-013656'
+- task: DotNetCoreCLI@2
+  displayName: 'Building'
+  inputs:
+    command: 'build'
+    projects: $(solutionPath)
+- task: DotNetCoreCLI@2
+  displayName: 'Testing'
+  inputs:
+    command: 'test'
+    workingDirectory: $(solutionPath)
