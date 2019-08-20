@@ -43,3 +43,9 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDirCart)
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: $(workingDirCatalog)'/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'up --build'
