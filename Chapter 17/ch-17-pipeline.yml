@@ -40,8 +40,8 @@ steps:
     command: 'test'
     workingDirectory: $(workingDirCart)
 - task: DockerCompose@0
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerComposeFile: $(workingDirCatalog)/docker-compose.yml
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'up --build'
+  displayName: 'Docker Compose'
+  inputs: |
+    docker-compose -f $(workingDirCatalog)/docker-compose.yml --project-directory $(workingDirCatalog) -p docs up -d
+    docker wait docs_sut_1
+    docker-compose -f $(workingDirCatalog)/docker-compose.yml --project-directory $(workingDirCatalog) down
