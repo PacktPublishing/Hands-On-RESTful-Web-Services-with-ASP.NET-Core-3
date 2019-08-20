@@ -10,10 +10,10 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  workingDirCatalog: './Chapter 17/Catalog'
-  solutionPathCatalog: './Chapter 17/Catalog/VinylStore.Catalog.API.sln'
-  workingDirCart: './Chapter 17/Cart'
-  solutionPathCart: './Chapter 17/Cart/VinylStore.Cart.API.sln'
+  workingDirCatalog: ./Chapter 17/Catalog
+  solutionPathCatalog: ./Chapter 17/Catalog/VinylStore.Catalog.API.sln
+  workingDirCart: ./Chapter 17/Cart
+  solutionPathCart: ./Chapter 17/Cart/VinylStore.Cart.API.sln
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
@@ -46,6 +46,6 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerComposeFile: $(workingDirCatalog)'/docker-compose.yml'
+    dockerComposeFile: $(workingDirCatalog)/docker-compose.yml
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'up --build'
