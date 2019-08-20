@@ -41,6 +41,8 @@ steps:
     workingDirectory: $(workingDirCart)
     
 - script: |
-    docker-compose -f docker-compose.yml --project-directory $(workingDirCatalog) -p docs up -d
+    docker-compose -f docker-compose.yml -p docs up -d
     docker wait docs_sut_1
-    docker-compose -f docker-compose.yml --project-directory $(workingDirCatalog) down
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDirCatalog)
+  displayName: 'Docker compose build'
