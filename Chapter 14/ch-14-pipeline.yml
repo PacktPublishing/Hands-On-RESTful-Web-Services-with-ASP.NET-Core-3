@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   workingDirCatalog: './Chapter 14/Catalog'
@@ -29,10 +29,6 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDirCatalog)
-- task: DotNetCoreInstaller@0
-  displayName: 'Install .net core 3.0 (preview)'
-  inputs:
-    version: '3.0.100-preview8-013656'
 - task: DotNetCoreCLI@2
   displayName: 'Building Cart'
   inputs:
