@@ -7,13 +7,14 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   workingDirCatalog: './Chapter 17/Catalog'
-  solutionPathCatalog: './Chapter 17/Catalog/VinylStore.Catalog.API.sln'
-  workingDirCart: './Chapter 17/Cart'
-  solutionPathCart: './Chapter 17/Cart/VinylStore.Cart.API.sln'
+  solutionPathCatalog: ./Chapter 17/Catalog/VinylStore.Catalog.API.sln
+  workingDirCart: ./Chapter 17/Cart
+  solutionPathCart: ./Chapter 17/Cart/VinylStore.Cart.API.sln
+
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
@@ -29,10 +30,6 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDirCatalog)
-- task: DotNetCoreInstaller@0
-  displayName: 'Install .net core 3.0 (preview)'
-  inputs:
-    version: '3.0.100-preview8-013656'
 - task: DotNetCoreCLI@2
   displayName: 'Building Cart'
   inputs:
@@ -43,3 +40,9 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDirCart)
+- script: |
+    docker-compose -f docker-compose.yml up -d
+    docker wait catalog_api
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDirCatalog)
+  displayName: 'Docker compose build'

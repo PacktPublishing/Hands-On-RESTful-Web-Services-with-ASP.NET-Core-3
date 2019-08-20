@@ -25,7 +25,7 @@ services:
     networks:
       - my_network
     environment:
-      SA_PASSWORD: MyPassword123
+      SA_PASSWORD: P@ssw0rd
       ACCEPT_EULA: Y
 
   catalog_esb:

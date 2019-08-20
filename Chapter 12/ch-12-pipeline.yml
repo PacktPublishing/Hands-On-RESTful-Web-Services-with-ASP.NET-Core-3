@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   workingDir: './Chapter 12/Catalog'
@@ -27,3 +27,9 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDir)
+- script: |
+    docker-compose -f docker-compose.yml up -d
+    docker wait catalog_api
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDir)
+  displayName: 'Docker compose build'

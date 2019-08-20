@@ -15,5 +15,16 @@
   <ItemGroup>
     <ProjectReference Include="..\VinylStore.Catalog.Infrastructure\VinylStore.Catalog.Infrastructure.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Update="appsettings.Integration.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
