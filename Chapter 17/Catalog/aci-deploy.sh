@@ -5,7 +5,7 @@ export resource_group=catalogServiceGroup
 # Set the sql container name
 export sql_name=catalog-db
 # Set the sql admin password
-export sql_admin_pass=MyPassword123
+export sql_admin_pass=P@ssw0rd
 # Set the event service bus name
 export esb_name=catalog-esb
 # Set the event service bus username
