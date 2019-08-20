@@ -39,7 +39,6 @@ steps:
   inputs:
     command: 'test'
     workingDirectory: $(workingDirCart)
-    
 - script: |
     docker-compose -f docker-compose.yml -p docs up -d
     docker wait docs_sut_1
