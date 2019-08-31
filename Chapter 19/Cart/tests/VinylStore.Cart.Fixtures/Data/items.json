@@ -1,0 +1,63 @@
+[
+  {
+    "CartItemId": "86bff4f7-05a7-46b6-ba73-d43e2c45840f",
+    "Name": "DAMN.",
+    "Description": "DAMN. by Kendrick Lamar",
+    "LabelName": "TDE, Top Dawg Entertainment",
+    "Price": "34.5",
+    "PictureUri": "https://mycdn.com/pictures/45345345",
+    "ReleaseDate": "2017-01-01T00:00:00+00:00",
+    "Format": "Vinyl 33g",
+    "AvailableStock": 5,
+    "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+    "Genre": null,
+    "ArtistId": "3eb00b42-a9f0-4012-841d-70ebf3ab7474",
+    "Artist": null
+  },
+  {
+    "CartItemId": "b5b05534-9263-448c-a69e-0bbd8b3eb90e",
+    "Name": "GOOD KID, m.A.A.d CITY",
+    "Description": "GOOD KID, m.A.A.d CITY. by Kendrick Lamar",
+    "LabelName": "TDE, Top Dawg Entertainment",
+    "Price": "23.5",
+    "PictureUri": "https://mycdn.com/pictures/32423423",
+    "ReleaseDate": "2016-01-01T00:00:00+00:00",
+    "Format": "Vinyl 33g",
+    "AvailableStock": 6,
+    "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+    "Genre": null,
+    "ArtistId": "3eb00b42-a9f0-4012-841d-70ebf3ab7474",
+    "Artist": null
+  },
+  {
+    "CartItemId": "f5da5ce4-091e-492e-a70a-22b073d75a52",
+    "Name": "Untitled",
+    "Description": "Untitled by Kendrick Lamar",
+    "LabelName": "TDE, Top Dawg Entertainment",
+    "Price": "15.5",
+    "PictureUri": "https://mycdn.com/pictures/32423423",
+    "ReleaseDate": "2016-01-01T00:00:00+00:00",
+    "Format": "Vinyl 33g",
+    "AvailableStock": 6,
+    "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+    "Genre": null,
+    "ArtistId": "3eb00b42-a9f0-4012-841d-70ebf3ab7474",
+    "Artist": null,
+    "IsInactive": true
+  },
+  {
+    "CartItemId": "be05537d-5e80-45c1-bd8c-aa21c0f1251e",
+    "Name": "Malibu",
+    "Description": "Malibu. by Anderson Paak",
+    "LabelName": "Steel Wool/OBE/Art Club",
+    "Price": "23.5",
+    "PictureUri": "https://mycdn.com/pictures/32423423",
+    "ReleaseDate": "2016-01-01T00:00:00+00:00",
+    "Format": "Vinyl 43",
+    "AvailableStock": 3,
+    "GenreId": "c04f05c0-f6ad-44d1-a400-3375bfb5dfd6",
+    "Genre": null,
+    "ArtistId": "f08a333d-30db-4dd1-b8ba-3b0473c7cdab",
+    "Artist": null
+  }
+]

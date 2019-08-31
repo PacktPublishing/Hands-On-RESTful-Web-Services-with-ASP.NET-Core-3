@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    cart_api:
+        container_name: cart_api
+        environment:
+            - ASPNETCORE_URLS=http://*:5002;https://*:5003
+            - ASPNETCORE_ENVIRONMENT=Integration
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=YourSecurePassword
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.dotnet/https/localhost.pfx
+        build:
+            context: .
+        volumes:
+            - ./certificate/:/root/.dotnet/https
+        networks:
+            - my_network
+        ports:
+            - 5002:5002
+            - 5003:5003
+        depends_on:
+            - cart_db
+    cart_db:
+        container_name: cart_db
+        networks:
+            - my_network
+        ports:
+            - 6378:6378
+        image: redis:alpine
+
+networks:
+    my_network:
+        driver: bridge
