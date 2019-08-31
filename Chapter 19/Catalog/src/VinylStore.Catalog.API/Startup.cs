@@ -101,12 +101,9 @@ namespace VinylStore.Catalog.API
                 .UseHealthChecks("/health")
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                             {
-                                 endpoints.MapControllers();
-                             })
                 .UseOpenApi()
-                .UseSwaggerUi3();
+                .UseSwaggerUi3()
+                .UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
