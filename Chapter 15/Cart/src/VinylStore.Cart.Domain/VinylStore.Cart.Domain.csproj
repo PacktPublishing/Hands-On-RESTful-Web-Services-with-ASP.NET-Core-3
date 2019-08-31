@@ -12,4 +12,5 @@
     <ItemGroup>
       <ProjectReference Include="..\VinylStore.Cart.Events\VinylStore.Cart.Events.csproj" />
     </ItemGroup>
+
 </Project>

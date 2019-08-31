@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Catalog.API.Infrastructure.Filters;
-using VinylStore.Catalog.Domain.Commands.User;
+using VinylStore.Catalog.Domain.Commands.Users;
 
 namespace VinylStore.Catalog.API.Controllers
 {
@@ -40,6 +40,7 @@ namespace VinylStore.Catalog.API.Controllers
             var token = await _mediator.Send(request);
 
             if (token == null) return BadRequest();
+
             return Ok(token);
         }
 
@@ -50,6 +51,7 @@ namespace VinylStore.Catalog.API.Controllers
             var user = await _mediator.Send(request);
 
             if (user == null) return BadRequest();
+
             return CreatedAtAction(nameof(Get), new { }, null);
         }
     }

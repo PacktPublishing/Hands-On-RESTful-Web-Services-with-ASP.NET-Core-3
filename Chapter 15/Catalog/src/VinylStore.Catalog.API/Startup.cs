@@ -35,14 +35,10 @@ namespace VinylStore.Catalog.API
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
-                .AddResponseCaching()
                 .AddDomainComponents()
-                .AddDistributedRedisCache(options =>
-                {
-                    options.Configuration = Configuration.GetSection("Caching:ConnectionString").Value;
-                })
                 .AddControllers()
                 .AddFluentValidation();
+
 
             services.AddLinks(config =>
             {
@@ -72,16 +68,15 @@ namespace VinylStore.Catalog.API
                 Console.WriteLine(e);
             }
 
-            app.UseRouting()
-               .UseHttpsRedirection()
-               .UseResponseCaching()
-               .UseMiddleware<ResponseTimeMiddlewareAsync>()
-               .UseAuthentication()
-               .UseAuthorization()
-               .UseEndpoints(endpoints =>
-                            {
-                                endpoints.MapControllers();
-                            });
+            app.UseRouting();
+            app.UseHttpsRedirection();
+            app.UseMiddleware<ResponseTimeMiddlewareAsync>();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

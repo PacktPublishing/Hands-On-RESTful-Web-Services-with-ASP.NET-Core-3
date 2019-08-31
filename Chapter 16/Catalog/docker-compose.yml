@@ -37,13 +37,6 @@ services:
     networks:
       - my_network
 
-  catalog_cache:
-    container_name: catalog_cache
-    image: redis:alpine
-    networks:
-      - my_network
-    ports:
-      - 6379:6380
 
 networks:
   my_network:

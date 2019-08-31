@@ -133,11 +133,13 @@ namespace VinylStore.Catalog.API.Migrations
                     b.Property<Guid>("ArtistId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistName");
+                    b.Property<string>("ArtistName")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.HasKey("ArtistId");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artists","catalog");
                 });
 
             modelBuilder.Entity("VinylStore.Catalog.Domain.Entities.Genre", b =>

@@ -20,4 +20,5 @@
     <ProjectReference Include="..\..\src\VinylStore.Catalog.Infrastructure\VinylStore.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\VinylStore.Catalog.Infrastructure.Tests\VinylStore.Catalog.Infrastructure.Tests.csproj" />
   </ItemGroup>
+
 </Project>

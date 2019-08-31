@@ -1,11 +1,11 @@
 using System;
 using AutoMapper;
 using FluentValidation;
+//using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using VinylStore.Catalog.Domain.Commands.Item;
 using VinylStore.Catalog.Domain.Commands.Item.Validators;
-
 
 namespace VinylStore.Catalog.Domain.Infrastructure.Extensions
 {
@@ -17,8 +17,8 @@ namespace VinylStore.Catalog.Domain.Infrastructure.Extensions
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services
-                .AddTransient<IValidator<EditItemCommand>, EditItemCommandValidator>()
-                .AddTransient<IValidator<AddItemCommand>, AddItemCommandValidator>();
+               .AddTransient<IValidator<EditItemCommand>, EditItemCommandValidator>()
+         .AddTransient<IValidator<AddItemCommand>, AddItemCommandValidator>();
 
 
             return services;

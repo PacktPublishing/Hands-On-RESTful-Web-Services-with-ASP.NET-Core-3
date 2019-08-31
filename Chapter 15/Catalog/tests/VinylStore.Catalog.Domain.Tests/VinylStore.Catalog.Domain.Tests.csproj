@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
-    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="Moq" Version="4.11.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -20,5 +20,4 @@
     <ProjectReference Include="..\..\src\VinylStore.Catalog.Infrastructure\VinylStore.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\VinylStore.Catalog.Infrastructure.Tests\VinylStore.Catalog.Infrastructure.Tests.csproj" />
   </ItemGroup>
-
 </Project>

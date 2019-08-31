@@ -1,9 +1,6 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.Extensions.Logging;
-using Moq;
 using Newtonsoft.Json;
 using Shouldly;
 using VinylStore.Catalog.Domain.Commands.Item;
@@ -12,25 +9,16 @@ using VinylStore.Catalog.Domain.Infrastructure.Mapper;
 using VinylStore.Catalog.Fixtures;
 using VinylStore.Catalog.Infrastructure.Repositories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace VinylStore.Catalog.Domain.Tests.Handlers.Item
 {
     public class EditItemHandlerTests : IClassFixture<CatalogDataContextFactory>
     {
         private readonly CatalogDataContextFactory _catalogDataContextFactory;
-        private readonly Mock<LoggerAbstraction<EditItemHandler>> _logger;
 
-
-        public EditItemHandlerTests(CatalogDataContextFactory catalogDataContextFactory, ITestOutputHelper output)
+        public EditItemHandlerTests(CatalogDataContextFactory catalogDataContextFactory)
         {
             _catalogDataContextFactory = catalogDataContextFactory;
-
-            _logger = new Mock<LoggerAbstraction<EditItemHandler>>();
-            _logger
-                .Setup(x => x.Log(It.IsAny<LogLevel>(), It.IsAny<Exception>(), It.IsAny<string>()))
-                .Callback((LogLevel logLevel, Exception exception, string information) =>
-                    output.WriteLine($"{logLevel}:{information}"));
         }
 
 
@@ -42,7 +30,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Item
             var item = JsonConvert.DeserializeObject<EditItemCommand>(json);
 
             var sut = new EditItemHandler(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())), _logger.Object);
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
 
             var result =
                 await sut.Handle(item, CancellationToken.None);
@@ -53,9 +41,6 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.Item
             result.ArtistId.ShouldBe(item.ArtistId);
             result.Price.Amount.ShouldBe(item.Price.Amount);
             result.Price.Currency.ShouldBe(item.Price.Currency);
-
-            _logger
-                .Verify(x => x.Log(It.IsAny<LogLevel>(), It.IsAny<Exception>(), It.IsAny<string>()), Times.AtMost(2));
         }
     }
 }

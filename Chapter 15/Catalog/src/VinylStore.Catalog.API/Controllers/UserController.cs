@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Catalog.API.Infrastructure.Filters;
-using VinylStore.Catalog.Domain.Commands.Users;
+using VinylStore.Catalog.Domain.Commands.User;
 
 namespace VinylStore.Catalog.API.Controllers
 {

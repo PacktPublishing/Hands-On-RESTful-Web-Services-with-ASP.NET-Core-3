@@ -40,7 +40,6 @@ namespace VinylStore.Catalog.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        [ResponseCache(Duration = 20)]
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
         {

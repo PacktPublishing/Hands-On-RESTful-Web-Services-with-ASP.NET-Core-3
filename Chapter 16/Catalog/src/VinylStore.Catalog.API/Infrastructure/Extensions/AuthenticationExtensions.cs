@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using VinylStore.Catalog.Domain;
 using VinylStore.Catalog.Domain.Entities;
-using VinylStore.Catalog.Domain.Infrastructure.Settings;
 using VinylStore.Catalog.Infrastructure;
 
 namespace VinylStore.Catalog.API.Infrastructure.Extensions

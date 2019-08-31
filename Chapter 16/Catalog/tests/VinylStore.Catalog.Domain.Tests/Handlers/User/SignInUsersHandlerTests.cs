@@ -2,9 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Shouldly;
-using VinylStore.Catalog.Domain.Commands.User;
+using VinylStore.Catalog.Domain.Commands.Users;
 using VinylStore.Catalog.Domain.Handlers.User;
-using VinylStore.Catalog.Domain.Infrastructure.Settings;
 using VinylStore.Catalog.Fixtures;
 using Xunit;
 
@@ -22,7 +21,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.User
         [Fact]
         public async Task signin_with_invalid_user_should_return_a_valid_token_response()
         {
-            var sut = new SignInUserHandler(_testDataContextFactory.InMemoryUserManager,
+            var sut = new SignInUsersHandler(_testDataContextFactory.InMemoryUserManager,
                 Options.Create(
                     new AuthenticationSettings { Secret = "Very Secret key-word to match", ExpirationDays = 7 }));
 
@@ -33,10 +32,11 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.User
             result.ShouldBeNull();
         }
 
+
         [Fact]
         public async Task signin_with_valid_user_should_return_a_valid_token_response()
         {
-            var sut = new SignInUserHandler(_testDataContextFactory.InMemoryUserManager,
+            var sut = new SignInUsersHandler(_testDataContextFactory.InMemoryUserManager,
                 Options.Create(
                     new AuthenticationSettings { Secret = "Very Secret key-word to match", ExpirationDays = 7 }));
 
