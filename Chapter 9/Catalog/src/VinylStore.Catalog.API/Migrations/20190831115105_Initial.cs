@@ -3,35 +3,39 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VinylStore.Catalog.API.Migrations
 {
-    public partial class InitMigrations : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                "catalog");
+                name: "catalog");
 
             migrationBuilder.CreateTable(
-                "Artists",
-                schema: "catalog",
+                name: "Artist",
                 columns: table => new
                 {
                     ArtistId = table.Column<Guid>(nullable: false),
-                    ArtistName = table.Column<string>(maxLength: 200, nullable: false)
+                    ArtistName = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_Artists", x => x.ArtistId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artist", x => x.ArtistId);
+                });
 
             migrationBuilder.CreateTable(
-                "Genres",
-                schema: "catalog",
+                name: "Genre",
                 columns: table => new
                 {
                     GenreId = table.Column<Guid>(nullable: false),
-                    GenreDescription = table.Column<string>(maxLength: 1000, nullable: false)
+                    GenreDescription = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_Genres", x => x.GenreId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genre", x => x.GenreId);
+                });
 
             migrationBuilder.CreateTable(
-                "Items",
+                name: "Items",
                 schema: "catalog",
                 columns: table => new
                 {
@@ -52,29 +56,27 @@ namespace VinylStore.Catalog.API.Migrations
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        "FK_Items_Artists_ArtistId",
-                        x => x.ArtistId,
-                        principalSchema: "catalog",
-                        principalTable: "Artists",
+                        name: "FK_Items_Artist_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artist",
                         principalColumn: "ArtistId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        "FK_Items_Genres_GenreId",
-                        x => x.GenreId,
-                        principalSchema: "catalog",
-                        principalTable: "Genres",
+                        name: "FK_Items_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genre",
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                "IX_Items_ArtistId",
+                name: "IX_Items_ArtistId",
                 schema: "catalog",
                 table: "Items",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                "IX_Items_GenreId",
+                name: "IX_Items_GenreId",
                 schema: "catalog",
                 table: "Items",
                 column: "GenreId");
@@ -83,16 +85,14 @@ namespace VinylStore.Catalog.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "Items",
-                "catalog");
+                name: "Items",
+                schema: "catalog");
 
             migrationBuilder.DropTable(
-                "Artists",
-                "catalog");
+                name: "Artist");
 
             migrationBuilder.DropTable(
-                "Genres",
-                "catalog");
+                name: "Genre");
         }
     }
 }
