@@ -49,12 +49,13 @@ namespace VinylStore.Cart.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseRouting()
+            app
+                .UseRouting()
                 .UseHttpsRedirection()
                 .UseEndpoints(endpoints =>
-                               {
-                                   endpoints.MapControllers();
-                               });
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }

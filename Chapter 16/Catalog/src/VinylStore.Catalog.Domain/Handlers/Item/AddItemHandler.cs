@@ -2,9 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using VinylStore.Catalog.Domain.Commands.Item;
-using VinylStore.Catalog.Domain.Infrastructure;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 using VinylStore.Catalog.Domain.Responses.Item;
 
@@ -14,13 +12,11 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
     {
         private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
 
-        public AddItemHandler(IItemRepository itemRepository, IMapper mapper, ILogger<AddItemHandler> logger)
+        public AddItemHandler(IItemRepository itemRepository, IMapper mapper)
         {
             _itemRepository = itemRepository;
             _mapper = mapper;
-            _logger = logger;
         }
 
 
@@ -29,12 +25,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
             var item = _mapper.Map<Entities.Item>(command);
 
             var result = _itemRepository.Add(item);
-
-            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            _logger.LogInformation(LoggingEvents.Add, LoggingMessages.NumberOfRecordAffected_modifiedRecords,
-                modifiedRecords);
-            _logger.LogInformation(LoggingEvents.Add, LoggingMessages.ChangesApplied_id, result?.Id);
+            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<ItemResponse>(result);
         }

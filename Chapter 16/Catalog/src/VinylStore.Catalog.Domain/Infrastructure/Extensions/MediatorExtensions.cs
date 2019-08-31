@@ -1,13 +1,11 @@
 using System;
 using AutoMapper;
 using FluentValidation;
-//using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using VinylStore.Catalog.Domain.Commands.Item;
 using VinylStore.Catalog.Domain.Commands.Item.Validators;
 
-//using VinylStore.Catalog.Domain.Commands.Item.Validators;
 
 namespace VinylStore.Catalog.Domain.Infrastructure.Extensions
 {

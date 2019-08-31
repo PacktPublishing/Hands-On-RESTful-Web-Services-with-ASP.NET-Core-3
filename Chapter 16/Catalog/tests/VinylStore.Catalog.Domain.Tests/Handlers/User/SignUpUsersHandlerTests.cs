@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Shouldly;
-using VinylStore.Catalog.Domain.Commands.User;
+using VinylStore.Catalog.Domain.Commands.Users;
 using VinylStore.Catalog.Domain.Handlers.User;
 using VinylStore.Catalog.Fixtures;
 using Xunit;
@@ -22,7 +22,7 @@ namespace VinylStore.Catalog.Domain.Tests.Handlers.User
         [Fact]
         public async Task signup_should_create_a_new_user()
         {
-            var sut = new SignUpUserHandler(_testDataContextFactory.InMemoryUserManager);
+            var sut = new SignUpUsersHandler(_testDataContextFactory.InMemoryUserManager);
             var newEmail = "samuele.resca.newaccount@example.com";
             var name = "Samuele Resca";
 

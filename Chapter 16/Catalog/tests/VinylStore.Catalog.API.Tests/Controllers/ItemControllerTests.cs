@@ -11,16 +11,14 @@ using VinylStore.Catalog.Domain.Entities;
 using VinylStore.Catalog.Domain.Responses.Item;
 using VinylStore.Catalog.Fixtures;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace VinylStore.Catalog.API.Tests.Controllers
 {
     public class ItemControllerTests : IClassFixture<InMemoryApplicationFactory<Startup>>
     {
-        public ItemControllerTests(InMemoryApplicationFactory<Startup> factory, ITestOutputHelper testOutputHelper)
+        public ItemControllerTests(InMemoryApplicationFactory<Startup> factory)
         {
             _factory = factory;
-            _factory.SetTestOutputHelper(testOutputHelper);
         }
 
         private readonly InMemoryApplicationFactory<Startup> _factory;

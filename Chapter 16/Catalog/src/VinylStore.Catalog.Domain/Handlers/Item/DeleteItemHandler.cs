@@ -3,9 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using VinylStore.Catalog.Domain.Commands.Item;
-using VinylStore.Catalog.Domain.Infrastructure;
 using VinylStore.Catalog.Domain.Infrastructure.Repositories;
 using VinylStore.Catalog.Domain.Responses.Item;
 
@@ -15,13 +13,11 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
     {
         private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
 
-        public DeleteItemHandler(IItemRepository itemRepository, IMapper mapper, ILogger<DeleteItemHandler> logger)
+        public DeleteItemHandler(IItemRepository itemRepository, IMapper mapper)
         {
             _itemRepository = itemRepository;
             _mapper = mapper;
-            _logger = logger;
         }
 
         public async Task<ItemResponse> Handle(DeleteItemCommand command,
@@ -33,10 +29,7 @@ namespace VinylStore.Catalog.Domain.Handlers.Item
             result.IsInactive = false;
 
             _itemRepository.Update(result);
-            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            _logger.LogInformation(LoggingEvents.Delete, LoggingMessages.NumberOfRecordAffected_modifiedRecords,
-                modifiedRecords);
+            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<ItemResponse>(result);
         }
