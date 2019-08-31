@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VinylStore.Catalog.API.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,22 +11,30 @@ namespace VinylStore.Catalog.API.Migrations
                 name: "catalog");
 
             migrationBuilder.CreateTable(
-                name: "Artist",
+                name: "Artists",
+                schema: "catalog",
                 columns: table => new
                 {
                     ArtistId = table.Column<Guid>(nullable: false),
-                    ArtistName = table.Column<string>(nullable: true)
+                    ArtistName = table.Column<string>(maxLength: 200, nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Artist", x => x.ArtistId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artists", x => x.ArtistId);
+                });
 
             migrationBuilder.CreateTable(
-                name: "Genre",
+                name: "Genres",
+                schema: "catalog",
                 columns: table => new
                 {
                     GenreId = table.Column<Guid>(nullable: false),
-                    GenreDescription = table.Column<string>(nullable: true)
+                    GenreDescription = table.Column<string>(maxLength: 1000, nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Genre", x => x.GenreId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.GenreId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Items",
@@ -50,15 +58,17 @@ namespace VinylStore.Catalog.API.Migrations
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Items_Artist_ArtistId",
+                        name: "FK_Items_Artists_ArtistId",
                         column: x => x.ArtistId,
-                        principalTable: "Artist",
+                        principalSchema: "catalog",
+                        principalTable: "Artists",
                         principalColumn: "ArtistId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_Genre_GenreId",
+                        name: "FK_Items_Genres_GenreId",
                         column: x => x.GenreId,
-                        principalTable: "Genre",
+                        principalSchema: "catalog",
+                        principalTable: "Genres",
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -83,10 +93,12 @@ namespace VinylStore.Catalog.API.Migrations
                 schema: "catalog");
 
             migrationBuilder.DropTable(
-                name: "Artist");
+                name: "Artists",
+                schema: "catalog");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "Genres",
+                schema: "catalog");
         }
     }
 }

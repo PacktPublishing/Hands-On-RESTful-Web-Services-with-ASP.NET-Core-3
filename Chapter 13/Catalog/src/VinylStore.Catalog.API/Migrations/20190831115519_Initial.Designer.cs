@@ -10,14 +10,14 @@ using VinylStore.Catalog.Infrastructure;
 namespace VinylStore.Catalog.API.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20190304042828_InitMigrations")]
-    partial class InitMigrations
+    [Migration("20190831115519_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "3.0.0-preview5.19227.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -93,12 +93,14 @@ namespace VinylStore.Catalog.API.Migrations
                     b.HasOne("VinylStore.Catalog.Domain.Entities.Artist", "Artist")
                         .WithMany("Items")
                         .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VinylStore.Catalog.Domain.Entities.Genre", "Genre")
                         .WithMany("Items")
                         .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
