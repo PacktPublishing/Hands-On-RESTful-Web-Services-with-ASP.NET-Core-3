@@ -33,6 +33,7 @@ namespace VinylStore.Catalog.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
