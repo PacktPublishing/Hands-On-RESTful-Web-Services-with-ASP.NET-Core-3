@@ -7,11 +7,11 @@
   <ItemGroup>
     <PackageReference Include="Automapper" Version="9.0.0" />
     <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="FluentValidation" Version="8.5.0-preview4" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview4" />
+    <PackageReference Include="FluentValidation" Version="8.5.0-preview5" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview5" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview8.19405.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0-preview9.19424.4" />
   </ItemGroup>
 </Project>
