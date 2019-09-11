@@ -53,12 +53,12 @@ namespace VinylStore.Catalog.API
                 })
                 .AddControllers()
                 .AddFluentValidation();
-                
+
             services
                 .AddHealthChecks()
                 .AddSqlServer(dataSourceConnectionString.Value)
                 .AddCheck<RedisCacheHealthCheck>("cache_health_check");
-               
+
             services.AddLinks(config =>
             {
                 config.AddPolicy<ItemHateoasResponse>(policy =>
@@ -74,11 +74,12 @@ namespace VinylStore.Catalog.API
                             x => new { id = x.Data.Id });
                 });
             });
-            
-            services.AddOpenApiDocument(settings =>{
+
+            services.AddOpenApiDocument(settings =>
+            {
                 settings.Title = "Vinyl catalog service";
                 settings.DocumentName = "v3";
-                settings.Version = "v3";                                   
+                settings.Version = "v3";
             });
         }
 
