@@ -2,11 +2,10 @@ version: "3.7"
 services:
     cart_api:
         container_name: cart_api
-        environment:
-            - ASPNETCORE_URLS=http://*:5002
-            - ASPNETCORE_ENVIRONMENT=Integration
         build:
             context: .
+        env_file:
+            - .env
         networks:
             - my_network
         ports:
@@ -17,6 +16,8 @@ services:
         container_name: cart_db
         networks:
             - my_network
+        env_file:
+            - .env
         ports:
             - 6378:6378
         image: redis:alpine

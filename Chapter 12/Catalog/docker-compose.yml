@@ -1,27 +1,32 @@
 version: "3.7"
 services:
-    catalog_api:
-        container_name: catalog_api
-        build: 
-            context: .
-        environment:
-            - ASPNETCORE_URLS=http://*:5000;https://*:5001
-            - ASPNETCORE_ENVIRONMENT=Integration
-        networks:
-            - my_network
-        ports:
-            - 5000:5000
-        depends_on:
-            - catalog_db
-
-    catalog_db:
-        container_name: catalog_db
-        image: microsoft/mssql-server-linux
-        networks:
-            - my_network
-        environment:
-            SA_PASSWORD: P@ssw0rd
-            ACCEPT_EULA: "Y"
+  catalog_api:
+    container_name: catalog_api
+    build:
+      context: .
+    env_file:
+      - .env
+    networks:
+      - my_network
+    ports:
+      - 5000:5000
+    depends_on:
+      - catalog_db
+  catalog_db:
+    container_name: catalog_db
+    image: microsoft/mssql-server-linux
+    networks:
+      - my_network
+    env_file:
+      - .env
+  catalog_esb:
+    container_name: catalog_esb
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - my_network
 networks:
-    my_network:
-        driver: bridge
+  my_network:
+    driver: bridge
