@@ -41,7 +41,7 @@ steps:
     command: 'test'
     workingDirectory: $(workingDirCart)
 - script: |
-    docker-compose up --force-recreate --build
+    docker-compose up --force-recreate --build --detach
   workingDirectory: $(workingDirCatalog)
   displayName: 'Docker compose build'
 - task: Bash@3
