@@ -28,8 +28,24 @@ steps:
     command: 'test'
     workingDirectory: $(workingDir)
 - script: |
-    docker-compose -f docker-compose.yml up -d
-    docker wait catalog_api
-    docker-compose -f docker-compose.yml down
+    docker-compose up --force-recreate --build --detach
   workingDirectory: $(workingDir)
   displayName: 'Docker compose build'
+- task: Bash@3
+  displayName: "Verify Docker container"
+  inputs:
+    targetType: 'inline'
+    script: |
+      sleep 30
+              testCondition=$(docker inspect --format="{{.State.Running}}" catalog_api)
+              if [ "$testCondition" == "false" ]; then
+                echo "The container is not running" >&2
+                exit 1;
+              else
+                echo "The container is running" >&2
+                exit 0
+              fi
+- script: |
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDir)
+  displayName: 'Docker compose down'    
