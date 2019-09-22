@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-rc1 AS base
 WORKDIR /app
 EXPOSE 5002
-EXPOSE 5003
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /project

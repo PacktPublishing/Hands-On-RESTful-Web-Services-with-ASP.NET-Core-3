@@ -4,8 +4,6 @@ services:
         container_name: cart_api
         build:
             context: .
-        volumes:
-            - ./https/:/root/.dotnet/https
         env_file:
             - .env
         networks:
