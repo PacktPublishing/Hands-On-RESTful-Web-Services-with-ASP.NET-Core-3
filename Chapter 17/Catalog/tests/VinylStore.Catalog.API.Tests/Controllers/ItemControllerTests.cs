@@ -48,10 +48,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-        public async Task get_by_id_should_return_right_data(object jsonPayload)
+        public async Task get_by_id_should_return_right_data(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/items/{request.Id}");
 
@@ -72,12 +70,11 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_create_new_record(object jsonPayload)
+        public async Task add_should_create_new_record(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/items", httpContent);
 
             response.EnsureSuccessStatusCode();
@@ -86,9 +83,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
+        public async Task add_should_returns_bad_request_if_artistid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
             request.ArtistId = Guid.NewGuid();
@@ -102,9 +98,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_returns_bad_request_if_genreid_not_exist(object jsonPayload)
+        public async Task add_should_returns_bad_request_if_genreid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
             request.GenreId = Guid.NewGuid();
@@ -118,13 +113,11 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-        public async Task update_should_modify_existing_items(object jsonPayload)
+        public async Task update_should_modify_existing_items(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PutAsync($"/api/items/{request.Id}", httpContent);
 
             response.EnsureSuccessStatusCode();
@@ -143,11 +136,11 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-        public async Task update_should_returns_not_found_when_item_is_not_present(object jsonPayload)
+        public async Task update_should_returns_not_found_when_item_is_not_present(Item request)
         {
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PutAsync($"/api/items/{Guid.NewGuid()}", httpContent);
 
             response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
@@ -156,11 +149,9 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task update_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
+        public async Task update_should_returns_bad_request_if_artistid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
-
             request.ArtistId = Guid.NewGuid();
 
             var httpContent =
@@ -172,9 +163,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task update_should_returns_bad_request_if_genreid_not_exist(object jsonPayload)
+        public async Task update_should_returns_bad_request_if_genreid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
             request.GenreId = Guid.NewGuid();
@@ -188,9 +178,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-        public async Task delete_should_returns_no_content_when_called_with_right_id(object jsonPayload)
+        public async Task delete_should_returns_no_content_when_called_with_right_id(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
             var response = await client.DeleteAsync($"/api/items/{request.Id}");
