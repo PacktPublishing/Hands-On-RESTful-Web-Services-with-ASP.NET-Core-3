@@ -31,7 +31,7 @@ namespace VinylStore.Cart.Domain.Tests.Handlers
             var result = await handler.Handle(
                 new CreateCartCommand
                 {
-                    ItemsIds = new List<string>
+                    ItemsIds = new[]
                         {"be05537d-5e80-45c1-bd8c-aa21c0f1251e", "f5da5ce4-091e-492e-a70a-22b073d75a52"},
                     UserEmail = "samuele.resca@gmail.com"
                 }, CancellationToken.None);

@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit.Sdk;
 
 namespace VinylStore.Catalog.Fixtures
-{
+{ 
     public class LoadTestDataAttribute : DataAttribute
     {
         private readonly string _path;
         private readonly string _section;
 
-
-        public LoadTestDataAttribute(string path, string section = null)
+        public LoadTestDataAttribute(string path, string section)
         {
             _path = path;
             _section = section;
@@ -22,28 +22,21 @@ namespace VinylStore.Catalog.Fixtures
 
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            if (testMethod == null) { throw new ArgumentNullException(nameof(testMethod)); }
+            if (testMethod == null) throw new ArgumentNullException(nameof(testMethod));
 
-            var path = Path.IsPathRooted(_path)
+            string path = Path.IsPathRooted(_path)
                 ? _path
                 : Path.GetRelativePath(Directory.GetCurrentDirectory(), _path);
 
-            if (!File.Exists(path))
-            {
-                throw new ArgumentException($"File not found: {path}");
-            }
+            if (!File.Exists(path)) throw new ArgumentException($"File not found: {path}");
 
-            var fileData = File.ReadAllText(_path);
+            string fileData = File.ReadAllText(_path);
 
-            if (string.IsNullOrEmpty(_section))
-            {
-                return JsonConvert.DeserializeObject<List<object[]>>(fileData);
-            }
+            if (string.IsNullOrEmpty(_section)) return JsonConvert.DeserializeObject<List<string[]>>(fileData);
 
             var allData = JObject.Parse(fileData);
-
             var data = allData[_section];
-            return data.ToObject<List<object[]>>();
+            return new List<object[]> {new[] {data.ToObject(testMethod.GetParameters().First().ParameterType)}};
         }
     }
 }
