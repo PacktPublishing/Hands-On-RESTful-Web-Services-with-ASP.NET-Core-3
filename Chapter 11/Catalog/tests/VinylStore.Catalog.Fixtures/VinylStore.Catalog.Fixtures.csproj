@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.0-rc1.19457.4" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0-rc1.19457.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0-preview-20190828-03" />
