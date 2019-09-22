@@ -16,12 +16,12 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 {
     public class ArtistControllerTests : IClassFixture<InMemoryApplicationFactory<Startup>>
     {
+        private readonly InMemoryApplicationFactory<Startup> _factory;
+
         public ArtistControllerTests(InMemoryApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
-
-        private readonly InMemoryApplicationFactory<Startup> _factory;
 
         [Theory]
         [InlineData("/api/artist/")]
@@ -55,10 +55,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task get_by_id_should_return_right_data(object jsonPayload)
+        public async Task get_by_id_should_return_right_data(Artist request)
         {
-            var request = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/artist/{request.ArtistId}");
 
@@ -73,10 +71,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task get_item_by_artist_should_return_right_data(object jsonPayload)
+        public async Task get_item_by_artist_should_return_right_data(Artist request)
         {
-            var request = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/artist/{request.ArtistId}/items");
 
