@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,7 +15,7 @@ namespace VinylStore.Catalog.Fixtures
         private readonly string _section;
 
 
-        public LoadTestDataAttribute(string path, string section = null)
+        public LoadTestDataAttribute(string path, string section)
         {
             _path = path;
             _section = section;
@@ -32,12 +33,11 @@ namespace VinylStore.Catalog.Fixtures
 
             string fileData = File.ReadAllText(_path);
 
-            if (string.IsNullOrEmpty(_section)) return JsonConvert.DeserializeObject<List<object[]>>(fileData);
+            if (string.IsNullOrEmpty(_section)) return JsonConvert.DeserializeObject<List<string[]>>(fileData);
 
             var allData = JObject.Parse(fileData);
-
             var data = allData[_section];
-            return data.ToObject<List<object[]>>();
+            return new List<object[]> {new[] {data.ToObject(testMethod.GetParameters().First().ParameterType)}};
         }
     }
 }

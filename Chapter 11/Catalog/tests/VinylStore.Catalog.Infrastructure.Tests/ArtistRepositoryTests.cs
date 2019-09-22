@@ -22,9 +22,8 @@ namespace VinylStore.Catalog.Infrastructure.Tests
 
         [Theory]
         [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task should_return_record_by_id(object jsonPayload)
+        public async Task should_return_record_by_id(Artist artist)
         {
-            var artist = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
             var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);
 
             var result = await sut.GetAsync(artist.ArtistId);
@@ -36,9 +35,8 @@ namespace VinylStore.Catalog.Infrastructure.Tests
 
         [Theory]
         [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task should_add_new_item(object jsonPayload)
+        public async Task should_add_new_item(Artist artist)
         {
-            var artist = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
             artist.ArtistId = Guid.NewGuid();
 
             var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);

@@ -21,24 +21,24 @@ namespace VinylStore.Catalog.Infrastructure.Tests
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task should_return_record_by_id(object jsonPayload)
+        [LoadTestData("record-test.json",  "artist_with_id")]
+        public async Task should_return_record_by_id(Artist jsonPayload)
         {
-            var artist = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
+       
             var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);
 
-            var result = await sut.GetAsync(artist.ArtistId);
+            var result = await sut.GetAsync(jsonPayload.ArtistId);
 
-            result.ArtistId.ShouldBe(artist.ArtistId);
-            result.ArtistName.ShouldBe(artist.ArtistName);
+            result.ArtistId.ShouldBe(jsonPayload.ArtistId);
+            result.ArtistName.ShouldBe(jsonPayload.ArtistName);
         }
 
 
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task should_add_new_item(object jsonPayload)
+        [LoadTestData("record-test.json",  "artist_with_id")]
+        public async Task should_add_new_item(Artist jsonPayload)
         {
-            var artist = JsonConvert.DeserializeObject<Artist>(jsonPayload.ToString());
+            var artist = jsonPayload;
             artist.ArtistId = Guid.NewGuid();
 
             var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);

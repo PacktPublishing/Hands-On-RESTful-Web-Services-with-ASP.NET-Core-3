@@ -5,22 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Shouldly;
+using VinylStore.Cart.Domain.Commands.Cart;
 using VinylStore.Cart.Domain.Responses.Cart;
 using VinylStore.Cart.Fixtures;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace VinylStore.Cart.API.Tests.Controllers
 {
     public class CartControllerTests : IClassFixture<CartApplicationFactory<Startup>>
     {
         private readonly CartApplicationFactory<Startup> _factory;
-        private readonly ITestOutputHelper _testOutputHelper;
 
-        public CartControllerTests(CartApplicationFactory<Startup> factory, ITestOutputHelper testOutputHelper)
+        public CartControllerTests(CartApplicationFactory<Startup> factory)
         {
             _factory = factory;
-            _testOutputHelper = testOutputHelper;
         }
 
         [Theory]
@@ -51,12 +49,13 @@ namespace VinylStore.Cart.API.Tests.Controllers
         }
 
         [Theory]
-        [LoadTestData("record-data.json", "item_without_id")]
-        public async Task post_should_create_a_cart(object jsonPayload)
+        [InlineData(new []{"f5da5ce4-091e-492e-a70a-22b073d75a52", "be05537d-5e80-45c1-bd8c-aa21c0f1251e"},"test@testdomain.com" )]
+        public async Task post_should_create_a_cart(string[] items, string email)
         {
             var client = _factory.CreateClient();
+            var request = new CreateCartCommand {ItemsIds = items, UserEmail = email};
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/cart", httpContent);
 
             response.EnsureSuccessStatusCode();

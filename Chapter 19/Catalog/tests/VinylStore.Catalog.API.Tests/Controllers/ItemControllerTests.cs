@@ -72,12 +72,11 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_create_new_record(object jsonPayload)
+        public async Task add_should_create_new_record(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/items", httpContent);
 
             response.EnsureSuccessStatusCode();
@@ -86,9 +85,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_returns_bad_request_if_artistid_not_exist(object jsonPayload)
+        public async Task add_should_returns_bad_request_if_artistid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
 
             request.ArtistId = Guid.NewGuid();
@@ -102,11 +100,9 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_without_id")]
-        public async Task add_should_returns_bad_request_if_genreid_not_exist(object jsonPayload)
+        public async Task add_should_returns_bad_request_if_genreid_not_exist(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
             var client = _factory.CreateClient();
-
             request.GenreId = Guid.NewGuid();
 
             var httpContent =
@@ -118,13 +114,12 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "item_with_id")]
-        public async Task update_should_modify_existing_items(object jsonPayload)
+        public async Task update_should_modify_existing_items(Item request)
         {
-            var request = JsonConvert.DeserializeObject<Item>(jsonPayload.ToString());
 
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(jsonPayload.ToString(), Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             var response = await client.PutAsync($"/api/items/{request.Id}", httpContent);
 
             response.EnsureSuccessStatusCode();

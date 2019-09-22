@@ -55,10 +55,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "genre_with_id")]
-        public async Task get_by_id_should_return_right_data(object jsonPayload)
+        public async Task get_by_id_should_return_right_data(Genre request)
         {
-            var request = JsonConvert.DeserializeObject<Genre>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/genre/{request.GenreId}");
 
@@ -74,10 +72,8 @@ namespace VinylStore.Catalog.API.Tests.Controllers
 
         [Theory]
         [LoadTestData("record-test.json", "genre_with_id")]
-        public async Task get_item_by_genre_should_return_right_data(object jsonPayload)
+        public async Task get_item_by_genre_should_return_right_data(Genre request)
         {
-            var request = JsonConvert.DeserializeObject<Genre>(jsonPayload.ToString());
-
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/genre/{request.GenreId}/items");
 
