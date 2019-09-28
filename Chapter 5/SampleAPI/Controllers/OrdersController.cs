@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using SampleAPI.Models;
@@ -22,13 +23,13 @@ namespace SampleAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_orderRepository.Get());
+            return Ok(Map(_orderRepository.Get()));
         }
 
         [HttpGet("{id:guid}")]
         public IActionResult GetById(Guid id)
         {
-            return Ok(_orderRepository.Get(id));
+            return Ok(Map(_orderRepository.Get(id)));
         }
 
         [HttpPost]
@@ -107,5 +108,20 @@ namespace SampleAPI.Controllers
  
             return order;
         } 
+        
+        private IList<OrderResponse> Map(IList<Order> orders)
+        {
+            return orders.Select(Map).ToList();
+        }
+        
+        private OrderResponse Map(Order order)
+        {
+            return new OrderResponse
+            {
+                Id = order.Id,
+                ItemsIds = order.ItemsIds,
+                Currency = order.Currency
+            };
+        }
     }
 }
