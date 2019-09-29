@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using SampleAPI.Filters;
 using SampleAPI.Models;
 using SampleAPI.Repositories;
 using SampleAPI.Requests;
@@ -27,6 +28,7 @@ namespace SampleAPI.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [OrderExists]
         public IActionResult GetById(Guid id)
         {
             return Ok(Map(_orderRepository.Get(id)));
@@ -41,6 +43,7 @@ namespace SampleAPI.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [OrderExists]
         public IActionResult Put(Guid id, OrderRequest request)
         {
             if (request.ItemsIds == null)        
@@ -62,6 +65,7 @@ namespace SampleAPI.Controllers
         }
         
         [HttpPatch("{id:guid}")] 
+        [OrderExists]
         public IActionResult Patch(Guid id, JsonPatchDocument<Order> requestOp)
         {
             var order = _orderRepository.Get(id);
@@ -77,6 +81,7 @@ namespace SampleAPI.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [OrderExists]
         public IActionResult Delete(Guid id)
         {
             var order = _orderRepository.Get(id);
