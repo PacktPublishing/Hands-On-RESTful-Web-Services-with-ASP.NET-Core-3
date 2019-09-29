@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-rc1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0 AS base
 WORKDIR /app
 EXPOSE 5002
 EXPOSE 5003
