@@ -18,7 +18,7 @@ steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
   inputs:
-    version: '3.0.100-rc1-014190'
+    version: '3.0.100'
 - task: DotNetCoreCLI@2
   displayName: 'Building Catalog'
   inputs:
