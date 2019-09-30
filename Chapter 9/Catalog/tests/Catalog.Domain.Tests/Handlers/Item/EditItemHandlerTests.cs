@@ -1,0 +1,45 @@
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using Catalog.Domain.Commands.Item;
+using Catalog.Domain.Handlers.Item;
+using Catalog.Domain.Infrastructure.Mapper;
+using Catalog.Fixtures;
+using Catalog.Infrastructure.Repositories;
+using Newtonsoft.Json;
+using Shouldly;
+using Xunit;
+
+namespace Catalog.Domain.Tests.Handlers.Item
+{
+    public class EditItemHandlerTests : IClassFixture<CatalogDataContextFactory>
+    {
+        private readonly CatalogDataContextFactory _catalogDataContextFactory;
+
+        public EditItemHandlerTests(CatalogDataContextFactory catalogDataContextFactory)
+        {
+            _catalogDataContextFactory = catalogDataContextFactory;
+        }
+
+        [Theory]
+        [InlineData(
+            "{\"Id\":\"b5b05534-9263-448c-a69e-0bbd8b3eb90e\", \"Name\":\"Test album\",\"Description\":\"Description\",\"LabelName\":\"LabelName\",\"Price\":{\"Amount\":23.5,\"Currency\":\"EUR\"},\"PictureUri\":\"https://mycdn.com/pictures/32423423\",\"ReleaseDate\":\"2016-01-01T00:00:00+00:00\",\"Format\":\"Vinyl 33g\",\"AvailableStock\":6,\"GenreId\":\"c04f05c0-f6ad-44d1-a400-3375bfb5dfd6\",\"Genre\":null,\"ArtistId\":\"f08a333d-30db-4dd1-b8ba-3b0473c7cdab\",\"Artist\":null}")]
+        public async Task edititem_should_add_right_entity(string json)
+        {
+            var item = JsonConvert.DeserializeObject<EditItemCommand>(json);
+
+            var sut = new EditItemHandler(new ItemRepository(_catalogDataContextFactory.ContextInstance),
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+
+            var result =
+                await sut.Handle(item, CancellationToken.None);
+
+            result.Name.ShouldBe(item.Name);
+            result.Description.ShouldBe(item.Description);
+            result.GenreId.ShouldBe(item.GenreId);
+            result.ArtistId.ShouldBe(item.ArtistId);
+            result.Price.Amount.ShouldBe(item.Price.Amount);
+            result.Price.Currency.ShouldBe(item.Price.Currency);
+        }
+    }
+}
