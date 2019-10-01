@@ -1,9 +1,9 @@
 using AutoMapper;
-using Catalog.Domain.Commands.Item;
 using Catalog.Domain.Entities;
+using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses.Item;
 
-namespace Catalog.Domain.Infrastructure.Mapper
+namespace Catalog.Domain.Mapper
 {
     public class CatalogProfile : Profile
     {
@@ -13,8 +13,8 @@ namespace Catalog.Domain.Infrastructure.Mapper
             CreateMap<GenreResponse, Genre>().ReverseMap();
             CreateMap<ArtistResponse, Artist>().ReverseMap();
             CreateMap<Money, MoneyResponse>().ReverseMap();
-            CreateMap<AddItemCommand, Item>().ReverseMap();
-            CreateMap<EditItemCommand, Item>().ReverseMap();
+            CreateMap<AddItemRequest, Item>().ReverseMap();
+            CreateMap<EditItemRequest, Item>().ReverseMap();
         }
     }
 }

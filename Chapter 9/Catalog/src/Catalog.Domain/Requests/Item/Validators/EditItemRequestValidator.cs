@@ -1,18 +1,18 @@
 using FluentValidation;
 
-namespace Catalog.Domain.Commands.Item.Validators
+namespace Catalog.Domain.Requests.Item.Validators
 {
-    public class AddItemCommandValidator : AbstractValidator<AddItemCommand>
+    public class EditItemRequestValidator : AbstractValidator<EditItemRequest>
     {
-        public AddItemCommandValidator()
+        public EditItemRequestValidator()
         {
+            RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.GenreId).NotEmpty();
             RuleFor(x => x.ArtistId).NotEmpty();
             RuleFor(x => x.Price).NotEmpty();
+            RuleFor(x => x.Price).Must(x => x?.Amount > 0);
             RuleFor(x => x.ReleaseDate).NotEmpty();
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Price).Must(x => x?.Amount > 0);
-            RuleFor(x => x.AvailableStock).Must(x => x > 0);
         }
     }
 }

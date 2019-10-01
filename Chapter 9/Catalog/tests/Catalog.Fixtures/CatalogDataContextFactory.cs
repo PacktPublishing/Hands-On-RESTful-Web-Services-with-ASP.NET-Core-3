@@ -22,10 +22,8 @@ namespace Catalog.Fixtures
 
         private void EnsureCreation(DbContextOptions<CatalogContext> contextOptions)
         {
-            using (var context = new TestCatalogContext(contextOptions))
-            {
-                context.Database.EnsureCreated();
-            }
+            using var context = new TestCatalogContext(contextOptions);
+            context.Database.EnsureCreated();
         }
 
         public void Dispose()

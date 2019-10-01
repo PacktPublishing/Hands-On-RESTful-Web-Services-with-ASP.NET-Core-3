@@ -1,7 +1,7 @@
 using System.Threading;
 using Catalog.Domain.Commands;
 using Catalog.Domain.Handlers;
-using Catalog.Domain.Infrastructure.Mediator;
+using Catalog.Domain.Mediator;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
@@ -18,7 +18,7 @@ namespace Catalog.Domain.Tests
             var serviceProvider = new ServiceCollection()
                 .AddScoped(x => handler.Object)
                 .BuildServiceProvider();
-            IMediator sut = new Mediator(serviceProvider);
+            IMediator sut = new Mediator.Mediator(serviceProvider);
 
             sut.Send<FakeCommand, FakeResponse>(new FakeCommand());
             handler.Verify(x => x.Handle(It.IsAny<FakeCommand>(), It.IsAny<CancellationToken>()), Times.Once);

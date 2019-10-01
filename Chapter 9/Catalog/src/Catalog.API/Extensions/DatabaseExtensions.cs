@@ -3,7 +3,7 @@ using Catalog.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalog.API.Infrastructure.Extensions
+namespace Catalog.API.Extensions
 {
     public static class DatabaseExtensions
     {

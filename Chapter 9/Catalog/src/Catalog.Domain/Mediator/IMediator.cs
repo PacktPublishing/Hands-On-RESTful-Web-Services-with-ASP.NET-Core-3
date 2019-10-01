@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Catalog.Domain.Infrastructure.Mediator
+namespace Catalog.Domain.Mediator
 {
     public interface IMediator
     {

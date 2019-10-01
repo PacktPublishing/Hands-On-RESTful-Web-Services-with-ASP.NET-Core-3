@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Catalog.Domain.Entities;
 
-namespace Catalog.Domain.Infrastructure.Repositories
+namespace Catalog.Domain.Repositories
 {
     public interface IItemRepository : IRepository
     {

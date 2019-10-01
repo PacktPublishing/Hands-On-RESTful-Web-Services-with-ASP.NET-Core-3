@@ -2,9 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Domain.Handlers;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalog.Domain.Infrastructure.Mediator
+namespace Catalog.Domain.Mediator
 {
     public class Mediator : IMediator
     {
@@ -19,7 +18,7 @@ namespace Catalog.Domain.Infrastructure.Mediator
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
 
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand, TResponse>>();
+            var handler = (ICommandHandler<TCommand,TResponse>) _serviceProvider.GetService(typeof(ICommandHandler<TCommand,TResponse>));
 
             return await handler.Handle(command, cancellationToken);
         }

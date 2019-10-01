@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Catalog.Domain.Infrastructure.Repositories
+namespace Catalog.Domain.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {

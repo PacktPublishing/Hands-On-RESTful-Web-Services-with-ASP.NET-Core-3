@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Domain.Commands.Item;
-using Catalog.Domain.Infrastructure.Repositories;
+using Catalog.Domain.Repositories;
 using Catalog.Domain.Responses.Item;
 using MediatR;
 

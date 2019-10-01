@@ -22,4 +22,11 @@
     <ProjectReference Include="..\Catalog.Infrastructure.Tests\Catalog.Infrastructure.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Handlers\Item\EditItemHandlerTests.cs" />
+    <Compile Remove="Handlers\Item\GetItemHandlerTests.cs" />
+    <Compile Remove="Handlers\Item\GetItemsHandlerTests.cs" />
+    <Compile Remove="MediatorTests.cs" />
+  </ItemGroup>
+
 </Project>

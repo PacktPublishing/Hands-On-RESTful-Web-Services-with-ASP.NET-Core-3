@@ -11,4 +11,19 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Handlers\**" />
+    <Compile Remove="Mediator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Handlers\**" />
+    <EmbeddedResource Remove="Mediator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Handlers\**" />
+    <None Remove="Mediator\**" />
+  </ItemGroup>
+
 </Project>

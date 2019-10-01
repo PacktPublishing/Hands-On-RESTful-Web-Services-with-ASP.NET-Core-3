@@ -3,9 +3,9 @@ using Catalog.Domain.Entities;
 using Catalog.Domain.Responses.Item;
 using MediatR;
 
-namespace Catalog.Domain.Commands.Item
+namespace Catalog.Domain.Requests.Item
 {
-    public class AddItemCommand : IRequest<ItemResponse>
+    public class AddItemRequest : IRequest<ItemResponse>
     {
         public string Name { get; set; }
         public string Description { get; set; }

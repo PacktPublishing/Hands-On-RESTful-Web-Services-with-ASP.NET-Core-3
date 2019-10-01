@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Domain.Entities;
-using Catalog.Domain.Infrastructure.Repositories;
+using Catalog.Domain.Repositories;
 using Catalog.Infrastructure.SchemaDefinitions;
 using Microsoft.EntityFrameworkCore;
 
