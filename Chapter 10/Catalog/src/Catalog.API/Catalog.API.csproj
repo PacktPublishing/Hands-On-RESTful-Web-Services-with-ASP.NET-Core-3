@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp3.0\Catalog.API.csproj.ResolveComReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <IntermediateAssembly Remove="obj\Debug\netcoreapp3.0\Catalog.API.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <_DebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp3.0\Catalog.API.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <_DeploymentManifestEntryPoint Remove="obj\Debug\netcoreapp3.0\Catalog.API.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationManifest Remove="obj\Debug\netcoreapp3.0\Catalog.API.dll.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <DeployManifest Remove="obj\Debug\netcoreapp3.0\Catalog.API.application" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClsidMap Remove="obj\Debug\netcoreapp3.0\Catalog.API.clsidmap" />
+  </ItemGroup>
+  <ItemGroup>
+    <RegFreeComManifest Remove="obj\Debug\netcoreapp3.0\Catalog.API.X.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <RazorIntermediateAssembly Remove="obj\Debug\netcoreapp3.0\Catalog.API.Views.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <_RazorDebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp3.0\Catalog.API.Views.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <_RazorComponentDeclarationAssembly Remove="obj\Debug\netcoreapp3.0\RazorDeclaration\Catalog.API.dll" />
+  </ItemGroup>
+</Project>
