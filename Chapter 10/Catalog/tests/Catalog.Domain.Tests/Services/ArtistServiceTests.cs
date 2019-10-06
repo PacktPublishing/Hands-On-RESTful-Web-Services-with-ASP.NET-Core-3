@@ -36,7 +36,7 @@ namespace Catalog.Domain.Tests.Handlers
             var result =
                 await _sut.GetArtistsAsync(CancellationToken.None);
             result
-                .ToList().Count.ShouldBe(2);
+                .ToList().Count.ShouldBe(3);
         }
 
         [Theory]

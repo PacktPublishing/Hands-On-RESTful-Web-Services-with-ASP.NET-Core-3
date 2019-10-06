@@ -18,21 +18,21 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
         [Fact]
         public void should_have_error_when_Id_is_null()
         {
-            var editItemRequest = new EditItemRequest { Price = new Money() };
+            var editItemRequest = new EditItemRequest { Price = new Price() };
             _validator.ShouldHaveValidationErrorFor(x => x.Id, editItemRequest);
         }
 
         [Fact]
         public void should_have_error_when_ArtistId_is_null()
         {
-            var editItemRequest = new EditItemRequest { Price = new Money() };
+            var editItemRequest = new EditItemRequest { Price = new Price() };
             _validator.ShouldHaveValidationErrorFor(x => x.GenreId, editItemRequest);
         }
 
         [Fact]
         public void should_have_error_when_GenreId_is_null()
         {
-            var editItemRequest = new EditItemRequest { Price = new Money() };
+            var editItemRequest = new EditItemRequest { Price = new Price() };
             _validator.ShouldHaveValidationErrorFor(x => x.GenreId, editItemRequest);
         }
     }
