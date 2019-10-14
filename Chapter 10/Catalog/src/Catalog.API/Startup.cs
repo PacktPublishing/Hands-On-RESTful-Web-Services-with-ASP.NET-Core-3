@@ -27,7 +27,8 @@ namespace Catalog.API
                 .AddScoped<IItemRepository, ItemRepository>()
                 .AddScoped<IArtistRepository, ArtistRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
-                .AddDomainComponents()
+                .AddMappers()
+                .AddServices()
                 .AddControllers()
                 .AddFluentValidation();
         }

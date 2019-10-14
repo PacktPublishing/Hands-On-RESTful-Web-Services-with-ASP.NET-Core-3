@@ -9,21 +9,21 @@ using Xunit;
 
 namespace Catalog.Infrastructure.Tests
 {
-    public class ArtistRepositoryTests : IClassFixture<CatalogDataContextFactory>
+    public class ArtistRepositoryTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogDataContextFactory _testDataContextFactory;
+        private readonly CatalogContextFactory _testContextFactory;
 
 
-        public ArtistRepositoryTests(CatalogDataContextFactory testDataContextFactory)
+        public ArtistRepositoryTests(CatalogContextFactory testContextFactory)
         {
-            _testDataContextFactory = testDataContextFactory;
+            _testContextFactory = testContextFactory;
         }
 
         [Theory]
         [LoadTestData("record-test.json", "artist_with_id")]
         public async Task should_return_record_by_id(Artist artist)
         {
-            var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);
+            var sut = new ArtistRepository(_testContextFactory.ContextInstance);
 
             var result = await sut.GetAsync(artist.ArtistId);
 
@@ -38,12 +38,12 @@ namespace Catalog.Infrastructure.Tests
         {
             artist.ArtistId = Guid.NewGuid();
 
-            var sut = new ArtistRepository(_testDataContextFactory.ContextInstance);
+            var sut = new ArtistRepository(_testContextFactory.ContextInstance);
             sut.Add(artist);
 
             await sut.UnitOfWork.SaveEntitiesAsync();
 
-            _testDataContextFactory.ContextInstance.Artists
+            _testContextFactory.ContextInstance.Artists
                 .FirstOrDefault(x => x.ArtistId == artist.ArtistId)
                 .ShouldNotBeNull();
         }

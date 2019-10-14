@@ -33,7 +33,7 @@ namespace Catalog.API.Filters
                     return;
                 }
 
-                var result = await _itemService.GetItem(new GetItemRequest { Id = id }, CancellationToken.None);
+                var result = await _itemService.GetItemAsync(new GetItemRequest { Id = id });
 
                 if (result == null)
                 {

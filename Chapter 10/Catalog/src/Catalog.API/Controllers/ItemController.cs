@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Catalog.API.Filters;
 using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Item;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,9 +25,9 @@ namespace Catalog.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            var result = await _itemService.GetItems(CancellationToken.None);
+            var result = await _itemService.GetItemsAsync();
 
-            var totalItems = result.Count;
+            var totalItems = result.Count();
 
             var itemsOnPage = result
                 .OrderBy(c => c.Name)
@@ -44,14 +44,14 @@ namespace Catalog.API.Controllers
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _itemService.GetItem(new GetItemRequest { Id = id }, CancellationToken.None);
+            var result = await _itemService.GetItemAsync(new GetItemRequest { Id = id });
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(AddItemRequest request)
         {
-            var result = await _itemService.AddItem(request, CancellationToken.None);
+            var result = await _itemService.AddItemAsync(request, CancellationToken.None);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
@@ -60,7 +60,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Put(Guid id, EditItemRequest request)
         {
             request.Id = id;
-            var result = await _itemService.EditItem(request, CancellationToken.None);
+            var result = await _itemService.EditItemAsync(request, CancellationToken.None);
             return Ok(result);
         }
     }

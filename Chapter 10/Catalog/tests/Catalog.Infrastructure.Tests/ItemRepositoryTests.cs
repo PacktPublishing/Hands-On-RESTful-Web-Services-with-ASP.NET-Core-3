@@ -1,42 +1,36 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Catalog.Domain.Entities;
 using Catalog.Fixtures;
 using Catalog.Infrastructure.Repositories;
-using Newtonsoft.Json;
 using Shouldly;
 using Xunit;
 
 namespace Catalog.Infrastructure.Tests
 {
-    public class ItemRepositoryTests : IClassFixture<CatalogDataContextFactory>
+    public class ItemRepositoryTests : IClassFixture<CatalogContextFactory>
     {
-        public ItemRepositoryTests(CatalogDataContextFactory catalogDataContextFactory)
-        {
-            _catalogDataContextFactory = catalogDataContextFactory;
-        }
+        private readonly ItemRepository _sut;
+        private readonly  TestCatalogContext _context;
 
-        private readonly CatalogDataContextFactory _catalogDataContextFactory;
+        public ItemRepositoryTests(CatalogContextFactory catalogContextFactory)
+        {
+            _context = catalogContextFactory.ContextInstance;
+            _sut = new ItemRepository(_context);
+        }
 
         [Fact]
         public async Task should_get_data()
         {
-            var sut = new ItemRepository(_catalogDataContextFactory.ContextInstance);
-
-            var result = await sut.GetAsync();
-
-            result.Count.ShouldBeGreaterThan(0);
+            var result = await _sut.GetAsync();
+            result.ShouldNotBeNull();
         }
 
         [Fact]
         public async Task should_returns_null_with_id_not_present()
         {
-            var sut = new ItemRepository(_catalogDataContextFactory.ContextInstance);
-
-            var result = await sut.GetAsync(Guid.NewGuid());
-
+            var result = await _sut.GetAsync(Guid.NewGuid());
             result.ShouldBeNull();
         }
 
@@ -44,41 +38,64 @@ namespace Catalog.Infrastructure.Tests
         [InlineData("b5b05534-9263-448c-a69e-0bbd8b3eb90e")]
         public async Task should_return_record_by_id(string guid)
         {
-            var sut = new ItemRepository(_catalogDataContextFactory.ContextInstance);
-
-            var result = await sut.GetAsync(new Guid(guid));
-
+            var result = await _sut.GetAsync(new Guid(guid));
             result.Id.ShouldBe(new Guid(guid));
         }
 
-        [Theory]
-        [LoadTestData("record-test.json", "item_without_id")]
-        public async Task should_add_new_item(Item entity)
+        [Fact]
+        public async Task should_add_new_item()
         {
-            var sut = new ItemRepository(_catalogDataContextFactory.ContextInstance);
-            sut.Add(entity);
+            var testItem = new Item
+            {
+                Name = "Test album",
+                Description = "Description",
+                LabelName = "Label name",
+                Price = new Price { Amount = 13, Currency = "EUR" },
+                PictureUri = "https://mycdn.com/pictures/32423423",
+                ReleaseDate = DateTimeOffset.Now,
+                Format = "Vinyl 33g",
+                AvailableStock = 6,
+                GenreId = new Guid("c04f05c0-f6ad-44d1-a400-3375bfb5dfd6"),
+                ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
+            };
 
-            await sut.UnitOfWork.SaveEntitiesAsync();
+          
+            _sut.Add(testItem);
+            await _sut.UnitOfWork.SaveEntitiesAsync();
 
-            _catalogDataContextFactory.ContextInstance.Items
-                .FirstOrDefault(item => item.Id == entity.Id)
+            _context.Items
+                .FirstOrDefault(item => item.Id == testItem.Id)
                 .ShouldNotBeNull();
         }
 
-        [Theory]
-        [LoadTestData("record-test.json", "item_with_id")]
-        public async Task should_update_an_item(Item entity)
+        [Fact]
+        public async Task should_update_item()
         {
-            entity.Description = "Updated";
+            var testItem = new Item
+            {
+                Id = new Guid("f5da5ce4-091e-492e-a70a-22b073d75a52"),
+                Name = "Test album",
+                Description = "Description updated",
+                LabelName = "Label name",
+                Price = new Price { Amount = 50, Currency = "EUR" },
+                PictureUri = "https://mycdn.com/pictures/32423423",
+                ReleaseDate = DateTimeOffset.Now,
+                Format = "Vinyl 33g",
+                AvailableStock = 6,
+                GenreId = new Guid("c04f05c0-f6ad-44d1-a400-3375bfb5dfd6"),
+                ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
+            };
 
-            var sut = new ItemRepository(_catalogDataContextFactory.ContextInstance);
-            var result = sut.Update(entity);
+           
+            _sut.Update(testItem);
 
-            await sut.UnitOfWork.SaveEntitiesAsync();
+            await _sut.UnitOfWork.SaveEntitiesAsync();
 
-            _catalogDataContextFactory.ContextInstance.Items
-                .FirstOrDefault(item => item.Id == result.Id)
-                ?.Description.ShouldBe("Updated");
+            var result = _context.Items
+                .FirstOrDefault(item => item.Id == testItem.Id);
+
+            result.Description.ShouldBe("Description updated");
+            result.Price.Amount.ShouldBe(50);
         }
     }
 }

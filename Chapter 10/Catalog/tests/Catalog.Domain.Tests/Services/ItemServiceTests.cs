@@ -1,35 +1,35 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using Catalog.Domain.Mapper;
+using Catalog.Domain.Entities;
+using Catalog.Domain.Mappers;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Services;
 using Catalog.Fixtures;
 using Catalog.Infrastructure.Repositories;
-using Newtonsoft.Json;
 using Shouldly;
 using Xunit;
 
 namespace Catalog.Domain.Tests.Services
 {
-    public class ItemServiceTests : IClassFixture<CatalogDataContextFactory>
+    public class ItemServiceTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogDataContextFactory _catalogDataContextFactory;
+        private readonly ItemRepository _itemRepository;
+        private readonly IItemMapper _mapper;
 
-        public ItemServiceTests(CatalogDataContextFactory catalogDataContextFactory)
+        public ItemServiceTests(CatalogContextFactory catalogContextFactory)
         {
-            _catalogDataContextFactory = catalogDataContextFactory;
+            _itemRepository = new ItemRepository(catalogContextFactory.ContextInstance);
+            _mapper = catalogContextFactory.ItemMapper;
         }
 
         [Fact]
         public async Task getitems_should_return_right_data()
         {
-            var sut = new ItemService(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+            ItemService sut = new ItemService(_itemRepository, _mapper);
 
             var result =
-                await sut.GetItems(CancellationToken.None);
+                await sut.GetItemsAsync();
 
             result.ShouldNotBeNull();
         }
@@ -38,11 +38,9 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("b5b05534-9263-448c-a69e-0bbd8b3eb90e")]
         public async Task getitem_should_return_right_data(string guid)
         {
-            var sut = new ItemService(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
-
+            ItemService sut = new ItemService(_itemRepository, _mapper);
             var result =
-                await sut.GetItem(new GetItemRequest { Id = new Guid(guid) }, CancellationToken.None);
+                await sut.GetItemAsync(new GetItemRequest { Id = new Guid(guid) });
 
             result.Id.ShouldBe(new Guid(guid));
         }
@@ -50,52 +48,69 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public void getitem_should_thrown_exception_with_null_id()
         {
-            var sut = new ItemService(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
-
-            sut.GetItem(null, CancellationToken.None).ShouldThrow<ArgumentNullException>();
+            ItemService sut = new ItemService(_itemRepository, _mapper);
+            sut.GetItemAsync(null).ShouldThrow<ArgumentNullException>();
         }
-
-        [Theory]
-        [InlineData(
-            "{\"Name\":\"Test album\",\"Description\":\"Description\",\"LabelName\":\"LabelName\",\"Price\":{\"Amount\":23.5,\"Currency\":\"EUR\"},\"PictureUri\":\"https://mycdn.com/pictures/32423423\",\"ReleaseDate\":\"2016-01-01T00:00:00+00:00\",\"Format\":\"Vinyl 33g\",\"AvailableStock\":6,\"GenreId\":\"c04f05c0-f6ad-44d1-a400-3375bfb5dfd6\",\"Genre\":null,\"ArtistId\":\"f08a333d-30db-4dd1-b8ba-3b0473c7cdab\",\"Artist\":null}")]
-        public async Task additem_should_add_right_entity(string json)
+        
+        [Fact]
+        public async Task additem_should_add_right_entity()
         {
-            var sut = new ItemService(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+            var testItem = new AddItemRequest
+            {
+                Name = "Test album",
+                Description = "Description",
+                LabelName = "Label name",
+                Price = new Price { Amount = 13, Currency = "EUR" },
+                PictureUri = "https://mycdn.com/pictures/32423423",
+                ReleaseDate = DateTimeOffset.Now,
+                Format = "Vinyl 33g",
+                AvailableStock = 6,
+                GenreId = new Guid("c04f05c0-f6ad-44d1-a400-3375bfb5dfd6"),
+                ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
+            };
 
-            var item = JsonConvert.DeserializeObject<AddItemRequest>(json);
+            IItemService sut = new ItemService(_itemRepository, _mapper);
 
             var result =
-                await sut.AddItem(item, CancellationToken.None);
+                await sut.AddItemAsync(testItem);
 
-            result.Name.ShouldBe(item.Name);
-            result.Description.ShouldBe(item.Description);
-            result.GenreId.ShouldBe(item.GenreId);
-            result.ArtistId.ShouldBe(item.ArtistId);
-            result.Price.Amount.ShouldBe(item.Price.Amount);
-            result.Price.Currency.ShouldBe(item.Price.Currency);
+            result.Name.ShouldBe(testItem.Name);
+            result.Description.ShouldBe(testItem.Description);
+            result.GenreId.ShouldBe(testItem.GenreId);
+            result.ArtistId.ShouldBe(testItem.ArtistId);
+            result.Price.Amount.ShouldBe(testItem.Price.Amount);
+            result.Price.Currency.ShouldBe(testItem.Price.Currency);
         }
 
-        [Theory]
-        [InlineData(
-            "{\"Id\":\"b5b05534-9263-448c-a69e-0bbd8b3eb90e\", \"Name\":\"Test album\",\"Description\":\"Description\",\"LabelName\":\"LabelName\",\"Price\":{\"Amount\":23.5,\"Currency\":\"EUR\"},\"PictureUri\":\"https://mycdn.com/pictures/32423423\",\"ReleaseDate\":\"2016-01-01T00:00:00+00:00\",\"Format\":\"Vinyl 33g\",\"AvailableStock\":6,\"GenreId\":\"c04f05c0-f6ad-44d1-a400-3375bfb5dfd6\",\"Genre\":null,\"ArtistId\":\"f08a333d-30db-4dd1-b8ba-3b0473c7cdab\",\"Artist\":null}")]
-        public async Task edititem_should_add_right_entity(string json)
+        [Fact]
+        public async Task edititem_should_add_right_entity()
         {
-            var sut = new ItemService(new ItemRepository(_catalogDataContextFactory.ContextInstance),
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+            var testItem = new EditItemRequest
+            {
+                Id = new Guid("b5b05534-9263-448c-a69e-0bbd8b3eb90e"),
+                Name = "Test album",
+                Description = "Description",
+                LabelName = "Label name",
+                Price = new Price { Amount = 13, Currency = "EUR" },
+                PictureUri = "https://mycdn.com/pictures/32423423",
+                ReleaseDate = DateTimeOffset.Now,
+                Format = "Vinyl 33g",
+                AvailableStock = 6,
+                GenreId = new Guid("c04f05c0-f6ad-44d1-a400-3375bfb5dfd6"),
+                ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
+            };
 
-            var item = JsonConvert.DeserializeObject<EditItemRequest>(json);
+            ItemService sut = new ItemService(_itemRepository, _mapper);
 
             var result =
-                await sut.EditItem(item, CancellationToken.None);
+                await sut.EditItemAsync(testItem, CancellationToken.None);
 
-            result.Name.ShouldBe(item.Name);
-            result.Description.ShouldBe(item.Description);
-            result.GenreId.ShouldBe(item.GenreId);
-            result.ArtistId.ShouldBe(item.ArtistId);
-            result.Price.Amount.ShouldBe(item.Price.Amount);
-            result.Price.Currency.ShouldBe(item.Price.Currency);
+            result.Name.ShouldBe(testItem.Name);
+            result.Description.ShouldBe(testItem.Description);
+            result.GenreId.ShouldBe(testItem.GenreId);
+            result.ArtistId.ShouldBe(testItem.ArtistId);
+            result.Price.Amount.ShouldBe(testItem.Price.Amount);
+            result.Price.Currency.ShouldBe(testItem.Price.Currency);
         }
     }
 }

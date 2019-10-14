@@ -1,6 +1,6 @@
 using System;
 
-namespace Catalog.Domain.Responses.Item
+namespace Catalog.Domain.Responses
 {
     public class GenreResponse
     {

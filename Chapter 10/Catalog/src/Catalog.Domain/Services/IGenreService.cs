@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Domain.Requests.Genre;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 
 namespace Catalog.Domain.Services
 {

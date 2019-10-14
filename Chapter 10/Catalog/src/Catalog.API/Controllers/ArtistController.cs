@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Catalog.API.Filters;
 using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Artists;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 

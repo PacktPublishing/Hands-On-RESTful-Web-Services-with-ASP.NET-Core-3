@@ -14,13 +14,13 @@ using Xunit;
 
 namespace Catalog.Domain.Tests.Services
 {
-    public class GenreServiceTests : IClassFixture<CatalogDataContextFactory>
+    public class GenreServiceTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogDataContextFactory _catalogDataContextFactory;
+        private readonly CatalogContextFactory _catalogContextFactory;
 
-        public GenreServiceTests(CatalogDataContextFactory catalogDataContextFactory)
+        public GenreServiceTests(CatalogContextFactory catalogContextFactory)
         {
-            _catalogDataContextFactory = catalogDataContextFactory;
+            _catalogContextFactory = catalogContextFactory;
         }
 
         [Theory]
@@ -28,11 +28,11 @@ namespace Catalog.Domain.Tests.Services
         public async Task getgenre_should_return_right_genre(string id)
         {
 
-            var genreRepository = new GenreRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var genreRepository = new GenreRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new GenreService(genreRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             var result = await sut.GetGenreAsync(new GetGenreRequest { Id = new Guid(id) }, CancellationToken.None);
             result.GenreId.ShouldBe(new Guid(id));
@@ -41,11 +41,11 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public void getgenre_should_thrown_exception_with_null_id()
         {
-            var genreRepository = new GenreRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var genreRepository = new GenreRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new GenreService(genreRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             sut.GetGenreAsync(null, CancellationToken.None).ShouldThrow<ArgumentNullException>();
         }
@@ -53,11 +53,11 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public async Task get_multiple_genre_should_return_right_data()
         {
-            var genreRepository = new GenreRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var genreRepository = new GenreRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new GenreService(genreRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             var result = await sut.GetGenreAsync(CancellationToken.None);
             result.Count().ShouldBeGreaterThan(0);
@@ -67,11 +67,11 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("c04f05c0-f6ad-44d1-a400-3375bfb5dfd6")]
         public async Task handle_should_return_right_items_using_genre_id(string id)
         {
-            var genreRepository = new GenreRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var genreRepository = new GenreRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new GenreService(genreRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             var result = await sut.GetItemByGenreIdAsync(new GetItemsByGenreRequest { Id = new Guid(id) }, CancellationToken.None);
             result.ShouldNotBeNull();
@@ -83,11 +83,11 @@ namespace Catalog.Domain.Tests.Services
         {
             var genre = JsonConvert.DeserializeObject<AddGenreRequest>(json);
 
-            var genreRepository = new GenreRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var genreRepository = new GenreRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new GenreService(genreRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             var result =
                 await sut.AddGenreAsync(genre, CancellationToken.None);

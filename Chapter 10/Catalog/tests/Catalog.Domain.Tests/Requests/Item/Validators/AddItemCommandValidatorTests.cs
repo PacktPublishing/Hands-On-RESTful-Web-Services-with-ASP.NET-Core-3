@@ -5,7 +5,7 @@ using Catalog.Domain.Requests.Artists;
 using Catalog.Domain.Requests.Genre;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Requests.Item.Validators;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
 using FluentValidation.TestHelper;
 using Moq;

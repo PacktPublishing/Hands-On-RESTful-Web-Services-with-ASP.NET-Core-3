@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Genre;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 
 namespace Catalog.Domain.Services
 {
@@ -13,19 +15,23 @@ namespace Catalog.Domain.Services
     {
         private readonly IGenreRepository _genreRepository;
         private readonly IItemRepository _itemRepository;
-        private readonly IMapper _mapper;
+        private readonly IGenreMapper _genreMapper;
+        private readonly IItemMapper _itemMapper;
+        
 
-        public GenreService(IGenreRepository genreRepository, IItemRepository itemRepository, IMapper mapper)
+        public GenreService(IGenreRepository genreRepository, IItemRepository itemRepository, 
+            IGenreMapper genreMapper, IItemMapper itemMapper)
         {
             _genreRepository = genreRepository;
             _itemRepository = itemRepository;
-            _mapper = mapper;
+            _genreMapper = genreMapper;
+            _itemMapper = itemMapper;
         }
 
         public async Task<IEnumerable<GenreResponse>> GetGenreAsync(CancellationToken cancellationToken)
         {
             var result = await _genreRepository.GetAsync();
-            return _mapper.Map<IEnumerable<GenreResponse>>(result);
+            return result.Select(_genreMapper.Map);
         }
 
         public async Task<GenreResponse> GetGenreAsync(GetGenreRequest request, CancellationToken cancellationToken)
@@ -40,7 +46,7 @@ namespace Catalog.Domain.Services
         {
             if (request?.Id == null) throw new ArgumentNullException();
             var result = await _itemRepository.GetItemByGenreIdAsync(request.Id);
-            return _mapper.Map<List<ItemResponse>>(result);
+            return result.Select(_itemMapper.Map);
         }
 
         public async Task<GenreResponse> AddGenreAsync(AddGenreRequest request, CancellationToken cancellationToken)

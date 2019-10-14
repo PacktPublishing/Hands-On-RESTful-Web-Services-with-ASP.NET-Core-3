@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Catalog.API.Filters;
 using Catalog.Domain.Requests.Item;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +24,7 @@ namespace Catalog.API.Tests.Infrastructure.Filters
             var existingId = Guid.NewGuid();
             var mediator = new Mock<IItemService>();
             mediator
-                .Setup(itemService => itemService.GetItem(It.IsAny<GetItemRequest>(), It.IsAny<CancellationToken>()))
+                .Setup(itemService => itemService.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(() => null);
 
             var filter = new ItemExistsAttribute.ItemExistsFilterImpl(mediator.Object);
@@ -51,7 +51,7 @@ namespace Catalog.API.Tests.Infrastructure.Filters
 
             var mediator = new Mock<IItemService>();
             mediator
-                .Setup(_ => _.GetItem(It.IsAny<GetItemRequest>(), It.IsAny<CancellationToken>()))
+                .Setup(_ => _.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(new ItemResponse { Id = id });
 
             var filter = new ItemExistsAttribute.ItemExistsFilterImpl(mediator.Object);

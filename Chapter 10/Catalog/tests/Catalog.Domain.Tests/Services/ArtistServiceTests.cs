@@ -14,24 +14,24 @@ using Xunit;
 
 namespace Catalog.Domain.Tests.Services
 {
-    public class ArtistServiceTests : IClassFixture<CatalogDataContextFactory>
+    public class ArtistServiceTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogDataContextFactory _catalogDataContextFactory;
+        private readonly CatalogContextFactory _catalogContextFactory;
 
-        public ArtistServiceTests(CatalogDataContextFactory catalogDataContextFactory)
+        public ArtistServiceTests(CatalogContextFactory catalogContextFactory)
         {
-            _catalogDataContextFactory = catalogDataContextFactory;
+            _catalogContextFactory = catalogContextFactory;
 
         }
 
         [Fact]
         public async Task getartist_should_return_right_data()
         {
-            var artistRepository = new ArtistRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var artistRepository = new ArtistRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new ArtistService(artistRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
             var result =
                 await sut.GetArtistsAsync(CancellationToken.None);
@@ -43,11 +43,11 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")]
         public async Task getartist_should_return_right_artist(string id)
         {
-            var artistRepository = new ArtistRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var artistRepository = new ArtistRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new ArtistService(artistRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
             var result = await sut.GetArtistAsync(new GetArtistRequest { Id = new Guid(id) }, CancellationToken.None);
             result.ShouldNotBeNull();
@@ -57,11 +57,11 @@ namespace Catalog.Domain.Tests.Services
         public void getartist_should_thrown_exception_with_null_id()
         {
 
-            var artistRepository = new ArtistRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var artistRepository = new ArtistRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new ArtistService(artistRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
             sut.GetArtistAsync(null, CancellationToken.None).ShouldThrow<ArgumentNullException>();
         }
@@ -70,11 +70,11 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")]
         public async Task handle_should_return_right_items_using_artist_id(string id)
         {
-            var artistRepository = new ArtistRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var artistRepository = new ArtistRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new ArtistService(artistRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
 
             var result = await sut.GetItemByArtistIdAsync(new GetItemsByArtistRequest { Id = new Guid(id) }, CancellationToken.None);
@@ -84,11 +84,11 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("{\"ArtistName\":\"TestArtist\"}")]
         public async Task addartist_should_add_right_artist(string json)
         {
-            var artistRepository = new ArtistRepository(_catalogDataContextFactory.ContextInstance);
-            var itemRepository = new ItemRepository(_catalogDataContextFactory.ContextInstance);
+            var artistRepository = new ArtistRepository(_catalogContextFactory.ContextInstance);
+            var itemRepository = new ItemRepository(_catalogContextFactory.ContextInstance);
 
             var sut = new ArtistService(artistRepository, itemRepository,
-                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CatalogProfile>())));
+                _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
             var artist = JsonConvert.DeserializeObject<AddArtistRequest>(json);
 
