@@ -16,21 +16,18 @@ namespace Catalog.Fixtures
                 .EnableSensitiveDataLogging()
                 .Options;
 
-            EnsureCreation(ContextOptions);
             ContextInstance = new TestCatalogContext(ContextOptions);
+            EnsureCreation(ContextOptions);
         }
 
         private void EnsureCreation(DbContextOptions<CatalogContext> contextOptions)
         {
-            using (var context = new TestCatalogContext(contextOptions))
-            {
-                context.Database.EnsureCreated();
-            }
+            using var context = new TestCatalogContext(contextOptions);
+            context.Database.EnsureCreated();
         }
 
         public void Dispose()
         {
-            ContextInstance.Database.EnsureDeleted();
             ContextInstance.Dispose();
         }
     }

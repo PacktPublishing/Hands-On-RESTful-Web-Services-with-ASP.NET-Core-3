@@ -11,7 +11,7 @@ using FluentValidation.TestHelper;
 using Moq;
 using Xunit;
 
-namespace Catalog.Domain.Tests.Commands.Item.Validators
+namespace Catalog.Domain.Tests.Requests.Item.Validators
 {
     public class AddItemCommandValidatorTests
     {

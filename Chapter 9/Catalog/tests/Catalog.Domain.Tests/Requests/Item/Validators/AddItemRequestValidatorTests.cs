@@ -19,7 +19,7 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
         public void should_have_error_when_ArtistId_is_null()
         {
             var addItemRequest = new AddItemRequest { Price = new Price() };
-            _validator.ShouldHaveValidationErrorFor(x => x.GenreId, addItemRequest);
+            _validator.ShouldHaveValidationErrorFor(x => x.ArtistId, addItemRequest);
         }
 
         [Fact]

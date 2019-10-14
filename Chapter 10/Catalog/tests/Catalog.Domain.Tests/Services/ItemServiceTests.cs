@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using Shouldly;
 using Xunit;
 
-namespace Catalog.Domain.Tests.Handlers
+namespace Catalog.Domain.Tests.Services
 {
     public class ItemServiceTests : IClassFixture<CatalogDataContextFactory>
     {

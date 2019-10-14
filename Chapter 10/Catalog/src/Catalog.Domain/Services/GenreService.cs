@@ -18,8 +18,8 @@ namespace Catalog.Domain.Services
         public GenreService(IGenreRepository genreRepository, IItemRepository itemRepository, IMapper mapper)
         {
             _genreRepository = genreRepository;
-            _mapper = mapper;
             _itemRepository = itemRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<GenreResponse>> GetGenreAsync(CancellationToken cancellationToken)

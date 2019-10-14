@@ -55,7 +55,6 @@ namespace Catalog.API.Controllers
             return Ok(result);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Post(AddGenreRequest request)
         {
