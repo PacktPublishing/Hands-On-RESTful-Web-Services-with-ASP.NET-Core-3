@@ -4,8 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Catalog.API.ResponseModels;
 using Catalog.Domain.Entities;
+using Catalog.Domain.Requests.Genre;
 using Catalog.Domain.Responses;
 using Catalog.Fixtures;
 using Newtonsoft.Json;
@@ -54,8 +54,8 @@ namespace Catalog.API.Tests.Controllers
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "genre_with_id")]
-        public async Task get_by_id_should_return_right_data(Genre request)
+        [LoadData("genre")]
+        public async Task get_by_id_should_return_the_data(Genre request)
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/genre/{request.GenreId}");
@@ -71,8 +71,8 @@ namespace Catalog.API.Tests.Controllers
 
 
         [Theory]
-        [LoadTestData("record-test.json", "genre_with_id")]
-        public async Task get_item_by_genre_should_return_right_data(Genre request)
+        [LoadData("genre")]
+        public async Task get_item_by_genre_should_return_the_data(Genre request)
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/genre/{request.GenreId}/items");

@@ -27,18 +27,18 @@ namespace Catalog.Infrastructure.Repositories
 
         public async Task<Genre> GetAsync(Guid id)
         {
-            var item = await _catalogContext.Genres
+            var genre = await _catalogContext.Genres
                 .FindAsync(id);
 
-            if (item == null) return null;
+            if (genre == null) return null;
 
-            _catalogContext.Entry(item).State = EntityState.Detached;
-            return item;
+            _catalogContext.Entry(genre).State = EntityState.Detached;
+            return genre;
         }
 
-        public Genre Add(Genre item)
+        public Genre Add(Genre genre)
         {
-            return _catalogContext.Genres.Add(item).Entity;
+            return _catalogContext.Genres.Add(genre).Entity;
         }
     }
 }

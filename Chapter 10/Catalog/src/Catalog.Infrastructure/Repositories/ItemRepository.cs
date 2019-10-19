@@ -43,8 +43,12 @@ namespace Catalog.Infrastructure.Repositories
 
         public async Task<IList<Item>> GetItemByArtistIdAsync(Guid id)
         {
-            var items = await _context.Items
-                .Where(item => item.ArtistId == id).ToListAsync();
+            var items = await _context
+                .Items
+                .Where(item => item.ArtistId == id)
+                .Include(x => x.Genre)
+                .Include(x => x.Artist)
+                .ToListAsync();
 
             return items;
         }
@@ -52,7 +56,10 @@ namespace Catalog.Infrastructure.Repositories
         public async Task<IList<Item>> GetItemByGenreIdAsync(Guid id)
         {
             var items = await _context.Items
-                .Where(item => item.GenreId == id).ToListAsync();
+                .Where(item => item.GenreId == id)
+                .Include(x => x.Genre)
+                .Include(x => x.Artist)
+                .ToListAsync();
 
             return items;
         }

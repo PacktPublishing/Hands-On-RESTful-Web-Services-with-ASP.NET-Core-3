@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Catalog.Domain.Requests.Artists.Validators
 {
-    public class AddArtistCommandValidator : AbstractValidator<AddArtistRequest>
+    public class AddArtistRequestValidator : AbstractValidator<AddArtistRequest>
     {
-        public AddArtistCommandValidator()
+        public AddArtistRequestValidator()
         {
             RuleFor(artist => artist.ArtistName).NotEmpty();
         }

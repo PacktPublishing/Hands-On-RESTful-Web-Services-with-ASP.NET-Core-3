@@ -21,7 +21,7 @@ namespace Catalog.Fixtures
 
             EnsureCreation(contextOptions);
             ContextInstance = new TestCatalogContext(contextOptions);
-            
+
             GenreMapper = new GenreMapper();
             ArtistMapper = new ArtistMapper();
             ItemMapper = new ItemMapper(ArtistMapper, GenreMapper);

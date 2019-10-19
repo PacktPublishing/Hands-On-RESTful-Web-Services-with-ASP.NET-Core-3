@@ -9,6 +9,6 @@ namespace Catalog.Domain.Repositories
     {
         Task<IList<Genre>> GetAsync();
         Task<Genre> GetAsync(Guid id);
-        Genre Add(Genre item);
+        Genre Add(Genre genre);
     }
 }

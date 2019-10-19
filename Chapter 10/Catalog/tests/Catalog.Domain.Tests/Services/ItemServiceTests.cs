@@ -51,7 +51,7 @@ namespace Catalog.Domain.Tests.Services
             ItemService sut = new ItemService(_itemRepository, _mapper);
             sut.GetItemAsync(null).ShouldThrow<ArgumentNullException>();
         }
-        
+
         [Fact]
         public async Task additem_should_add_right_entity()
         {

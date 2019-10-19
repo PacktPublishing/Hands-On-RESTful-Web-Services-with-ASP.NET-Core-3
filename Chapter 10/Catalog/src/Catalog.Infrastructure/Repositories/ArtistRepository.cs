@@ -26,18 +26,18 @@ namespace Catalog.Infrastructure.Repositories
 
         public async Task<Artist> GetAsync(Guid id)
         {
-            var item = await _catalogContext.Artists
+            var artist = await _catalogContext.Artists
                 .FindAsync(id);
 
-            if (item == null) return null;
+            if (artist == null) return null;
 
-            _catalogContext.Entry(item).State = EntityState.Detached;
-            return item;
+            _catalogContext.Entry(artist).State = EntityState.Detached;
+            return artist;
         }
 
-        public Artist Add(Artist item)
+        public Artist Add(Artist artist)
         {
-            return _catalogContext.Artists.Add(item).Entity;
+            return _catalogContext.Artists.Add(artist).Entity;
         }
     }
 }

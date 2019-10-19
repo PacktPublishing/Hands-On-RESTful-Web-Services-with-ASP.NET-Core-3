@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Services;

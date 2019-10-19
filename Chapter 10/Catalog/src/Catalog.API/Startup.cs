@@ -1,7 +1,9 @@
 ﻿using Catalog.API.Extensions;
 using Catalog.Domain.Extensions;
 using Catalog.Domain.Repositories;
+using Catalog.Domain.Services;
 using Catalog.Infrastructure.Repositories;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,7 @@ namespace Catalog.API
                 .AddMappers()
                 .AddServices()
                 .AddControllers()
-                .AddFluentValidation();
+                .AddValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

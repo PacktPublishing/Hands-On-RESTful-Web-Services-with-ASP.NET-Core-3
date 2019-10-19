@@ -11,19 +11,18 @@ namespace Catalog.Infrastructure.Tests
 {
     public class ArtistRepositoryTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogContextFactory _testContextFactory;
+        private readonly CatalogContextFactory _factory;
 
-
-        public ArtistRepositoryTests(CatalogContextFactory testContextFactory)
+        public ArtistRepositoryTests(CatalogContextFactory factory)
         {
-            _testContextFactory = testContextFactory;
+            _factory = factory;
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
+        [LoadData("artist")]
         public async Task should_return_record_by_id(Artist artist)
         {
-            var sut = new ArtistRepository(_testContextFactory.ContextInstance);
+            var sut = new ArtistRepository(_factory.ContextInstance);
 
             var result = await sut.GetAsync(artist.ArtistId);
 
@@ -31,23 +30,21 @@ namespace Catalog.Infrastructure.Tests
             result.ArtistName.ShouldBe(artist.ArtistName);
         }
 
-
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
+        [LoadData("artist")]
         public async Task should_add_new_item(Artist artist)
         {
             artist.ArtistId = Guid.NewGuid();
 
-            var sut = new ArtistRepository(_testContextFactory.ContextInstance);
+            var sut = new ArtistRepository(_factory.ContextInstance);
             sut.Add(artist);
 
             await sut.UnitOfWork.SaveEntitiesAsync();
 
-            _testContextFactory.ContextInstance.Artists
+            _factory.ContextInstance.Artists
                 .FirstOrDefault(x => x.ArtistId == artist.ArtistId)
                 .ShouldNotBeNull();
         }
-
     }
 }
 

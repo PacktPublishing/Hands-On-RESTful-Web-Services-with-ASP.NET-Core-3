@@ -30,14 +30,14 @@ namespace Catalog.Domain.Requests.Item.Validators
             RuleFor(x => x.AvailableStock).Must(x => x > 0);
         }
 
-        private async Task<bool> ArtistExists(Guid artistId, CancellationToken token)
+        private async Task<bool> ArtistExists(Guid artistId, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(artistId.ToString()))
             {
                 return false;
             }
 
-            var artist = await _artistService.GetArtistAsync(new GetArtistRequest { Id = artistId }, token);
+            var artist = await _artistService.GetArtistAsync(new GetArtistRequest { Id = artistId });
             return artist != null;
         }
 
@@ -48,7 +48,7 @@ namespace Catalog.Domain.Requests.Item.Validators
                 return false;
             }
 
-            var genre = await _genreService.GetGenreAsync(new GetGenreRequest { Id = genreId }, token);
+            var genre = await _genreService.GetGenreAsync(new GetGenreRequest { Id = genreId });
             return genre != null;
         }
     }

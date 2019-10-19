@@ -11,19 +11,18 @@ namespace Catalog.Infrastructure.Tests
 {
     public class GenreRepositoryTests : IClassFixture<CatalogContextFactory>
     {
-        private readonly CatalogContextFactory _testContextFactory;
+        private readonly CatalogContextFactory _factory;
 
-
-        public GenreRepositoryTests(CatalogContextFactory testContextFactory)
+        public GenreRepositoryTests(CatalogContextFactory factory)
         {
-            _testContextFactory = testContextFactory;
+            _factory = factory;
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "genre_with_id")]
+        [LoadData("genre")]
         public async Task should_return_record_by_id(Genre genre)
         {
-            var sut = new GenreRepository(_testContextFactory.ContextInstance);
+            var sut = new GenreRepository(_factory.ContextInstance);
 
             var result = await sut.GetAsync(genre.GenreId);
 
@@ -33,21 +32,20 @@ namespace Catalog.Infrastructure.Tests
 
 
         [Theory]
-        [LoadTestData("record-test.json", "genre_with_id")]
+        [LoadData("genre")]
         public async Task should_add_new_item(Genre genre)
         {
             genre.GenreId = Guid.NewGuid();
 
-            var sut = new GenreRepository(_testContextFactory.ContextInstance);
+            var sut = new GenreRepository(_factory.ContextInstance);
             sut.Add(genre);
 
             await sut.UnitOfWork.SaveEntitiesAsync();
 
-            _testContextFactory.ContextInstance.Genres
+            _factory.ContextInstance.Genres
                 .FirstOrDefault(x => x.GenreId == genre.GenreId)
                 .ShouldNotBeNull();
         }
-
     }
 }
 

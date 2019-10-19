@@ -18,7 +18,7 @@ namespace Catalog.Domain.Mappers
         public Item Map(AddItemRequest request)
         {
             if (request == null) return null;
-            
+
             return new Item
             {
                 Name = request.Name,
@@ -37,7 +37,7 @@ namespace Catalog.Domain.Mappers
         public Item Map(EditItemRequest request)
         {
             if (request == null) return null;
-            
+
             return new Item
             {
                 Id = request.Id,
@@ -57,7 +57,7 @@ namespace Catalog.Domain.Mappers
         public ItemResponse Map(Item request)
         {
             if (request == null) return null;
-            
+
             return new ItemResponse
             {
                 Id = request.Id,

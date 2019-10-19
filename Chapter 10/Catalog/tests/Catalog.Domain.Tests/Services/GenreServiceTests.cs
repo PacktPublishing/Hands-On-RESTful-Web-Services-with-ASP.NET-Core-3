@@ -34,7 +34,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetGenreAsync(new GetGenreRequest { Id = new Guid(id) }, CancellationToken.None);
+            var result = await sut.GetGenreAsync(new GetGenreRequest { Id = new Guid(id) });
             result.GenreId.ShouldBe(new Guid(id));
         }
 
@@ -47,7 +47,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            sut.GetGenreAsync(null, CancellationToken.None).ShouldThrow<ArgumentNullException>();
+            sut.GetGenreAsync(null).ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetGenreAsync(CancellationToken.None);
+            var result = await sut.GetGenreAsync();
             result.Count().ShouldBeGreaterThan(0);
         }
 
@@ -73,7 +73,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetItemByGenreIdAsync(new GetItemsByGenreRequest { Id = new Guid(id) }, CancellationToken.None);
+            var result = await sut.GetItemByGenreIdAsync(new GetGenreRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
 

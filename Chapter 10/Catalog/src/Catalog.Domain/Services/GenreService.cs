@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Genre;
@@ -17,9 +16,8 @@ namespace Catalog.Domain.Services
         private readonly IItemRepository _itemRepository;
         private readonly IGenreMapper _genreMapper;
         private readonly IItemMapper _itemMapper;
-        
 
-        public GenreService(IGenreRepository genreRepository, IItemRepository itemRepository, 
+        public GenreService(IGenreRepository genreRepository, IItemRepository itemRepository,
             IGenreMapper genreMapper, IItemMapper itemMapper)
         {
             _genreRepository = genreRepository;
@@ -28,21 +26,21 @@ namespace Catalog.Domain.Services
             _itemMapper = itemMapper;
         }
 
-        public async Task<IEnumerable<GenreResponse>> GetGenreAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<GenreResponse>> GetGenreAsync()
         {
             var result = await _genreRepository.GetAsync();
             return result.Select(_genreMapper.Map);
         }
 
-        public async Task<GenreResponse> GetGenreAsync(GetGenreRequest request, CancellationToken cancellationToken)
+        public async Task<GenreResponse> GetGenreAsync(GetGenreRequest request)
         {
             if (request?.Id == null) throw new ArgumentNullException();
 
             var result = await _genreRepository.GetAsync(request.Id);
-            return result == null ? null : new GenreResponse { GenreId = result.GenreId, GenreDescription = result.GenreDescription };
+            return result == null ? null : _genreMapper.Map(result);
         }
 
-        public async Task<IEnumerable<ItemResponse>> GetItemByGenreIdAsync(GetItemsByGenreRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ItemResponse>> GetItemByGenreIdAsync(GetGenreRequest request)
         {
             if (request?.Id == null) throw new ArgumentNullException();
             var result = await _itemRepository.GetItemByGenreIdAsync(request.Id);
@@ -56,7 +54,7 @@ namespace Catalog.Domain.Services
             var result = _genreRepository.Add(item);
             await _genreRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return new GenreResponse { GenreId = result.GenreId, GenreDescription = result.GenreDescription };
+            return _genreMapper.Map(result);
         }
     }
 }

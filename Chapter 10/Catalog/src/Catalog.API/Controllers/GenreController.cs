@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Catalog.API.Filters;
-using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Genre;
 using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
@@ -26,7 +25,7 @@ namespace Catalog.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
-            var result = await _genreService.GetGenreAsync(CancellationToken.None);
+            var result = await _genreService.GetGenreAsync();
 
             var totalItems = result.ToList().Count;
 
@@ -44,14 +43,14 @@ namespace Catalog.API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _genreService.GetGenreAsync(new GetGenreRequest { Id = id }, CancellationToken.None);
+            var result = await _genreService.GetGenreAsync(new GetGenreRequest { Id = id });
             return Ok(result);
         }
 
         [HttpGet("{id:guid}/items")]
         public async Task<IActionResult> GetItemById(Guid id)
         {
-            var result = await _genreService.GetItemByGenreIdAsync(new GetItemsByGenreRequest { Id = id }, CancellationToken.None);
+            var result = await _genreService.GetItemByGenreIdAsync(new GetGenreRequest { Id = id });
             return Ok(result);
         }
 

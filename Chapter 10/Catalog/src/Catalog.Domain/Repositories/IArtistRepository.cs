@@ -9,6 +9,6 @@ namespace Catalog.Domain.Repositories
     {
         Task<IList<Artist>> GetAsync();
         Task<Artist> GetAsync(Guid id);
-        Artist Add(Artist item);
+        Artist Add(Artist artist);
     }
 }

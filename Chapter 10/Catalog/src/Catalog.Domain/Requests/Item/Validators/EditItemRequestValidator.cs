@@ -31,25 +31,25 @@ namespace Catalog.Domain.Requests.Item.Validators
             RuleFor(x => x.Name).NotEmpty();
         }
 
-        private async Task<bool> ArtistExists(Guid artistId, CancellationToken token)
+        private async Task<bool> ArtistExists(Guid artistId, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(artistId.ToString()))
             {
                 return false;
             }
 
-            var artist = await _artistService.GetArtistAsync(new GetArtistRequest { Id = artistId }, token);
+            var artist = await _artistService.GetArtistAsync(new GetArtistRequest { Id = artistId });
             return artist != null;
         }
 
-        private async Task<bool> GenreExists(Guid genreId, CancellationToken token)
+        private async Task<bool> GenreExists(Guid genreId, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(genreId.ToString()))
             {
                 return false;
             }
 
-            var genre = await _genreService.GetGenreAsync(new GetGenreRequest { Id = genreId }, token);
+            var genre = await _genreService.GetGenreAsync(new GetGenreRequest { Id = genreId });
             return genre != null;
         }
     }

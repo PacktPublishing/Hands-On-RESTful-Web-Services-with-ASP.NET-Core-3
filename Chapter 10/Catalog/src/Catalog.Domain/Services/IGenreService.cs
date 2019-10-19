@@ -8,13 +8,9 @@ namespace Catalog.Domain.Services
 {
     public interface IGenreService
     {
-        Task<IEnumerable<GenreResponse>> GetGenreAsync(CancellationToken cancellationToken);
-
-        Task<GenreResponse> GetGenreAsync(GetGenreRequest request, CancellationToken cancellationToken);
-
-        Task<IEnumerable<ItemResponse>> GetItemByGenreIdAsync(GetItemsByGenreRequest request,
-            CancellationToken cancellationToken);
-
+        Task<IEnumerable<GenreResponse>> GetGenreAsync();
+        Task<GenreResponse> GetGenreAsync(GetGenreRequest request);
+        Task<IEnumerable<ItemResponse>> GetItemByGenreIdAsync(GetGenreRequest request);
         Task<GenreResponse> AddGenreAsync(AddGenreRequest request, CancellationToken cancellationToken);
     }
 }

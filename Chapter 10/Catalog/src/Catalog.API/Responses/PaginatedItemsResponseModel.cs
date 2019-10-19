@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Catalog.API.ResponseModels
+namespace Catalog.Domain.Responses
 {
     public class PaginatedItemResponseModel<TEntity> where TEntity : class
     {

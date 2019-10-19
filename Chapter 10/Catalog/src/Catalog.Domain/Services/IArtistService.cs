@@ -8,13 +8,9 @@ namespace Catalog.Domain.Services
 {
     public interface IArtistService
     {
-        Task<IEnumerable<ArtistResponse>> GetArtistsAsync(CancellationToken cancellationToken);
-
-        Task<ArtistResponse> GetArtistAsync(GetArtistRequest request, CancellationToken cancellationToken);
-
-        Task<IEnumerable<ItemResponse>> GetItemByArtistIdAsync(GetItemsByArtistRequest request,
-            CancellationToken cancellationToken);
-
-        Task<ArtistResponse> AddArtist(AddArtistRequest request, CancellationToken cancellationToken);
+        Task<IEnumerable<ArtistResponse>> GetArtistsAsync();
+        Task<ArtistResponse> GetArtistAsync(GetArtistRequest request);
+        Task<IEnumerable<ItemResponse>> GetItemByArtistIdAsync(GetArtistRequest request);
+        Task<ArtistResponse> AddArtistAsync(AddArtistRequest request, CancellationToken cancellationToken);
     }
 }

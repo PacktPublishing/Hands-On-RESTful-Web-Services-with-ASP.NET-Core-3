@@ -30,7 +30,6 @@ namespace Catalog.Fixtures
                     var db = scopedServices.GetRequiredService<CatalogContext>();
                     db.Database.EnsureCreated();
                 });
-
         }
     }
 }

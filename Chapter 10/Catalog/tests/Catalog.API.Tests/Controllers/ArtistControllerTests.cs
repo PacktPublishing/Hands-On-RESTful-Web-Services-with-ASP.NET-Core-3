@@ -4,8 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Catalog.API.ResponseModels;
 using Catalog.Domain.Entities;
+using Catalog.Domain.Requests.Artists;
 using Catalog.Domain.Responses;
 using Catalog.Fixtures;
 using Newtonsoft.Json;
@@ -54,8 +54,8 @@ namespace Catalog.API.Tests.Controllers
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task get_by_id_should_return_right_data(Artist request)
+        [LoadData("artist")]
+        public async Task get_by_id_should_return_the_data(Artist request)
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/artist/{request.ArtistId}");
@@ -66,12 +66,11 @@ namespace Catalog.API.Tests.Controllers
             var responseEntity = JsonConvert.DeserializeObject<Artist>(responseContent);
 
             responseEntity.ArtistId.ShouldBe(request.ArtistId);
-            responseEntity.ArtistName.ShouldBe(request.ArtistName);
         }
 
         [Theory]
-        [LoadTestData("record-test.json", "artist_with_id")]
-        public async Task get_item_by_artist_should_return_right_data(Artist request)
+        [LoadData("artist")]
+        public async Task get_item_by_artist_should_return_the_artist(Artist request)
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync($"/api/artist/{request.ArtistId}/items");
@@ -87,11 +86,11 @@ namespace Catalog.API.Tests.Controllers
         [Fact]
         public async Task add_should_create_new_artist()
         {
-            var genreDescription = new { ArtistName = "The Braze" };
+            var addArtistRequest = new AddArtistRequest { ArtistName = "The Braze" };
 
             var client = _factory.CreateClient();
 
-            var httpContent = new StringContent(JsonConvert.SerializeObject(genreDescription), Encoding.UTF8,
+            var httpContent = new StringContent(JsonConvert.SerializeObject(addArtistRequest), Encoding.UTF8,
                 "application/json");
             var response = await client.PostAsync("/api/artist", httpContent);
 

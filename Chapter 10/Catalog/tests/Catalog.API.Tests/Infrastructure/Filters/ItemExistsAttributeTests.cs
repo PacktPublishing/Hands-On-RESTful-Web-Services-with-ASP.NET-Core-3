@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Catalog.API.Filters;
 using Catalog.Domain.Requests.Item;
@@ -22,12 +21,12 @@ namespace Catalog.API.Tests.Infrastructure.Filters
         public async Task should_continue_pipeline_when_id_is_not_present()
         {
             var existingId = Guid.NewGuid();
-            var mediator = new Mock<IItemService>();
-            mediator
-                .Setup(itemService => itemService.GetItemAsync(It.IsAny<GetItemRequest>()))
+            var itemService = new Mock<IItemService>();
+            itemService
+                .Setup(_ => _.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(() => null);
 
-            var filter = new ItemExistsAttribute.ItemExistsFilterImpl(mediator.Object);
+            var filter = new ItemExistsAttribute.ItemExistsFilterImpl(itemService.Object);
 
 
             var actionExecutedContext = new ActionExecutingContext(
@@ -49,12 +48,12 @@ namespace Catalog.API.Tests.Infrastructure.Filters
         {
             var id = Guid.NewGuid();
 
-            var mediator = new Mock<IItemService>();
-            mediator
+            var itemService = new Mock<IItemService>();
+            itemService
                 .Setup(_ => _.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(new ItemResponse { Id = id });
 
-            var filter = new ItemExistsAttribute.ItemExistsFilterImpl(mediator.Object);
+            var filter = new ItemExistsAttribute.ItemExistsFilterImpl(itemService.Object);
 
 
             var actionExecutedContext = new ActionExecutingContext(

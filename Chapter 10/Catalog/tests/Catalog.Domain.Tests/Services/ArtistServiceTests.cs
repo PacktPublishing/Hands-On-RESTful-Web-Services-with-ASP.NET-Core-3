@@ -34,7 +34,7 @@ namespace Catalog.Domain.Tests.Services
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
             var result =
-                await sut.GetArtistsAsync(CancellationToken.None);
+                await sut.GetArtistsAsync();
             result
                 .ToList().Count.ShouldBe(2);
         }
@@ -49,7 +49,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ArtistService(artistRepository, itemRepository,
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetArtistAsync(new GetArtistRequest { Id = new Guid(id) }, CancellationToken.None);
+            var result = await sut.GetArtistAsync(new GetArtistRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
 
@@ -63,7 +63,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ArtistService(artistRepository, itemRepository,
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
-            sut.GetArtistAsync(null, CancellationToken.None).ShouldThrow<ArgumentNullException>();
+            sut.GetArtistAsync(null).ShouldThrow<ArgumentNullException>();
         }
 
         [Theory]
@@ -76,8 +76,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ArtistService(artistRepository, itemRepository,
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
-
-            var result = await sut.GetItemByArtistIdAsync(new GetItemsByArtistRequest { Id = new Guid(id) }, CancellationToken.None);
+            var result = await sut.GetItemByArtistIdAsync(new GetArtistRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
         [Theory]
@@ -93,7 +92,7 @@ namespace Catalog.Domain.Tests.Services
             var artist = JsonConvert.DeserializeObject<AddArtistRequest>(json);
 
             var result =
-                await sut.AddArtist(artist, CancellationToken.None);
+                await sut.AddArtistAsync(artist, CancellationToken.None);
 
             result.ArtistId.ShouldNotBeNull();
             result.ArtistName.ShouldBe(artist.ArtistName);
