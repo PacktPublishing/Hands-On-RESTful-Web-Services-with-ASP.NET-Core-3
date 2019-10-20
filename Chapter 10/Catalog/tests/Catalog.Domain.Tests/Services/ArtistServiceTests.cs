@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using Catalog.Domain.Mapper;
 using Catalog.Domain.Requests.Artists;
 using Catalog.Domain.Services;
 using Catalog.Fixtures;
