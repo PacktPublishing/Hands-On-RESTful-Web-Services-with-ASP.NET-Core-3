@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using Cart.Domain.Infrastructure.Repositories;
+using Cart.Domain.Repositories;
 using Cart.Domain.Services;
 using Cart.Infrastructure.Configurations;
 using Cart.Infrastructure.Extensions;

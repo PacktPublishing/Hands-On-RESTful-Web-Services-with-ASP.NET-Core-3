@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Cart.Domain.Commands.Cart;
 using Cart.Domain.Entities;
-using Cart.Domain.Infrastructure.Repositories;
+using Cart.Domain.Repositories;
 using Cart.Domain.Responses.Cart;
 using Cart.Domain.Services;
 using MediatR;
@@ -17,7 +17,6 @@ namespace Cart.Domain.Handlers.Cart
         private readonly ICatalogService _catalogService;
         private readonly IMapper _mapper;
         private readonly ICartRepository _repository;
-
 
         public CreateCartHandler(ICartRepository repository, IMapper mapper, ICatalogService catalogService)
         {

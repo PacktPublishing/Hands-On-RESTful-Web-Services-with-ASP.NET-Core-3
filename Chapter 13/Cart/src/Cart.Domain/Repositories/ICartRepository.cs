@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Cart.Domain.Infrastructure.Repositories
+namespace Cart.Domain.Repositories
 {
     public interface ICartRepository
     {

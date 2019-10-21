@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Cart.Domain.Infrastructure.Repositories;
+using Cart.Domain.Repositories;
 using Cart.Events;
 using NServiceBus;
 

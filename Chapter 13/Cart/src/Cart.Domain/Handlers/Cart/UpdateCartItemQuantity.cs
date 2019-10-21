@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Cart.Domain.Commands.Cart;
-using Cart.Domain.Infrastructure.Repositories;
+using Cart.Domain.Repositories;
 using Cart.Domain.Responses.Cart;
 using Cart.Domain.Services;
 using MediatR;
