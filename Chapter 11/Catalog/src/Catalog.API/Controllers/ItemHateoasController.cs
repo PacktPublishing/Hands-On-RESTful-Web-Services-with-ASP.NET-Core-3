@@ -53,7 +53,6 @@ namespace Catalog.API.Controllers
             return Ok(model);
         }
 
-
         [HttpGet("{id:guid}", Name = nameof(GetById))]
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
