@@ -2,14 +2,18 @@ using System.Threading.Tasks;
 using Catalog.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
+using NServiceBus.Routing;
 
 namespace Catalog.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static async Task<IServiceCollection> AddRabbitMq(this IServiceCollection services, string endpointName, string connectionString)
+        public static async Task<IServiceCollection> AddRabbitMq(this IServiceCollection services, 
+            string endpointName, string connectionString, string environmentName)
         {
 
+            if (environmentName.Equals("Testing")) return services;
+            
             var endpointConfiguration = new EndpointConfiguration(endpointName);
             
             endpointConfiguration.SendFailedMessagesTo("error");
@@ -30,7 +34,6 @@ namespace Catalog.Infrastructure.Extensions
                      
             var scanner = endpointConfiguration.AssemblyScanner();
             scanner.ScanAssembliesInNestedDirectories = true;
-            
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
             services.AddSingleton(endpointInstance);
 

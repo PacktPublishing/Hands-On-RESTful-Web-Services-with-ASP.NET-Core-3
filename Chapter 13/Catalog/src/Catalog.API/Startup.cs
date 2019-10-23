@@ -17,12 +17,15 @@ namespace Catalog.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment CurrentEnvironment { get; }
+        
+        public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
+            CurrentEnvironment = currentEnvironment;
         }
 
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -36,8 +39,10 @@ namespace Catalog.API
                 .AddControllers()
                 .AddValidation();
             
-                services.AddRabbitMq(Configuration.GetSection("ESB:EndPointName").Value,
-                    Configuration.GetSection("ESB:ConnectionString").Value)
+                services.AddRabbitMq(
+                        Configuration.GetSection("ESB:EndPointName").Value,
+                    Configuration.GetSection("ESB:ConnectionString").Value,
+                        CurrentEnvironment.EnvironmentName)
                 .GetAwaiter()
                 .GetResult();
 
