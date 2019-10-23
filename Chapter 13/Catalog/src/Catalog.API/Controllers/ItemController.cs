@@ -8,6 +8,7 @@ using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using NServiceBus;
 
 namespace Catalog.API.Controllers
 {
@@ -16,10 +17,13 @@ namespace Catalog.API.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
+        private readonly IEndpointInstance _endpoint;
 
-        public ItemController(IItemService itemService)
+
+        public ItemController(IItemService itemService, IEndpointInstance endpoint)
         {
             _itemService = itemService;
+            _endpoint = endpoint;
         }
 
         [HttpGet]

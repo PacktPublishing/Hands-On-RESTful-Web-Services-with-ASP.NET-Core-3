@@ -14,7 +14,7 @@ namespace Cart.Infrastructure.Extensions
             services.AddScoped<ICatalogService, CatalogService>();
 
             services.AddHttpClient<ICatalogClient, CatalogClient>(client => { client.BaseAddress = uri; })
-                .SetHandlerLifetime(TimeSpan.FromMinutes(2)) //Set lifetime to five minutes
+                .SetHandlerLifetime(TimeSpan.FromMinutes(2)) //Set lifetime to 2 minutes
                 .AddPolicyHandler(CatalogServicePolicies.RetryPolicy())
                 .AddPolicyHandler(CatalogServicePolicies.CircuitBreakerPolicy());
 

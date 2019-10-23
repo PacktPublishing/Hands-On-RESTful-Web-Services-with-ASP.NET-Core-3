@@ -12,12 +12,12 @@ namespace Cart.Domain.Tests.Handlers.Events
 {
     public class ItemSoldOutEventHandlerTests : IClassFixture<CartContextFactory>
     {
+        private readonly CartContextFactory _contextFactory;
+
         public ItemSoldOutEventHandlerTests(CartContextFactory cartContextFactory)
         {
             _contextFactory = cartContextFactory;
         }
-
-        private readonly CartContextFactory _contextFactory;
 
         [Fact]
         public async Task should_not_remove_records_when_soldout_message_contains_not_existing_id()
@@ -40,7 +40,6 @@ namespace Cart.Domain.Tests.Handlers.Events
 
             found.ShouldBeTrue();
         }
-
 
         [Fact]
         public async Task should_remove_records_when_soldout_messages_contains_existing_ids()

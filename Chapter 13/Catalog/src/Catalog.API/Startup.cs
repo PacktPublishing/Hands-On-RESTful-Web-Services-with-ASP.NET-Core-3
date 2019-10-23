@@ -4,6 +4,7 @@ using Catalog.API.Middleware;
 using Catalog.API.ResponseModels;
 using Catalog.Domain.Extensions;
 using Catalog.Domain.Repositories;
+using Catalog.Infrastructure.Extensions;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,11 @@ namespace Catalog.API
                 .AddServices()
                 .AddControllers()
                 .AddValidation();
+            
+                services.AddRabbitMq(Configuration.GetSection("ESB:EndPointName").Value,
+                    Configuration.GetSection("ESB:ConnectionString").Value)
+                .GetAwaiter()
+                .GetResult();
 
             services.AddLinks(config =>
             {
