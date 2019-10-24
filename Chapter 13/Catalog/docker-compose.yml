@@ -21,16 +21,19 @@ services:
       - .env
     networks:
       - my_network
+  
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management-alpine
-    env_file:
-      - .env
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     ports:
       - 5672:5672
       - 15672:15672
     networks:
       - my_network
+  
 networks:
   my_network:
     driver: bridge

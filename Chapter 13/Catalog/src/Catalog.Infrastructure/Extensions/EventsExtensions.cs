@@ -15,7 +15,7 @@ namespace Catalog.Infrastructure.Extensions
             if (environmentName.Equals("Testing")) return services;
             
             var endpointConfiguration = new EndpointConfiguration(endpointName);
-            
+            endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
             
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>()
