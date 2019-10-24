@@ -30,7 +30,7 @@ namespace Catalog.Infrastructure.Extensions
 
             var conventions = endpointConfiguration.Conventions();
             conventions.DefiningEventsAs(
-                type => type.Namespace != null && type.Namespace.Contains("Cart.Events"));
+                type => type.Namespace != null && type.Namespace.Contains("Catalog.Infrastructure"));
                      
             var scanner = endpointConfiguration.AssemblyScanner();
             scanner.ScanAssembliesInNestedDirectories = true;

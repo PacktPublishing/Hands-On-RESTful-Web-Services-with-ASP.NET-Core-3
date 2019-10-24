@@ -7,6 +7,7 @@ using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
+using Catalog.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using NServiceBus;
 
@@ -17,13 +18,12 @@ namespace Catalog.API.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
-        private readonly IEndpointInstance _endpoint;
+        private readonly IEndpointInstance _messageEndpoint;
 
-
-        public ItemController(IItemService itemService, IEndpointInstance endpoint)
+        public ItemController(IItemService itemService, IEndpointInstance messageEndpoint)
         {
             _itemService = itemService;
-            _endpoint = endpoint;
+            _messageEndpoint = messageEndpoint;
         }
 
         [HttpGet]
@@ -51,6 +51,7 @@ namespace Catalog.API.Controllers
             var result = await _itemService.GetItemAsync(new GetItemRequest {Id = id});
             return Ok(result);
         }
+        
 
         [HttpPost]
         public async Task<IActionResult> Post(AddItemRequest request)
@@ -73,7 +74,10 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var request = new DeleteItemRequest {Id = id};
+            
             await _itemService.DeleteItemAsync(request);
+            await _messageEndpoint.Publish(new ItemSoldOutEvent {Id = id.ToString()});
+
             return NoContent();
         }
     }
