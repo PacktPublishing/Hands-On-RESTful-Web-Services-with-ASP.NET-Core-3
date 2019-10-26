@@ -12,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="NServiceBus.RabbitMQ" Version="5.1.2" />
+    <PackageReference Include="Polly" Version="7.1.1" />
   </ItemGroup>
 
   <ItemGroup>
