@@ -26,23 +26,23 @@ namespace Catalog.Domain.Services
 
         public async Task<UserResponse> GetUserAsync(GetUserRequest request, CancellationToken cancellationToken)
         {
-            var response = await _userRepository.GetByEmail(request.Email, cancellationToken);
+            var response = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
             return new UserResponse { Name = response.Name, Email = response.Email };
         }
 
         public async Task<UserResponse> SignUpAsync(SignUpRequest request, CancellationToken cancellationToken)
         {
             var user = new Entities.User { Email = request.Email, UserName = request.Email, Name = request.Name };
-            bool result = await _userRepository.SignUp(user, request.Password, cancellationToken);
+            bool isCreated = await _userRepository.SignUpAsync(user, request.Password, cancellationToken);
 
-            return !result ? null : new UserResponse { Name = request.Name, Email = request.Email };
+            return !isCreated ? null : new UserResponse { Name = request.Name, Email = request.Email };
         }
 
         public async Task<TokenResponse> SignInAsync(SignInRequest request, CancellationToken cancellationToken)
         {
-            bool response = await _userRepository.Authenticate(request.Email, request.Password, cancellationToken);
+            bool isAuthenticated = await _userRepository.AuthenticateAsync(request.Email, request.Password, cancellationToken);
 
-            return response == false ? null : new TokenResponse { Token = GenerateSecurityToken(request) };
+            return !isAuthenticated ? null : new TokenResponse { Token = GenerateSecurityToken(request) };
         }
 
         private string GenerateSecurityToken(SignInRequest request)

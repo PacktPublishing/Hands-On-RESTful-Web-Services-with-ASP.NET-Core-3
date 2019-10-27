@@ -6,8 +6,8 @@ namespace Catalog.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<bool> Authenticate(string email, string password, CancellationToken cancellationToken = default);
-        Task<bool> SignUp(User user, string password, CancellationToken cancellationToken = default);
-        Task<User> GetByEmail(string requestEmail, CancellationToken cancellationToken = default);
+        Task<bool> AuthenticateAsync(string email, string password, CancellationToken cancellationToken = default);
+        Task<bool> SignUpAsync(User user, string password, CancellationToken cancellationToken = default);
+        Task<User> GetByEmailAsync(string requestEmail, CancellationToken cancellationToken = default);
     }
 }

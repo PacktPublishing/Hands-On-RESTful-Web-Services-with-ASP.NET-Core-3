@@ -18,20 +18,20 @@ namespace Catalog.Infrastructure.Repositories
             _signInManager = signInManager;
         }
 
-        public async Task<bool> Authenticate(string email, string password, CancellationToken cancellationToken)
+        public async Task<bool> AuthenticateAsync(string email, string password, CancellationToken cancellationToken)
         {
             var result = await _signInManager.PasswordSignInAsync(
                 email, password, false, false);
             return result.Succeeded;
         }
 
-        public async Task<bool> SignUp(User user, string password, CancellationToken cancellationToken)
+        public async Task<bool> SignUpAsync(User user, string password, CancellationToken cancellationToken)
         {
             var result = await _userManager.CreateAsync(user, password);
             return result.Succeeded;
         }
 
-        public async Task<User> GetByEmail(string requestEmail, CancellationToken cancellationToken)
+        public async Task<User> GetByEmailAsync(string requestEmail, CancellationToken cancellationToken)
         {
             return await _userManager
                 .Users

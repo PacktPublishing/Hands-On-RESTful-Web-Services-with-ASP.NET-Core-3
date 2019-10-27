@@ -36,7 +36,7 @@ namespace Catalog.Fixtures
         {
             var fakeUserService = new Mock<IUserRepository>();
 
-            fakeUserService.Setup(x => x.Authenticate(It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
+            fakeUserService.Setup(x => x.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync((string email, string password, CancellationToken token) =>
                 {
                     var user = _users.FirstOrDefault(x => x.Email == email);
@@ -47,10 +47,10 @@ namespace Catalog.Fixtures
                     return result == PasswordVerificationResult.Success;
                 });
 
-            fakeUserService.Setup(x => x.GetByEmail(It.IsAny<string>(), CancellationToken.None))
+            fakeUserService.Setup(x => x.GetByEmailAsync(It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync((string email, CancellationToken token) => _users.First(x => x.Email == email));
 
-            fakeUserService.Setup(x => x.SignUp(It.IsAny<User>(), It.IsAny<string>(), CancellationToken.None))
+            fakeUserService.Setup(x => x.SignUpAsync(It.IsAny<User>(), It.IsAny<string>(), CancellationToken.None))
                 .ReturnsAsync((User user, string password, CancellationToken token) =>
                 {
                     user.PasswordHash = _passwordHasher.HashPassword(user, password);
