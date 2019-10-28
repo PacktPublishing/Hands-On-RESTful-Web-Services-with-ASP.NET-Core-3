@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NServiceBus;
-using NServiceBus.Routing;
 using NServiceBus.Testing;
 
 namespace Catalog.Fixtures

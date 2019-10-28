@@ -9,14 +9,12 @@ services:
     networks:
       - my_network
     volumes:
-      - ./<path_to_certificate>/:/root/.dotnet/https
+      - ./certificate/:/root/.dotnet/https
     ports:
-      - 5000:5000
       - 5001:5001
     depends_on:
       - catalog_db
       - catalog_esb
-
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
@@ -24,7 +22,6 @@ services:
       - .env
     networks:
       - my_network
-  
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management-alpine
@@ -33,7 +30,6 @@ services:
       - 15672:15672
     networks:
       - my_network
-  
 networks:
   my_network:
     driver: bridge

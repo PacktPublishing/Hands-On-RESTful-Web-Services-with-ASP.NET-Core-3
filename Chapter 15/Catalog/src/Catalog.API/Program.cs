@@ -1,7 +1,5 @@
-﻿using System.Net;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Catalog.API
 {
@@ -15,12 +13,7 @@ namespace Catalog.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .ConfigureKestrel(options =>
-                {
-                    options.Listen(IPAddress.Any, 5001,
-                        listenOptions => { listenOptions.Protocols = HttpProtocols.Http2; });
-                });
+                .UseStartup<Startup>();
         }
     }
 }

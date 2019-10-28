@@ -30,11 +30,8 @@ namespace Catalog.Infrastructure.Extensions
                 })
                 .AddJwtBearer(x =>
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
                         ValidateAudience = false
