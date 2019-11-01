@@ -11,9 +11,9 @@ pool:
 
 variables:
   workingDirCatalog: './Chapter 13/Catalog'
-  solutionPathCatalog: './Chapter 13/Catalog/VinylStore.Catalog.API.sln'
+  solutionPathCatalog: './Chapter 13/Catalog/Catalog.API.sln'
   workingDirCart: './Chapter 13/Cart'
-  solutionPathCart: './Chapter 13/Cart/VinylStore.Cart.API.sln'
+  solutionPathCart: './Chapter 13/Cart/Cart.API.sln'
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'
