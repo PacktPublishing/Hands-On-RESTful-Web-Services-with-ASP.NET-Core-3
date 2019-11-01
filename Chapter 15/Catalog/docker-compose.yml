@@ -11,7 +11,7 @@ services:
 #    volumes:
 #      - ./certificate/:/root/.dotnet/https
     ports:
-      - 5001:5001
+     # - 5001:5001
       - 5000:5000
     depends_on:
       - catalog_db
