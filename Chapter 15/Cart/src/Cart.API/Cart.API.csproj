@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Cart.Domain\Cart.Domain.csproj" />
+      <ProjectReference Include="..\Cart.Infrastructure\Cart.Infrastructure.csproj" />
+    </ItemGroup>
+</Project>

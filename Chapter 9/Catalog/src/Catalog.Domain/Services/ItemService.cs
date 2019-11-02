@@ -1,48 +1,51 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
+using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Item;
-using Catalog.Domain.Responses.Item;
+using Catalog.Domain.Responses;
 
 namespace Catalog.Domain.Services
 {
-    public class ItemService
+    public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
-        private readonly IMapper _mapper;
+        private readonly IItemMapper _itemMapper;
 
-        public ItemService(IItemRepository itemRepository, IMapper mapper)
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper)
         {
             _itemRepository = itemRepository;
-            _mapper = mapper;
+            _itemMapper = itemMapper;
         }
-        
-        public async Task<IList<ItemResponse>> GetItems(CancellationToken cancellationToken)
+
+        public async Task<IEnumerable<ItemResponse>> GetItemsAsync()
         {
             var result = await _itemRepository.GetAsync();
-            return _mapper.Map<IList<ItemResponse>>(result);
+            return result
+                .Select(x => _itemMapper.Map(x));
         }
-        
-        public async Task<ItemResponse> GetItem(GetItemRequest request, CancellationToken cancellationToken)
+
+        public async Task<ItemResponse> GetItemAsync(GetItemRequest request)
         {
             if (request?.Id == null) throw new ArgumentNullException();
-            return _mapper.Map<ItemResponse>(await _itemRepository.GetAsync(request.Id));
+            var entity = await _itemRepository.GetAsync(request.Id);
+            return _itemMapper.Map(entity);
         }
-        
-        public async Task<ItemResponse> AddItem(AddItemRequest request, CancellationToken cancellationToken)
+
+        public async Task<ItemResponse> AddItemAsync(AddItemRequest request, CancellationToken cancellationToken)
         {
-            var item = _mapper.Map<Entities.Item>(request);
+            var item = _itemMapper.Map(request);
 
             var result = _itemRepository.Add(item);
             await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ItemResponse>(result);
+            return _itemMapper.Map(result);
         }
-        
-        public async Task<ItemResponse> EditItem(EditItemRequest request, CancellationToken cancellationToken)
+
+        public async Task<ItemResponse> EditItemAsync(EditItemRequest request, CancellationToken cancellationToken)
         {
             var existingRecord = await _itemRepository.GetAsync(request.Id);
 
@@ -51,12 +54,11 @@ namespace Catalog.Domain.Services
                 throw new ArgumentException($"Entity with {request.Id} is not present");
             }
 
-            var entity = _mapper.Map<Entities.Item>(request);
+            var entity = _itemMapper.Map(request);
             var result = _itemRepository.Update(entity);
 
             await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<ItemResponse>(result);
+            return _itemMapper.Map(result);
         }
-        
     }
 }

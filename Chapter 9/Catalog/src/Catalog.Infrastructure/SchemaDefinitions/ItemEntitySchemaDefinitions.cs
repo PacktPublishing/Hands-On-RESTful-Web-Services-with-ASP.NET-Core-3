@@ -32,7 +32,7 @@ namespace Catalog.Infrastructure.SchemaDefinitions
 
             builder.Property(x => x.Price).HasConversion(
                 x => $"{x.Amount}:{x.Currency}",
-                x => new Money
+                x => new Price
                 {
                     Amount = Convert.ToDecimal(x.Split(":", StringSplitOptions.None)[0]),
                     Currency = x.Split(":", StringSplitOptions.None)[1]

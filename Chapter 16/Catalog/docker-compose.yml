@@ -8,19 +8,21 @@ services:
       - .env
     networks:
       - my_network
+#    volumes:
+#      - ./certificate/:/root/.dotnet/https
     ports:
+     # - 5001:5001
       - 5000:5000
     depends_on:
       - catalog_db
-
+      - catalog_esb
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
-    networks:
-      - my_network
     env_file:
       - .env
-      
+    networks:
+      - my_network
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management-alpine
