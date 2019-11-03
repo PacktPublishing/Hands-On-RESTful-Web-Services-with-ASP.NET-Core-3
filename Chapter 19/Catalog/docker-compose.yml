@@ -8,19 +8,21 @@ services:
       - .env
     networks:
       - my_network
+#    volumes:
+#      - ./certificate/:/root/.dotnet/https
     ports:
+     # - 5001:5001
       - 5000:5000
     depends_on:
       - catalog_db
-
+      - catalog_esb
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
-    networks:
-      - my_network
     env_file:
       - .env
-      
+    networks:
+      - my_network
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management-alpine
@@ -29,38 +31,11 @@ services:
       - 15672:15672
     networks:
       - my_network
-networks:
-  my_network:
-    driver: bridge
-    depends_on:
-      - catalog_db
-
-  catalog_db:
-    container_name: catalog_db
-    image: microsoft/mssql-server-linux
-    networks:
-      - my_network
-    environment:
-      SA_PASSWORD: P@ssw0rd
-      ACCEPT_EULA: Y
-
-  catalog_esb:
-    container_name: catalog_esb
-    image: rabbitmq:3-management-alpine
-    ports:
-      - 5672:5672
-      - 15672:15672
-    networks:
-      - my_network
-
   catalog_cache:
-    container_name: catalog_cache
-    image: redis:alpine
-    networks:
-      - my_network
-    ports:
-      - 6379:6380
-
+      container_name: catalog_cache
+      image: redis:alpine
+      networks:
+        - my_network
 networks:
   my_network:
     driver: bridge

@@ -12,6 +12,7 @@ services:
       - 5000:5000
     depends_on:
       - catalog_db
+      - 
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
@@ -19,6 +20,7 @@ services:
       - my_network
     env_file:
       - .env
+      - 
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management-alpine
@@ -27,6 +29,7 @@ services:
       - 15672:15672
     networks:
       - my_network
+      
 networks:
   my_network:
     driver: bridge
