@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NServiceBus;
@@ -27,6 +28,7 @@ namespace Catalog.Fixtures
                     services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options));
                     services.AddSingleton<IEndpointInstance>(x => new TestableEndpointInstance());
                     services.Replace(ServiceDescriptor.Scoped(_ => new UsersContextFactory().InMemoryUserManager));
+                    services.AddSingleton<IDistributedCache, MemoryDistributedCache>();
 
                     var sp = services.BuildServiceProvider();
 

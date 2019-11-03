@@ -34,13 +34,7 @@ namespace Catalog.API.Filters
                     context.Exception,
                     context.Exception.Message);
 
-                var json = new JsonErrorPayload
-                {
-                    EventId = eventId.Id
-                };
-
-                if (_env.IsDevelopment()) json.DetailedMessage = context.Exception;
-
+                var json = new JsonErrorPayload { EventId = eventId.Id, DetailedMessage = context.Exception };
                 var exceptionObject = new ObjectResult(json) { StatusCode = 500 };
 
                 context.Result = exceptionObject;

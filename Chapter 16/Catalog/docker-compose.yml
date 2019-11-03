@@ -31,6 +31,11 @@ services:
       - 15672:15672
     networks:
       - my_network
+  catalog_cache:
+      container_name: catalog_cache
+      image: redis:alpine
+      networks:
+        - my_network
 networks:
   my_network:
     driver: bridge

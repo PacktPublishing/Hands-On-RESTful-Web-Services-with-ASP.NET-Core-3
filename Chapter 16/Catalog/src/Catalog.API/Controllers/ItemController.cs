@@ -16,6 +16,7 @@ namespace Catalog.API.Controllers
 {
     [Route("api/items")]
     [ApiController]
+    [JsonException]
     [Authorize]
     public class ItemController : ControllerBase
     {
@@ -48,12 +49,13 @@ namespace Catalog.API.Controllers
 
         [HttpGet("{id:guid}")]
         [ItemExists]
+        [ResponseCache(Duration = 100, VaryByQueryKeys = new[] { "*" })]
+        [TypeFilter(typeof(RedisCacheFilter), Arguments = new object[] { 20 })]
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _itemService.GetItemAsync(new GetItemRequest { Id = id });
             return Ok(result);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Post(AddItemRequest request)
