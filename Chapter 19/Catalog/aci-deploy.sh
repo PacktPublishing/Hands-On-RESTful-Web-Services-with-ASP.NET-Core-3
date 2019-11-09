@@ -23,8 +23,6 @@ export environment=Stage
 # Set the registry password
 export registry_password=3n299JMTM/ibZAeXlOs2xRie2==ambvD
 
-
-
 az container create --resource-group ${resource_group} \
                     --location westeurope \
                     --name ${sql_name} \

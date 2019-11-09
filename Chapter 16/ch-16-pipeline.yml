@@ -7,13 +7,13 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-16.04'
 
 variables:
   workingDirCatalog: './Chapter 16/Catalog'
-  solutionPathCatalog: './Chapter 16/Catalog/VinylStore.Catalog.API.sln'
+  solutionPathCatalog: './Chapter 16/Catalog/Catalog.API.sln'
   workingDirCart: './Chapter 16/Cart'
-  solutionPathCart: './Chapter 16/Cart/VinylStore.Cart.API.sln'
+  solutionPathCart: './Chapter 16/Cart/Cart.API.sln'
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .net core 3.0 (preview)'

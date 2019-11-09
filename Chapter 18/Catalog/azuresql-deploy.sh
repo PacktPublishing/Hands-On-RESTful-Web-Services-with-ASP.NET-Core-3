@@ -4,10 +4,10 @@
 export user_admin=samueler
 export user_pass=P@ssW0rd
 # The logical server name has to be unique in the system
-export server_name=vinylstoresql
+export server_name=catalogsql
 export database_name=catalog
 # The resource group name
-export resourceGroup=vinylstoreDataResourceGroup
+export resourceGroup=catalogapiDataResourceGroup
 # The ip address range that you want to allow to access your DB
 export startip=0.0.0.0
 export endip=0.0.0.0

@@ -7,13 +7,13 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-16.04'
 
 variables:
   workingDirCatalog: './Chapter 18/Catalog'
-  solutionPathCatalog: ./Chapter 18/Catalog/VinylStore.Catalog.API.sln
+  solutionPathCatalog: ./Chapter 18/Catalog/Catalog.API.sln
   workingDirCart: ./Chapter 18/Cart
-  solutionPathCart: ./Chapter 18/Cart/VinylStore.Cart.API.sln
+  solutionPathCart: ./Chapter 18/Cart/Cart.API.sln
 
 steps:
 - task: DotNetCoreInstaller@0
