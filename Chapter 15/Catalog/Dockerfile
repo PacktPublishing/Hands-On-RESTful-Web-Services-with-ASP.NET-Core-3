@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.0-preview2-alpine AS base
 WORKDIR /app
 EXPOSE 5000
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.100-preview2-alpine AS build
 WORKDIR /project
 COPY ["src/Catalog.API/Catalog.API.csproj", "src/Catalog.API/"]
 COPY . .
