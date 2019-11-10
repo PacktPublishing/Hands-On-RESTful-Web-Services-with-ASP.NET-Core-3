@@ -17,7 +17,6 @@ namespace Catalog.API.Controllers
     [Route("api/items")]
     [ApiController]
     [JsonException]
-    [Authorize]
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;

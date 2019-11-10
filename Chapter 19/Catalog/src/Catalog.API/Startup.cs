@@ -83,12 +83,13 @@ namespace Catalog.API
             if (!env.IsTesting())
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+
             app.UseResponseCaching();
             app.UseHealthChecks("/health");
             app.UseRouting();
             app.UseOpenApi();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSwaggerUi3();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();

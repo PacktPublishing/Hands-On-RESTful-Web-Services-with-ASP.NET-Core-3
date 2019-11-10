@@ -74,10 +74,10 @@ namespace Catalog.API
             if (!env.IsTesting())
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseResponseCaching();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
