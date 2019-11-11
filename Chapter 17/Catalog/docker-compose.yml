@@ -25,7 +25,7 @@ services:
       - my_network
   catalog_esb:
     container_name: catalog_esb
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3-management
     ports:
       - 5672:5672
       - 15672:15672

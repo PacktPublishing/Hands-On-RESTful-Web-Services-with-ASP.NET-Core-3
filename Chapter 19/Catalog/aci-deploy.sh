@@ -37,7 +37,7 @@ az container create --resource-group ${resource_group} \
 az container create --resource-group ${resource_group} \
                     --location westeurope \
                     --name ${esb_name} \
-                    --image rabbitmq:3-management-alpine \
+                    --image rabbitmq:3-management \
                     --cpu 1 \
                     --memory 1 \
                     --dns-name-label ${esb_name} \
