@@ -16,7 +16,6 @@ namespace Catalog.API.Controllers
 {
     [Route("api/items")]
     [ApiController]
-    [Authorize]
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
