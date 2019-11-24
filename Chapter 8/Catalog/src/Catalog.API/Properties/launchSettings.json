@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "VinylStore.Catalog.API": {
+    "Catalog.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

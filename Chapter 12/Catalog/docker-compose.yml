@@ -20,7 +20,6 @@ services:
       - my_network
     env_file:
       - .env
-
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management
