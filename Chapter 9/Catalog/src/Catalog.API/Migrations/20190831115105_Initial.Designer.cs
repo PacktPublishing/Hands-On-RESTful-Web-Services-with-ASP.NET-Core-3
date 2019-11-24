@@ -21,7 +21,7 @@ namespace Catalog.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("VinylStore.Catalog.Domain.Entities.Artist", b =>
+            modelBuilder.Entity("Catalog.Domain.Entities.Artist", b =>
                 {
                     b.Property<Guid>("ArtistId")
                         .ValueGeneratedOnAdd();
@@ -33,7 +33,7 @@ namespace Catalog.API.Migrations
                     b.ToTable("Artist");
                 });
 
-            modelBuilder.Entity("VinylStore.Catalog.Domain.Entities.Genre", b =>
+            modelBuilder.Entity("Catalog.Domain.Entities.Genre", b =>
                 {
                     b.Property<Guid>("GenreId")
                         .ValueGeneratedOnAdd();
@@ -45,7 +45,7 @@ namespace Catalog.API.Migrations
                     b.ToTable("Genre");
                 });
 
-            modelBuilder.Entity("VinylStore.Catalog.Domain.Entities.Item", b =>
+            modelBuilder.Entity("Catalog.Domain.Entities.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -84,15 +84,15 @@ namespace Catalog.API.Migrations
                     b.ToTable("Items","catalog");
                 });
 
-            modelBuilder.Entity("VinylStore.Catalog.Domain.Entities.Item", b =>
+            modelBuilder.Entity("Catalog.Domain.Entities.Item", b =>
                 {
-                    b.HasOne("VinylStore.Catalog.Domain.Entities.Artist", "Artist")
+                    b.HasOne("Catalog.Domain.Entities.Artist", "Artist")
                         .WithMany("Items")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VinylStore.Catalog.Domain.Entities.Genre", "Genre")
+                    b.HasOne("Catalog.Domain.Entities.Genre", "Genre")
                         .WithMany("Items")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
