@@ -21,7 +21,7 @@ export api_name=catalogapi
 # Set the api ASPNETCORE_ENVIRONMENT variables
 export environment=Stage
 # Set the registry password
-export registry_password=3n299JMTM/ibZAeXlOs2xRie2==ambvD
+export registry_password=<registry_password>
 
 az container create --resource-group ${resource_group} \
                     --location westeurope \
