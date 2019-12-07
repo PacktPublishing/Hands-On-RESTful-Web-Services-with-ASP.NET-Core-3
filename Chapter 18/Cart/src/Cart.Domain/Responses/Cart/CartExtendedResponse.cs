@@ -8,7 +8,7 @@ namespace Cart.Domain.Responses.Cart
     {
         public string Id { get; set; }
 
-        public IEnumerable<CartItemResponse> Items { get; set; }
+        public IList<CartItemResponse> Items { get; set; }
 
         public CartUser User { get; set; }
 
