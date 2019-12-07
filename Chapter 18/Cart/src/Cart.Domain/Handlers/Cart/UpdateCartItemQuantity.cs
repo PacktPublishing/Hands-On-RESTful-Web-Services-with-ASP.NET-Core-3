@@ -30,9 +30,9 @@ namespace Cart.Domain.Handlers.Cart
             var cartDetail = await _repository.GetAsync(command.CartId);
 
             if (command.IsAddOperation)
-                cartDetail.Items.FirstOrDefault(_ => _.CartItemId == command.CartItemId)?.IncreaseQuantity();
+                cartDetail.Items.FirstOrDefault(x => x.CartItemId == command.CartItemId)?.IncreaseQuantity();
             else
-                cartDetail.Items.FirstOrDefault(_ => _.CartItemId == command.CartItemId)?.DecreaseQuantity();
+                cartDetail.Items.FirstOrDefault(x => x.CartItemId == command.CartItemId)?.DecreaseQuantity();
 
             var cartItemsList = cartDetail.Items.ToList();
 

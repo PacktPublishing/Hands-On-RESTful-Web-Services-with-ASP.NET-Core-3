@@ -36,7 +36,9 @@ namespace SampleAPI.Controllers
         public IActionResult Post(OrderRequest request)
         {
             var order = Map(request);
+            
             _orderRepository.Add(order);
+            
             return CreatedAtAction(nameof(GetById), new { id = order.Id }, null);
         }
 
@@ -109,7 +111,7 @@ namespace SampleAPI.Controllers
             return order;
         } 
         
-        private IList<OrderResponse> Map(IList<Order> orders)
+        private IEnumerable<OrderResponse> Map(IEnumerable<Order> orders)
         {
             return orders.Select(Map).ToList();
         }

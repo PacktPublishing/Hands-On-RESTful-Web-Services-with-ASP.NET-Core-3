@@ -20,7 +20,7 @@ namespace Catalog.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IList<Item>> GetAsync()
+        public async Task<IEnumerable<Item>> GetAsync()
         {
             return await _context.Items
                 .AsNoTracking()
@@ -41,7 +41,7 @@ namespace Catalog.Infrastructure.Repositories
             return item;
         }
 
-        public async Task<IList<Item>> GetItemByArtistIdAsync(Guid id)
+        public async Task<IEnumerable<Item>> GetItemByArtistIdAsync(Guid id)
         {
             var items = await _context
                 .Items
@@ -53,7 +53,7 @@ namespace Catalog.Infrastructure.Repositories
             return items;
         }
 
-        public async Task<IList<Item>> GetItemByGenreIdAsync(Guid id)
+        public async Task<IEnumerable<Item>> GetItemByGenreIdAsync(Guid id)
         {
             var items = await _context.Items
                 .Where(item => item.GenreId == id)

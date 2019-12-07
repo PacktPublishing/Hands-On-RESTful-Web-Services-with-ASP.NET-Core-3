@@ -7,7 +7,7 @@ namespace Catalog.Domain.Repositories
 {
     public interface IGenreRepository : IRepository
     {
-        Task<IList<Genre>> GetAsync();
+        Task<IEnumerable<Genre>> GetAsync();
         Task<Genre> GetAsync(Guid id);
         Genre Add(Genre genre);
     }

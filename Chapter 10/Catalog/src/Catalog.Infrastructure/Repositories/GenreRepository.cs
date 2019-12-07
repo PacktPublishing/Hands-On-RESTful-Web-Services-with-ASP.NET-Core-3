@@ -18,7 +18,7 @@ namespace Catalog.Infrastructure.Repositories
             _catalogContext = catalogContext;
         }
 
-        public async Task<IList<Genre>> GetAsync()
+        public async Task<IEnumerable<Genre>> GetAsync()
         {
             return await _catalogContext.Genres
                 .AsNoTracking()

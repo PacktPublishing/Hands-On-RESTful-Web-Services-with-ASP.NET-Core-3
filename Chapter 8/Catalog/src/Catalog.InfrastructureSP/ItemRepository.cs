@@ -17,7 +17,7 @@ namespace Catalog.InfrastructureSP
             _sqlConnection = new SqlConnection(connectionString);
         }
 
-        public async Task<IList<Item>> GetAsync()
+        public async Task<IEnumerable<Item>> GetAsync()
         {
             var result = await _sqlConnection.QueryAsync<Item>("GetAllItems", commandType: CommandType.StoredProcedure);
             return result.AsList();

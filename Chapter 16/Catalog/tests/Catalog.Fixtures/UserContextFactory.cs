@@ -11,7 +11,7 @@ namespace Catalog.Fixtures
     public class UsersContextFactory
     {
         private readonly PasswordHasher<User> _passwordHasher;
-        private readonly IList<User> _users;
+        private readonly IEnumerable<User> _users;
 
         public UsersContextFactory()
         {

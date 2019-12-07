@@ -19,7 +19,7 @@ namespace Catalog.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IList<Item>> GetAsync()
+        public async Task<IEnumerable<Item>> GetAsync()
         {
             return await _context.Items.ToListAsync();
         }
