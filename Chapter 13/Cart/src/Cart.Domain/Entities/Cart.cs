@@ -7,7 +7,7 @@ namespace Cart.Domain.Entities
     {
         public string Id { get; set; }
 
-        public IEnumerable<CartItem> Items { get; set; }
+        public IList<CartItem> Items { get; set; }
 
         public CartUser User { get; set; }
 
