@@ -42,9 +42,9 @@ steps:
 - script: |
     docker-compose up --force-recreate --build --detach
   workingDirectory: $(workingDirCatalog)
-  displayName: 'Docker compose build'
+  displayName: 'Catalog - Docker compose build'
 - task: Bash@3
-  displayName: "Verify Docker container"
+  displayName: "Catalog - Verify Docker container"
   inputs:
     targetType: 'inline'
     script: |
@@ -60,4 +60,26 @@ steps:
 - script: |
     docker-compose -f docker-compose.yml down
   workingDirectory: $(workingDirCatalog)
-  displayName: 'Docker compose down'    
+  displayName: 'Catalog - Docker compose down'
+- script: |
+    docker-compose up --force-recreate --build --detach
+  workingDirectory: $(workingDirCart)
+  displayName: 'Cart - Docker compose build'
+- task: Bash@3
+  displayName: "Cart - Verify Docker container"
+  inputs:
+    targetType: 'inline'
+    script: |
+      sleep 30
+              testCondition=$(docker inspect --format="{{.State.Running}}" cart_api)
+              if [ "$testCondition" == "false" ]; then
+                echo "The container is not running" >&2
+                exit 1;
+              else
+                echo "The container is running" >&2
+                exit 0
+              fi
+- script: |
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDirCart)
+  displayName: 'Cart - Docker compose down'    
