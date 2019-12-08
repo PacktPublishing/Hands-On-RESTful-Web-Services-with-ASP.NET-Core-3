@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
 
@@ -26,12 +27,19 @@ namespace Cart.Infrastructure.Extensions
                 .DefiningEventsAs(
                     type => type.Namespace?.Contains("Cart.Events") ?? false);
 
-            var endpointInstance = Endpoint.Start(endpointConfiguration)
-                .ConfigureAwait(false)
-                .GetAwaiter()
-                .GetResult();
+            try
+            {
+                var endpointInstance = Endpoint.Start(endpointConfiguration)
+                    .ConfigureAwait(false)
+                    .GetAwaiter()
+                    .GetResult();
 
-            services.AddSingleton(endpointInstance);
+                services.AddSingleton(endpointInstance);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error in initializing the event bus: {e.Message}");
+            }
 
             return services;
         }
