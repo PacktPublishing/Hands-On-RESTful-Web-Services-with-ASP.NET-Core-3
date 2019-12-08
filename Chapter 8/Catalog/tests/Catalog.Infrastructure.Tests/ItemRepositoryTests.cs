@@ -24,9 +24,7 @@ namespace Catalog.Infrastructure.Tests
 
             var sut = new ItemRepository(context);
             var result = await sut.GetAsync();
-            result
-                .Count
-                .ShouldBe(4);
+            result.ShouldBeNull();
         }
 
         [Fact]
