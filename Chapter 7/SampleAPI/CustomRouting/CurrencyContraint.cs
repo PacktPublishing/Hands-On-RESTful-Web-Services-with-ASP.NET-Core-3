@@ -6,7 +6,7 @@ namespace SampleAPI.CustomRouting
 {
     public class CurrencyConstraint : IRouteConstraint
     {
-        private static readonly IList<string> _currencies =  
+        private static readonly IEnumerable<string> _currencies =  
             new List<string> { "EUR", "USD", "GBP" };
         
         public bool Match(HttpContext httpContext, IRouter route,

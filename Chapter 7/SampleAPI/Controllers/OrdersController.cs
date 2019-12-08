@@ -114,7 +114,7 @@ namespace SampleAPI.Controllers
             return order;
         } 
         
-        private IList<OrderResponse> Map(IList<Order> orders)
+        private IEnumerable<OrderResponse> Map(IEnumerable<Order> orders)
         {
             return orders.Select(Map).ToList();
         }

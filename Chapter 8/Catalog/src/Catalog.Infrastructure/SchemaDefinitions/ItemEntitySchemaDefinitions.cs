@@ -11,26 +11,26 @@ namespace Catalog.Infrastructure.SchemaDefinitions
         {
             builder.ToTable("Items", CatalogContext.DEFAULT_SCHEMA);
 
-            builder.HasKey(_ => _.Id);
+            builder.HasKey(x => x.Id);
 
-            builder.Property(_ => _.Name)
+            builder.Property(x => x.Name)
                 .IsRequired();
 
-            builder.Property(_ => _.Description)
+            builder.Property(x => x.Description)
                 .IsRequired()
                 .HasMaxLength(1000);
 
             builder
                 .HasOne(e => e.Genre)
                 .WithMany(c => c.Items)
-                .HasForeignKey(_ => _.GenreId);
+                .HasForeignKey(x => x.GenreId);
 
             builder
                 .HasOne(e => e.Artist)
                 .WithMany(c => c.Items)
-                .HasForeignKey(_ => _.ArtistId);
+                .HasForeignKey(x => x.ArtistId);
 
-            builder.Property(_ => _.Price).HasConversion(
+            builder.Property(x => x.Price).HasConversion(
                 _ => $"{_.Amount}:{_.Currency}",
                 _ => new Money
                 {

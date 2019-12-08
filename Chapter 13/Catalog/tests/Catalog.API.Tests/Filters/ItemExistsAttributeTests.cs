@@ -23,7 +23,7 @@ namespace Catalog.API.Tests.Filters
             var existingId = Guid.NewGuid();
             var itemService = new Mock<IItemService>();
             itemService
-                .Setup(_ => _.GetItemAsync(It.IsAny<GetItemRequest>()))
+                .Setup(x => x.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(() => null);
 
             var filter = new ItemExistsAttribute.ItemExistsFilterImpl(itemService.Object);
@@ -50,7 +50,7 @@ namespace Catalog.API.Tests.Filters
 
             var itemService = new Mock<IItemService>();
             itemService
-                .Setup(_ => _.GetItemAsync(It.IsAny<GetItemRequest>()))
+                .Setup(x => x.GetItemAsync(It.IsAny<GetItemRequest>()))
                 .ReturnsAsync(new ItemResponse {Id = id});
 
             var filter = new ItemExistsAttribute.ItemExistsFilterImpl(itemService.Object);

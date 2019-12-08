@@ -7,10 +7,10 @@ namespace Catalog.Domain.Repositories
 {
     public interface IItemRepository : IRepository
     {
-        Task<IList<Item>> GetAsync();
+        Task<IEnumerable<Item>> GetAsync();
         Task<Item> GetAsync(Guid id);
-        Task<IList<Item>> GetItemByArtistIdAsync(Guid id);
-        Task<IList<Item>> GetItemByGenreIdAsync(Guid id);
+        Task<IEnumerable<Item>> GetItemByArtistIdAsync(Guid id);
+        Task<IEnumerable<Item>> GetItemByGenreIdAsync(Guid id);
         Item Add(Item item);
         Item Update(Item item);
     }

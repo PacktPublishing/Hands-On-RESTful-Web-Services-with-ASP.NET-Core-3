@@ -7,7 +7,7 @@ namespace Catalog.Domain.Repositories
 {
     public interface IArtistRepository : IRepository
     {
-        Task<IList<Artist>> GetAsync();
+        Task<IEnumerable<Artist>> GetAsync();
         Task<Artist> GetAsync(Guid id);
         Artist Add(Artist artist);
     }

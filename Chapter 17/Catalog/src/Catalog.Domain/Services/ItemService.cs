@@ -30,7 +30,7 @@ namespace Catalog.Domain.Services
             var result = await _itemRepository.GetAsync();
 
             _logger.LogInformation(Events.GetById, Messages.NumberOfRecordAffected_modifiedRecords,
-                result.Count);
+                result.Count());
 
             return result
                 .Select(x => _itemMapper.Map(x));

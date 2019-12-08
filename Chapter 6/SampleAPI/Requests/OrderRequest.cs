@@ -6,7 +6,7 @@ namespace SampleAPI.Requests
     public class OrderRequest
     {
         [Required]
-        public IList<string> ItemsIds { get; set; }
+        public IEnumerable<string> ItemsIds { get; set; }
         [Required]
         [StringLength(3)]
         public string Currency { get; set; }

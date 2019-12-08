@@ -6,7 +6,7 @@ namespace SampleAPI.Repositories
 {
     public interface IOrderRepository
     {
-        IList<Order> Get();
+        IEnumerable<Order> Get();
         Order Get(Guid orderId);
         void Add(Order order);
         void Update(Guid orderId, Order order);
