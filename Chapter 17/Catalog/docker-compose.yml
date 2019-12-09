@@ -4,25 +4,26 @@ services:
     container_name: catalog_api
     build:
       context: .
+      dockerfile: containers/api/Dockerfile
     env_file:
-      - .env
+      - containers/api/api.env
     networks:
       - my_network
-#    volumes:
-#      - ./certificate/:/root/.dotnet/https
     ports:
-     # - 5001:5001
       - 5000:5000
     depends_on:
       - catalog_db
       - catalog_esb
+      - catalog_cache
+      
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
-    env_file:
-      - .env
     networks:
       - my_network
+    env_file:
+      - containers/db/db.env
+  
   catalog_esb:
     container_name: catalog_esb
     image: rabbitmq:3-management
@@ -31,6 +32,7 @@ services:
       - 15672:15672
     networks:
       - my_network
+
   catalog_cache:
       container_name: catalog_cache
       image: redis:alpine
