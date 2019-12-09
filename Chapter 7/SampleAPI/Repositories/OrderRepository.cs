@@ -7,14 +7,14 @@ namespace SampleAPI.Repositories
 {
     public class MemoryOrderRepository : IOrderRepository
     {
-        private IEnumerable<Order> _orders { get; set; }
+        private IList<Order> _orders { get; set; }
  
         public MemoryOrderRepository()
         {
             _orders = new List<Order>();
         }
  
-        public IEnumerable<Order> Get() => _orders.Where(_ => !_.IsInactive).ToList();
+        public IEnumerable<Order> Get() => _orders.Where(_ => !_.IsInactive);
  
         public Order Get(Guid orderId)
         {
