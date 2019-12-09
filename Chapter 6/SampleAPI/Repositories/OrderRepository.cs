@@ -14,12 +14,12 @@ namespace SampleAPI.Repositories
             _orders = new List<Order>();
         }
  
-        public IEnumerable<Order> Get() => _orders.Where(_ => !_.IsInactive);
+        public IEnumerable<Order> Get() => _orders.Where(o => !o.IsInactive);
  
         public Order Get(Guid orderId)
         {
             return _orders
-                .Where(_ => !_.IsInactive)
+                .Where(o => !o.IsInactive)
                 .FirstOrDefault(x => x.Id == orderId);
         }
          

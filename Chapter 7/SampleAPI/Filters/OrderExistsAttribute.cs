@@ -41,9 +41,9 @@ namespace SampleAPI.Filters
 
                 if (result == null)
                 {
-                    context.Result = 
+                    context.Result =
                         new NotFoundObjectResult(
-                            new {Message = $"Item with id {id} not exist."});
+                            new { Message = $"Item with id {id} not exist." });
                     return;
                 }
 

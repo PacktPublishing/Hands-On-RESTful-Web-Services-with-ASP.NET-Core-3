@@ -9,9 +9,9 @@ namespace SampleAPI.Filters
             ActionExecutionDelegate next)
         {
             //Before 
- 
+
             var resultContext = await next();
- 
+
             //After
         }
     }

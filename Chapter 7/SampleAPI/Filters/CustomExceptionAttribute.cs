@@ -33,7 +33,7 @@ namespace SampleAPI.Filters
 
                 var json = new JsonErrorPayload
                 {
-                    Messages = new[] {"An error occurred. Try it again."}
+                    Messages = new[] { "An error occurred. Try it again." }
                 };
 
                 if (_env.IsDevelopment())
@@ -41,14 +41,14 @@ namespace SampleAPI.Filters
                     json.DetailedMessage = context.Exception;
                 }
 
-                var exceptionObject = new ObjectResult(json) {StatusCode = 500};
+                var exceptionObject = new ObjectResult(json) { StatusCode = 500 };
 
                 context.Result = exceptionObject;
-                context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
     }
-    
+
     public class JsonErrorPayload
     {
         public string[] Messages { get; set; }

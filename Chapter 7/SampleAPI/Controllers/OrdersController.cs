@@ -46,25 +46,25 @@ namespace SampleAPI.Controllers
         [OrderExists]
         public IActionResult Put(Guid id, OrderRequest request)
         {
-            if (request.ItemsIds == null)        
-            {        
+            if (request.ItemsIds == null)
+            {
                 return BadRequest();
             }
-            
+
             var order = _orderRepository.Get(id);
-            
-            if (order == null)        
-            {        
+
+            if (order == null)
+            {
                 return NotFound(new { Message = $"Item with id {id} not exist." });
             }
-            
+
             order = Map(request, order);
 
-            _orderRepository.Update(id, order);      
-            return Ok();  
+            _orderRepository.Update(id, order);
+            return Ok();
         }
-        
-        [HttpPatch("{id:guid}")] 
+
+        [HttpPatch("{id:guid}")]
         [OrderExists]
         public IActionResult Patch(Guid id, JsonPatchDocument<Order> requestOp)
         {
@@ -94,10 +94,9 @@ namespace SampleAPI.Controllers
             _orderRepository.Delete(id);
             return NoContent();
         }
-        
+
         private Order Map(OrderRequest request)
         {
-
             return new Order
             {
                 Id = Guid.NewGuid(),
@@ -105,20 +104,20 @@ namespace SampleAPI.Controllers
                 Currency = request.Currency
             };
         }
-        
+
         private Order Map(OrderRequest request, Order order)
         {
             order.ItemsIds = request.ItemsIds;
             order.Currency = request.Currency;
- 
+
             return order;
-        } 
-        
+        }
+
         private IEnumerable<OrderResponse> Map(IEnumerable<Order> orders)
         {
             return orders.Select(Map).ToList();
         }
-        
+
         private OrderResponse Map(Order order)
         {
             return new OrderResponse
