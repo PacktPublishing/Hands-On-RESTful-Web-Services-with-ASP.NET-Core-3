@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /project
 COPY ["src/Catalog.API/Catalog.API.csproj", "src/Catalog.API/"]
 COPY . .
-WORKDIR "project/src/Catalog.API"
+WORKDIR "//project/src/Catalog.API"
 RUN dotnet build "Catalog.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
