@@ -42,12 +42,12 @@ namespace Catalog.API
                     policy
                         .RequireRoutedLink(nameof(ItemsHateoasController.Get), nameof(ItemsHateoasController.Get))
                         .RequireRoutedLink(nameof(ItemsHateoasController.GetById),
-                            nameof(ItemsHateoasController.GetById), _ => new {id = _.Data.Id})
+                            nameof(ItemsHateoasController.GetById), _ => new { id = _.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Post), nameof(ItemsHateoasController.Post))
                         .RequireRoutedLink(nameof(ItemsHateoasController.Put), nameof(ItemsHateoasController.Put),
-                            x => new {id = x.Data.Id})
+                            x => new { id = x.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Delete), nameof(ItemsHateoasController.Delete),
-                            x => new {id = x.Data.Id});
+                            x => new { id = x.Data.Id });
                 });
             });
         }

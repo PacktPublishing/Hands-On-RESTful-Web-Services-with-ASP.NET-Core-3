@@ -77,7 +77,7 @@ namespace Catalog.API
         {
             if (!env.IsTesting())
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
-         
+
             app.UseResponseCaching();
             app.UseHealthChecks("/health");
             app.UseRouting();

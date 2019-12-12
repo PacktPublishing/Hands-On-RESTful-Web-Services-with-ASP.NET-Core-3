@@ -87,7 +87,7 @@ namespace Catalog.API.Tests.Controllers
         [Fact]
         public async Task add_should_create_new_genre()
         {
-            var genreDescription = new {GenreDescription = "Jazz"};
+            var genreDescription = new { GenreDescription = "Jazz" };
             var client = _factory.CreateClient();
 
             var httpContent = new StringContent(JsonConvert.SerializeObject(genreDescription), Encoding.UTF8,

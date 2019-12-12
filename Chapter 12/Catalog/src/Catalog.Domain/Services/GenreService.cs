@@ -50,7 +50,7 @@ namespace Catalog.Domain.Services
 
         public async Task<GenreResponse> AddGenreAsync(AddGenreRequest request, CancellationToken cancellationToken)
         {
-            var item = new Genre {GenreDescription = request.GenreDescription};
+            var item = new Genre { GenreDescription = request.GenreDescription };
 
             var result = _genreRepository.Add(item);
             await _genreRepository.UnitOfWork.SaveChangesAsync(cancellationToken);

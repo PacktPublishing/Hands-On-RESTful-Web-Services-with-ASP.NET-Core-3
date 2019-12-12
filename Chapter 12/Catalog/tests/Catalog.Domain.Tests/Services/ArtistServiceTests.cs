@@ -31,7 +31,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ArtistService(artistRepository, itemRepository,
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetArtistAsync(new GetArtistRequest {Id = new Guid(id)});
+            var result = await sut.GetArtistAsync(new GetArtistRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
 
@@ -45,7 +45,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ArtistService(artistRepository, itemRepository,
                 _catalogContextFactory.ArtistMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetItemByArtistIdAsync(new GetArtistRequest {Id = new Guid(id)});
+            var result = await sut.GetItemByArtistIdAsync(new GetArtistRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
 

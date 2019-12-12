@@ -34,7 +34,7 @@ namespace Catalog.Domain.Requests.Item.Validators
         {
             if (string.IsNullOrEmpty(artistId.ToString())) return false;
 
-            var artist = await _artistService.GetArtistAsync(new GetArtistRequest {Id = artistId});
+            var artist = await _artistService.GetArtistAsync(new GetArtistRequest { Id = artistId });
             return artist != null;
         }
 
@@ -42,7 +42,7 @@ namespace Catalog.Domain.Requests.Item.Validators
         {
             if (string.IsNullOrEmpty(genreId.ToString())) return false;
 
-            var genre = await _genreService.GetGenreAsync(new GetGenreRequest {Id = genreId});
+            var genre = await _genreService.GetGenreAsync(new GetGenreRequest { Id = genreId });
             return genre != null;
         }
     }

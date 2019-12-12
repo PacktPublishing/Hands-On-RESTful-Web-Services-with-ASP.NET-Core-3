@@ -36,7 +36,7 @@ namespace Catalog.Fixtures
 
             var allData = JObject.Parse(fileData);
             var data = allData[_section];
-            return new List<object[]> {new[] {data.ToObject(testMethod.GetParameters().First().ParameterType)}};
+            return new List<object[]> { new[] { data.ToObject(testMethod.GetParameters().First().ParameterType) } };
         }
     }
 }

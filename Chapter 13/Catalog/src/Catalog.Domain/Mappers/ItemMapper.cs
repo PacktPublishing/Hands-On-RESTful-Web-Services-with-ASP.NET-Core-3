@@ -34,7 +34,7 @@ namespace Catalog.Domain.Mappers
 
             if (request.Price != null)
             {
-                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                item.Price = new Price { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return item;
@@ -60,7 +60,7 @@ namespace Catalog.Domain.Mappers
             
             if (request.Price != null)
             {
-                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                item.Price = new Price { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return item;
@@ -88,7 +88,7 @@ namespace Catalog.Domain.Mappers
             
             if (request.Price != null)
             {
-                response.Price = new PriceResponse {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                response.Price = new PriceResponse { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return response;

@@ -32,12 +32,12 @@ namespace Catalog.API.Filters
                     return;
                 }
 
-                var result = await _itemService.GetItemAsync(new GetItemRequest {Id = id});
+                var result = await _itemService.GetItemAsync(new GetItemRequest { Id = id });
 
                 if (result == null)
                 {
                     context.Result = new NotFoundObjectResult(new JsonErrorPayload
-                        {DetailedMessage = $"Item with id {id} not exist."});
+                    { DetailedMessage = $"Item with id {id} not exist." });
                     return;
                 }
 

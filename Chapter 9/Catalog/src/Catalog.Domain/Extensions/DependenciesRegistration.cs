@@ -16,7 +16,7 @@ namespace Catalog.Domain.Extensions
 
             return services;
         }
-        
+
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services

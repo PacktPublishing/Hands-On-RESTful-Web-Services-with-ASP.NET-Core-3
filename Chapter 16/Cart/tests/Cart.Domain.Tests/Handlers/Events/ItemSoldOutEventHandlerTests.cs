@@ -28,7 +28,7 @@ namespace Cart.Domain.Tests.Handlers.Events
             var found = false;
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent {Id = Guid.NewGuid().ToString()}, context);
+                new ItemSoldOutEvent { Id = Guid.NewGuid().ToString() }, context);
 
             var cartsIds = repository.GetCarts();
 
@@ -52,7 +52,7 @@ namespace Cart.Domain.Tests.Handlers.Events
 
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent {Id = itemSoldOutId}, context);
+                new ItemSoldOutEvent { Id = itemSoldOutId }, context);
 
             foreach (var cartId in repository.GetCarts())
             {

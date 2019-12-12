@@ -40,7 +40,7 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
                 .Setup(x => x.GetArtistAsync(It.IsAny<GetArtistRequest>()))
                 .ReturnsAsync(() => null);
 
-            var addItemRequest = new AddItemRequest {Price = new Price(), ArtistId = Guid.NewGuid()};
+            var addItemRequest = new AddItemRequest { Price = new Price(), ArtistId = Guid.NewGuid() };
             _validator.ShouldHaveValidationErrorFor(x => x.ArtistId, addItemRequest);
         }
 
@@ -48,7 +48,7 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
         [Fact]
         public void should_have_error_when_ArtistId_is_null()
         {
-            var addItemRequest = new AddItemRequest {Price = new Price()};
+            var addItemRequest = new AddItemRequest { Price = new Price() };
             _validator.ShouldHaveValidationErrorFor(x => x.ArtistId, addItemRequest);
         }
 
@@ -59,14 +59,14 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
                 .Setup(x => x.GetGenreAsync(It.IsAny<GetGenreRequest>()))
                 .ReturnsAsync(() => null);
 
-            var addItemRequest = new AddItemRequest {Price = new Price(), GenreId = Guid.NewGuid()};
+            var addItemRequest = new AddItemRequest { Price = new Price(), GenreId = Guid.NewGuid() };
             _validator.ShouldHaveValidationErrorFor(x => x.GenreId, addItemRequest);
         }
 
         [Fact]
         public void should_have_error_when_GenreId_is_null()
         {
-            var addItemRequest = new AddItemRequest {Price = new Price()};
+            var addItemRequest = new AddItemRequest { Price = new Price() };
             _validator.ShouldHaveValidationErrorFor(x => x.GenreId, addItemRequest);
         }
     }
