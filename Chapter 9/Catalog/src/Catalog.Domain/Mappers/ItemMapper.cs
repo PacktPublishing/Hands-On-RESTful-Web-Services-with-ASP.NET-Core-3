@@ -17,12 +17,13 @@ namespace Catalog.Domain.Mappers
 
         public Item Map(AddItemRequest request)
         {
-            return new Item
+            if (request == null) return null;
+            
+            var item = new Item
             {
                 Name = request.Name,
                 Description = request.Description,
                 LabelName = request.LabelName,
-                Price = new Price { Amount = request.Price.Amount, Currency = request.Price.Currency },
                 PictureUri = request.PictureUri,
                 ReleaseDate = request.ReleaseDate,
                 Format = request.Format,
@@ -30,17 +31,25 @@ namespace Catalog.Domain.Mappers
                 GenreId = request.GenreId,
                 ArtistId = request.ArtistId,
             };
+
+            if (request.Price != null)
+            {
+                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+            }
+
+            return item;
         }
 
         public Item Map(EditItemRequest request)
         {
-            return new Item
+            if (request == null) return null;
+            
+            var item = new Item
             {
                 Id = request.Id,
                 Name = request.Name,
                 Description = request.Description,
                 LabelName = request.LabelName,
-                Price = new Price { Amount = request.Price.Amount, Currency = request.Price.Currency },
                 PictureUri = request.PictureUri,
                 ReleaseDate = request.ReleaseDate,
                 Format = request.Format,
@@ -48,17 +57,25 @@ namespace Catalog.Domain.Mappers
                 GenreId = request.GenreId,
                 ArtistId = request.ArtistId,
             };
+            
+            if (request.Price != null)
+            {
+                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+            }
+
+            return item;
         }
 
         public ItemResponse Map(Item request)
         {
-            return new ItemResponse
+            if (request == null) return null;
+            
+            var response = new ItemResponse
             {
                 Id = request.Id,
                 Name = request.Name,
                 Description = request.Description,
                 LabelName = request.LabelName,
-                Price = new PriceResponse { Amount = request.Price.Amount, Currency = request.Price.Currency },
                 PictureUri = request.PictureUri,
                 ReleaseDate = request.ReleaseDate,
                 Format = request.Format,
@@ -67,8 +84,14 @@ namespace Catalog.Domain.Mappers
                 Genre = _genreMapper.Map(request.Genre),
                 ArtistId = request.ArtistId,
                 Artist = _artistMapper.Map(request.Artist),
-
             };
+            
+            if (request.Price != null)
+            {
+                response.Price = new PriceResponse {Currency = request.Price.Currency, Amount = request.Price.Amount};
+            }
+
+            return response;
         }
     }
 }
