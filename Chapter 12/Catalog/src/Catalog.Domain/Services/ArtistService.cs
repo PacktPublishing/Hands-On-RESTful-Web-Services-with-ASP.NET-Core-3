@@ -52,7 +52,7 @@ namespace Catalog.Domain.Services
 
         public async Task<ArtistResponse> AddArtistAsync(AddArtistRequest request, CancellationToken cancellationToken)
         {
-            var item = new Artist {ArtistName = request.ArtistName};
+            var item = new Artist { ArtistName = request.ArtistName };
             var result = _artistRepository.Add(item);
 
             await _artistRepository.UnitOfWork.SaveChangesAsync(cancellationToken);

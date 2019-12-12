@@ -87,7 +87,7 @@ namespace Catalog.API.Tests.Controllers
         [Fact]
         public async Task add_should_create_new_artist()
         {
-            var addArtistRequest = new AddArtistRequest {ArtistName = "The Braze"};
+            var addArtistRequest = new AddArtistRequest { ArtistName = "The Braze" };
 
             var client = _factory.CreateClient();
 

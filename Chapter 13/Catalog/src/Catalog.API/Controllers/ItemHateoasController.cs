@@ -41,7 +41,7 @@ namespace Catalog.API.Controllers
 
             foreach (var itemResponse in itemsOnPage)
             {
-                var hateoasResult = new ItemHateoasResponse {Data = itemResponse};
+                var hateoasResult = new ItemHateoasResponse { Data = itemResponse };
                 await _linksService.AddLinksAsync(hateoasResult);
 
                 hateoasResults.Add(hateoasResult);
@@ -57,8 +57,8 @@ namespace Catalog.API.Controllers
         [ItemExists]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _itemService.GetItemAsync(new GetItemRequest {Id = id});
-            var hateoasResult = new ItemHateoasResponse {Data = result};
+            var result = await _itemService.GetItemAsync(new GetItemRequest { Id = id });
+            var hateoasResult = new ItemHateoasResponse { Data = result };
             await _linksService.AddLinksAsync(hateoasResult);
 
             return Ok(hateoasResult);
@@ -68,7 +68,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Post(AddItemRequest request)
         {
             var result = await _itemService.AddItemAsync(request, CancellationToken.None);
-            return CreatedAtAction(nameof(GetById), new {id = result.Id}, null);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
         [HttpPut("{id:guid}", Name = nameof(Put))]
@@ -78,7 +78,7 @@ namespace Catalog.API.Controllers
             request.Id = id;
             var result = await _itemService.EditItemAsync(request, CancellationToken.None);
 
-            var hateoasResult = new ItemHateoasResponse {Data = result};
+            var hateoasResult = new ItemHateoasResponse { Data = result };
             await _linksService.AddLinksAsync(hateoasResult);
 
             return Ok(hateoasResult);
@@ -88,7 +88,7 @@ namespace Catalog.API.Controllers
         [ItemExists]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var request = new DeleteItemRequest {Id = id};
+            var request = new DeleteItemRequest { Id = id };
             await _itemService.DeleteItemAsync(request);
             return NoContent();
         }

@@ -48,12 +48,12 @@ namespace Cart.API.Tests.Controllers
         }
 
         [Theory]
-        [InlineData(new[] {"f5da5ce4-091e-492e-a70a-22b073d75a52", "be05537d-5e80-45c1-bd8c-aa21c0f1251e"},
+        [InlineData(new[] { "f5da5ce4-091e-492e-a70a-22b073d75a52", "be05537d-5e80-45c1-bd8c-aa21c0f1251e" },
             "test@testdomain.com")]
         public async Task post_should_create_a_cart(string[] items, string email)
         {
             var client = _factory.CreateClient();
-            var request = new CreateCartCommand {ItemsIds = items, UserEmail = email};
+            var request = new CreateCartCommand { ItemsIds = items, UserEmail = email };
 
             var httpContent =
                 new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");

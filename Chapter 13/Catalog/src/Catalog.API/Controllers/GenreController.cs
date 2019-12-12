@@ -44,14 +44,14 @@ namespace Catalog.API.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _genreService.GetGenreAsync(new GetGenreRequest {Id = id});
+            var result = await _genreService.GetGenreAsync(new GetGenreRequest { Id = id });
             return Ok(result);
         }
 
         [HttpGet("{id:guid}/items")]
         public async Task<IActionResult> GetItemById(Guid id)
         {
-            var result = await _genreService.GetItemByGenreIdAsync(new GetGenreRequest {Id = id});
+            var result = await _genreService.GetItemByGenreIdAsync(new GetGenreRequest { Id = id });
             return Ok(result);
         }
 
@@ -59,7 +59,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Post(AddGenreRequest request)
         {
             var result = await _genreService.AddGenreAsync(request, CancellationToken.None);
-            return CreatedAtAction(nameof(GetById), new {id = result.GenreId}, null);
+            return CreatedAtAction(nameof(GetById), new { id = result.GenreId }, null);
         }
     }
 }

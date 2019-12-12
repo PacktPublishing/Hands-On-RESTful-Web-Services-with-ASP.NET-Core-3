@@ -31,8 +31,8 @@ namespace Cart.Domain.Handlers.Cart
         {
             var entity = new Entities.Cart
             {
-                Items = command.ItemsIds.Select(x => new CartItem {CartItemId = new Guid(x), Quantity = 1}).ToList(),
-                User = new CartUser {Email = command.UserEmail},
+                Items = command.ItemsIds.Select(x => new CartItem { CartItemId = new Guid(x), Quantity = 1 }).ToList(),
+                User = new CartUser { Email = command.UserEmail },
                 ValidityDate = DateTimeOffset.Now.AddMonths(2),
                 Id = Guid.NewGuid().ToString()
             };

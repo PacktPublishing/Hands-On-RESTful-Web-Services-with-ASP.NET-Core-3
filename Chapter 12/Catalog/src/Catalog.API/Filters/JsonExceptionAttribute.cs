@@ -41,10 +41,10 @@ namespace Catalog.API.Filters
 
                 if (_env.IsDevelopment()) json.DetailedMessage = context.Exception;
 
-                var exceptionObject = new ObjectResult(json) {StatusCode = 500};
+                var exceptionObject = new ObjectResult(json) { StatusCode = 500 };
 
                 context.Result = exceptionObject;
-                context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
     }

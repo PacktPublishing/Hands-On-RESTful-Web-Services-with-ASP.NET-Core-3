@@ -40,10 +40,11 @@ namespace Catalog.API
                 .AddMappers()
                 .AddServices()
                 .AddResponseCaching()
-                .AddOpenApiDocument(settings =>{
+                .AddOpenApiDocument(settings =>
+                {
                     settings.Title = "Catalog API";
                     settings.DocumentName = "v3";
-                    settings.Version = "v3";                                   
+                    settings.Version = "v3";
                 })
                 .AddDistributedRedisCache(Configuration)
                 .AddControllers()

@@ -31,7 +31,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetGenreAsync(new GetGenreRequest {Id = new Guid(id)});
+            var result = await sut.GetGenreAsync(new GetGenreRequest { Id = new Guid(id) });
             result.GenreId.ShouldBe(new Guid(id));
         }
 
@@ -45,7 +45,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new GenreService(genreRepository, itemRepository,
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
-            var result = await sut.GetItemByGenreIdAsync(new GetGenreRequest {Id = new Guid(id)});
+            var result = await sut.GetItemByGenreIdAsync(new GetGenreRequest { Id = new Guid(id) });
             result.ShouldNotBeNull();
         }
 

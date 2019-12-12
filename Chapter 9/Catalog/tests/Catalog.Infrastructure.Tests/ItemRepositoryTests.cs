@@ -12,7 +12,7 @@ namespace Catalog.Infrastructure.Tests
     public class ItemRepositoryTests : IClassFixture<CatalogContextFactory>
     {
         private readonly ItemRepository _sut;
-        private readonly  TestCatalogContext _context;
+        private readonly TestCatalogContext _context;
 
         public ItemRepositoryTests(CatalogContextFactory catalogContextFactory)
         {
@@ -59,7 +59,7 @@ namespace Catalog.Infrastructure.Tests
                 ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
             };
 
-          
+
             _sut.Add(testItem);
             await _sut.UnitOfWork.SaveEntitiesAsync();
 
@@ -86,7 +86,7 @@ namespace Catalog.Infrastructure.Tests
                 ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
             };
 
-           
+
             _sut.Update(testItem);
 
             await _sut.UnitOfWork.SaveEntitiesAsync();

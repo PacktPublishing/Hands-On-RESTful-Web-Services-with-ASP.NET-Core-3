@@ -9,7 +9,7 @@ namespace Catalog.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static async Task<IServiceCollection> AddRabbitMq(this IServiceCollection services, 
+        public static async Task<IServiceCollection> AddRabbitMq(this IServiceCollection services,
             string endpointName, string connectionString, string environmentName)
         {
             if (environmentName.Equals("Testing")) return services;
@@ -19,7 +19,7 @@ namespace Catalog.Infrastructure.Extensions
                 .Handle<Exception>()
                 .WaitAndRetryAsync(maxRetryAttempts, i => pauseBetweenFailures);
 
-            var endpointInstance =  await retryPolicy.ExecuteAsync(async ()=> await ServiceCollection(endpointName, connectionString));
+            var endpointInstance = await retryPolicy.ExecuteAsync(async () => await ServiceCollection(endpointName, connectionString));
             services.AddSingleton(endpointInstance);
 
             return services;
@@ -48,9 +48,9 @@ namespace Catalog.Infrastructure.Extensions
             var scanner = endpointConfiguration.AssemblyScanner();
 
             scanner.ScanAssembliesInNestedDirectories = true;
-            
+
             return await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
-     
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Catalog.API
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment CurrentEnvironment { get; }
-        
+
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
@@ -38,13 +38,13 @@ namespace Catalog.API
                 .AddServices()
                 .AddControllers()
                 .AddValidation();
-            
-                services.AddRabbitMq(
-                        Configuration.GetSection("ESB:EndPointName").Value,
-                    Configuration.GetSection("ESB:ConnectionString").Value,
-                        CurrentEnvironment.EnvironmentName)
-                .GetAwaiter()
-                .GetResult();
+
+            services.AddRabbitMq(
+                    Configuration.GetSection("ESB:EndPointName").Value,
+                Configuration.GetSection("ESB:ConnectionString").Value,
+                    CurrentEnvironment.EnvironmentName)
+            .GetAwaiter()
+            .GetResult();
 
             services.AddLinks(config =>
             {
@@ -53,12 +53,12 @@ namespace Catalog.API
                     policy
                         .RequireRoutedLink(nameof(ItemsHateoasController.Get), nameof(ItemsHateoasController.Get))
                         .RequireRoutedLink(nameof(ItemsHateoasController.GetById),
-                            nameof(ItemsHateoasController.GetById), _ => new {id = _.Data.Id})
+                            nameof(ItemsHateoasController.GetById), _ => new { id = _.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Post), nameof(ItemsHateoasController.Post))
                         .RequireRoutedLink(nameof(ItemsHateoasController.Put), nameof(ItemsHateoasController.Put),
-                            x => new {id = x.Data.Id})
+                            x => new { id = x.Data.Id })
                         .RequireRoutedLink(nameof(ItemsHateoasController.Delete), nameof(ItemsHateoasController.Delete),
-                            x => new {id = x.Data.Id});
+                            x => new { id = x.Data.Id });
                 });
             });
         }
