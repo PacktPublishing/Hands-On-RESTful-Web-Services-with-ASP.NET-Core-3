@@ -6,8 +6,6 @@ namespace Cart.Domain.Services
 {
     public interface ICatalogService
     {
-        Task<CartItemResponse> EnrichCartItem(
-            CartItemResponse item,
-            CancellationToken cancellationToken);
+        Task<CartItemResponse> EnrichCartItem(CartItemResponse item, CancellationToken cancellationToken);
     }
 }

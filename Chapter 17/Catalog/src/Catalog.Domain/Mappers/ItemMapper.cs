@@ -18,7 +18,7 @@ namespace Catalog.Domain.Mappers
         public Item Map(AddItemRequest request)
         {
             if (request == null) return null;
-            
+
             var item = new Item
             {
                 Name = request.Name,
@@ -34,7 +34,7 @@ namespace Catalog.Domain.Mappers
 
             if (request.Price != null)
             {
-                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                item.Price = new Price { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return item;
@@ -43,7 +43,7 @@ namespace Catalog.Domain.Mappers
         public Item Map(EditItemRequest request)
         {
             if (request == null) return null;
-            
+
             var item = new Item
             {
                 Id = request.Id,
@@ -57,10 +57,10 @@ namespace Catalog.Domain.Mappers
                 GenreId = request.GenreId,
                 ArtistId = request.ArtistId,
             };
-            
+
             if (request.Price != null)
             {
-                item.Price = new Price {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                item.Price = new Price { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return item;
@@ -69,7 +69,7 @@ namespace Catalog.Domain.Mappers
         public ItemResponse Map(Item request)
         {
             if (request == null) return null;
-            
+
             var response = new ItemResponse
             {
                 Id = request.Id,
@@ -85,10 +85,10 @@ namespace Catalog.Domain.Mappers
                 ArtistId = request.ArtistId,
                 Artist = _artistMapper.Map(request.Artist),
             };
-            
+
             if (request.Price != null)
             {
-                response.Price = new PriceResponse {Currency = request.Price.Currency, Amount = request.Price.Amount};
+                response.Price = new PriceResponse { Currency = request.Price.Currency, Amount = request.Price.Amount };
             }
 
             return response;

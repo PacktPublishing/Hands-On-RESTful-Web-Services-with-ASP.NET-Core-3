@@ -1,56 +1,30 @@
-using System;
-using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NServiceBus;
-using Polly;
-using RabbitMQ.Client.Exceptions;
+using RabbitMQ.Client;
 
 namespace Catalog.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static async Task<IServiceCollection> AddRabbitMq(this IServiceCollection services,
-            string endpointName, string connectionString, string environmentName)
+        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration, string environmentName)
         {
             if (environmentName.Equals("Testing")) return services;
-            var maxRetryAttempts = 5;
-            var pauseBetweenFailures = TimeSpan.FromSeconds(20);
-            var retryPolicy = Policy
-                .Handle<Exception>()
-                .WaitAndRetryAsync(maxRetryAttempts, i => pauseBetweenFailures);
 
-            var endpointInstance = await retryPolicy.ExecuteAsync(async () => await ServiceCollection(endpointName, connectionString));
-            services.AddSingleton(endpointInstance);
+            var config = new EventBusSettings();
+            configuration.Bind("EventBus", config);
+            services.AddSingleton(config);
+
+            ConnectionFactory factory = new ConnectionFactory
+            {
+                HostName = config.HostName,
+                UserName = config.User,
+                Password = config.Password
+            };
+
+            services.AddSingleton(factory);
 
             return services;
-        }
-
-        private static async Task<IEndpointInstance> ServiceCollection(string endpointName, string connectionString)
-        {
-            var endpointConfiguration = new EndpointConfiguration(endpointName);
-            endpointConfiguration.EnableInstallers();
-            endpointConfiguration.SendFailedMessagesTo("error");
-
-            var transport = endpointConfiguration.UseTransport<RabbitMQTransport>()
-                .UseConventionalRoutingTopology();
-
-            transport.ConnectionString(connectionString);
-
-            var routing = transport
-                .Routing();
-
-            routing.RouteToEndpoint(typeof(ItemSoldOutEvent), endpointName);
-
-            var conventions = endpointConfiguration.Conventions();
-            conventions.DefiningEventsAs(
-                type => type.Namespace != null && type.Namespace.Contains("Catalog.Infrastructure"));
-
-            var scanner = endpointConfiguration.AssemblyScanner();
-
-            scanner.ScanAssembliesInNestedDirectories = true;
-
-            return await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
-
         }
     }
 }

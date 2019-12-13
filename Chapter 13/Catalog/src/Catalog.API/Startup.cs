@@ -4,10 +4,12 @@ using Catalog.API.Middleware;
 using Catalog.API.ResponseModels;
 using Catalog.Domain.Extensions;
 using Catalog.Domain.Repositories;
+using Catalog.Infrastructure;
 using Catalog.Infrastructure.Extensions;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,13 +41,7 @@ namespace Catalog.API
                 .AddControllers()
                 .AddValidation();
 
-            services.AddRabbitMq(
-                    Configuration.GetSection("ESB:EndPointName").Value,
-                Configuration.GetSection("ESB:ConnectionString").Value,
-                    CurrentEnvironment.EnvironmentName)
-            .GetAwaiter()
-            .GetResult();
-
+            services.AddEventBus(Configuration, CurrentEnvironment.EnvironmentName);
             services.AddLinks(config =>
             {
                 config.AddPolicy<ItemHateoasResponse>(policy =>
@@ -66,6 +62,7 @@ namespace Catalog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.EnvironmentName != "Testing") app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
 
             app.UseRouting();
             app.UseHttpsRedirection();

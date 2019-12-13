@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using Cart.Infrastructure.BackgroundServices;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cart.API
 {
@@ -13,7 +15,11 @@ namespace Cart.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<ItemSoldOutBackgroundService>();
+                });
         }
     }
 }

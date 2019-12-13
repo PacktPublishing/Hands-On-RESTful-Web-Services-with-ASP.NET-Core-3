@@ -17,14 +17,14 @@ namespace Cart.API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment CurrentEnvironment { get; }
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
             CurrentEnvironment = environment;
         }
-
-        public IConfiguration Configuration { get; }
-        public IWebHostEnvironment CurrentEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,9 +37,7 @@ namespace Cart.API
                 .AddCatalogService(new Uri(Configuration["CatalogApiUrl"]))
                 .AddMediatR(AppDomain.CurrentDomain.GetAssemblies())
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-                .AddRabbitMQ(Configuration.GetSection("ESB:EndPointName").Value,
-                    Configuration.GetSection("ESB:ConnectionString").Value,
-                    CurrentEnvironment.EnvironmentName)
+                .ConfigureEventBus(Configuration)
                 .Configure<CartDataSourceSettings>(Configuration);
         }
 

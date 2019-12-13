@@ -7,9 +7,7 @@ using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
-using Catalog.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using NServiceBus;
 
 namespace Catalog.API.Controllers
 {
@@ -18,12 +16,10 @@ namespace Catalog.API.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
-        private readonly IEndpointInstance _messageEndpoint;
 
-        public ItemController(IItemService itemService, IEndpointInstance messageEndpoint)
+        public ItemController(IItemService itemService)
         {
             _itemService = itemService;
-            _messageEndpoint = messageEndpoint;
         }
 
         [HttpGet]
@@ -76,7 +72,6 @@ namespace Catalog.API.Controllers
             var request = new DeleteItemRequest { Id = id };
 
             await _itemService.DeleteItemAsync(request);
-            await _messageEndpoint.Publish(new ItemSoldOutEvent { Id = id.ToString() });
 
             return NoContent();
         }
