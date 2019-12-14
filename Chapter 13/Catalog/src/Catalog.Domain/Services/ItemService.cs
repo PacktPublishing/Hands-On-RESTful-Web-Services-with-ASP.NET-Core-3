@@ -21,16 +21,16 @@ namespace Catalog.Domain.Services
     {
         private readonly IItemMapper _itemMapper;
         private readonly IItemRepository _itemRepository;
-        private readonly ConnectionFactory _connectionFactory;
+        private readonly ConnectionFactory _eventBusConnectionFactory;
         private readonly ILogger<ItemService> _logger;
         private readonly EventBusSettings _settings;
 
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ConnectionFactory connectionFactory, ILogger<ItemService> logger, EventBusSettings settings)
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ConnectionFactory eventBusConnectionFactory, ILogger<ItemService> logger, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
             _itemMapper = itemMapper;
-            _connectionFactory = connectionFactory;
+            _eventBusConnectionFactory = eventBusConnectionFactory;
             _logger = logger;
             _settings = settings;
         }
@@ -91,7 +91,7 @@ namespace Catalog.Domain.Services
         {
             try
             {
-                var connection = _connectionFactory.CreateConnection();
+                var connection = _eventBusConnectionFactory.CreateConnection();
 
                 using var channel = connection.CreateModel();
                 channel.QueueDeclare(queue: _settings.EventQueue);
