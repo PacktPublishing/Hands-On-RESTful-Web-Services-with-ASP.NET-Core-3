@@ -9,8 +9,6 @@ namespace Catalog.Infrastructure.Extensions
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration, string environmentName)
         {
-            if (environmentName.Equals("Testing")) return services;
-
             var config = new EventBusSettings();
             configuration.Bind("EventBus", config);
             services.AddSingleton(config);
@@ -23,7 +21,6 @@ namespace Catalog.Infrastructure.Extensions
             };
 
             services.AddSingleton(factory);
-
             return services;
         }
     }
