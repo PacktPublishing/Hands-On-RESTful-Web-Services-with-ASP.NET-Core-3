@@ -1,8 +1,6 @@
-using System;
 using Cart.Infrastructure.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NServiceBus;
 
 namespace Cart.Infrastructure.Extensions
 {

@@ -28,7 +28,7 @@ namespace Catalog.Fixtures
                     using var scope = sp.CreateScope();
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<CatalogContext>();
-                    
+
                     db.Database.EnsureCreated();
                 });
         }

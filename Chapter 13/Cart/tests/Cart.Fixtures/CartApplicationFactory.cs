@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using NServiceBus;
 
 namespace Cart.Fixtures
 {
@@ -22,11 +21,9 @@ namespace Cart.Fixtures
             builder.UseEnvironment("Testing")
                 .ConfigureTestServices(services =>
                 {
-                    services.AddSingleton<IEndpointInstance>(x => null);
-                    services.Replace(
-                        ServiceDescriptor.Scoped(_ =>
+                    services.Replace(ServiceDescriptor.Scoped(serviceProvider =>
                             _cartContextFactory.GetCartRepository()));
-                    services.Replace(ServiceDescriptor.Scoped(_ =>
+                    services.Replace(ServiceDescriptor.Scoped(serviceProvider =>
                         _cartContextFactory.GetCatalogService())
                     );
                 });

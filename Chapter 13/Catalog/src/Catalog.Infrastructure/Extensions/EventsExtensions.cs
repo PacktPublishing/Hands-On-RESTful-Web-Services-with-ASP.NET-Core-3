@@ -7,7 +7,7 @@ namespace Catalog.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration, string environmentName)
+        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
             var config = new EventBusSettings();
             configuration.Bind("EventBus", config);
@@ -21,6 +21,7 @@ namespace Catalog.Infrastructure.Extensions
             };
 
             services.AddSingleton(factory);
+
             return services;
         }
     }

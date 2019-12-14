@@ -19,7 +19,6 @@ namespace Cart.Infrastructure.BackgroundServices
         private readonly ICartRepository _cartRepository;
         private readonly ILogger<ItemSoldOutBackgroundService> _logger;
         private readonly EventBusSettings _options;
-
         private IModel _channel;
         private IConnection _connection;
 

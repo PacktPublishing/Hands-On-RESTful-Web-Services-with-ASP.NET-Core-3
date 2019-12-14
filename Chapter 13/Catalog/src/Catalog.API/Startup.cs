@@ -41,7 +41,7 @@ namespace Catalog.API
                 .AddControllers()
                 .AddValidation();
 
-            services.AddEventBus(Configuration, CurrentEnvironment.EnvironmentName);
+            services.AddEventBus(Configuration);
             services.AddLinks(config =>
             {
                 config.AddPolicy<ItemHateoasResponse>(policy =>
