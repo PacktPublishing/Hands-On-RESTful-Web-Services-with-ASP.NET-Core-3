@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Catalog.Domain.Configurations;
@@ -11,8 +10,8 @@ using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 
 namespace Catalog.Domain.Services
@@ -96,7 +95,7 @@ namespace Catalog.Domain.Services
                 using var channel = connection.CreateModel();
                 channel.QueueDeclare(queue: _settings.EventQueue, true, false);
 
-                var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
                 channel.ConfirmSelect();
                 channel.BasicPublish(exchange: "", routingKey: _settings.EventQueue, body: body);
