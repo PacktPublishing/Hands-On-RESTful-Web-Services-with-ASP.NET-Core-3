@@ -1,5 +1,4 @@
-﻿using Cart.Infrastructure.BackgroundServices;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 

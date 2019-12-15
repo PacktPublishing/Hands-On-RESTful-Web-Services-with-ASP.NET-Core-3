@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Cart.Domain.Commands.Cart;
 using Cart.Domain.Handlers.Cart;
-using Cart.Domain.Infrastructure.Mapper;
+using Cart.Domain.Mapper;
 using Cart.Fixtures;
 using Shouldly;
 using Xunit;
@@ -24,7 +24,7 @@ namespace Cart.Domain.Tests.Handlers
         {
             var handler = new CreateCartHandler(
                 _contextFactory.GetCartRepository(),
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CartProfile>())),
+                new AutoMapper.Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CartProfile>())),
                 _contextFactory.GetCatalogService());
 
             var result = await handler.Handle(

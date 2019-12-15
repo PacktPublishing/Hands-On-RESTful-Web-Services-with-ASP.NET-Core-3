@@ -1,15 +1,14 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Cart.Domain.Events;
 using Cart.Infrastructure.Configurations;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Cart.Domain.Events;
 
 namespace Cart.Infrastructure.BackgroundServices
 {
@@ -43,7 +42,7 @@ namespace Cart.Infrastructure.BackgroundServices
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Model.QueueDeclare(_settings.EventQueue, true, false);
+          
             
             consumer.Received += async (ch, ea) =>
             {
@@ -59,6 +58,7 @@ namespace Cart.Infrastructure.BackgroundServices
 
             try
             {
+                consumer.Model.QueueDeclare(_settings.EventQueue, true, false);
                 _channel.BasicConsume(_settings.EventQueue, false, consumer);
             }
             catch (Exception e)
