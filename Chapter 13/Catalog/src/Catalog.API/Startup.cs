@@ -62,8 +62,12 @@ namespace Catalog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            if (env.EnvironmentName != "Testing") 
-                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
+            if (env.EnvironmentName != "Testing")
+            {
+                while (!app.ApplicationServices.GetService<CatalogContext>().Database.CanConnect()){
+                    app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
+                }
+            }
 
             app.UseRouting();
             app.UseHttpsRedirection();

@@ -14,7 +14,6 @@ services:
     depends_on:
       - catalog_db
       - catalog_esb
-    command: ["./containers/api/entrypoint.sh"]
 
   catalog_db:
     container_name: catalog_db
