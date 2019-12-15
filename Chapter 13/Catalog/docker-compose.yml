@@ -12,9 +12,9 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - catalog_db
       - catalog_esb
-      
+      - catalog_db
+
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux
