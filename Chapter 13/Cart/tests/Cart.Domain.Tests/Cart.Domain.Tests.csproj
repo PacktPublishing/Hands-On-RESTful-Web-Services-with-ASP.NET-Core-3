@@ -23,12 +23,4 @@
         <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Handlers\Events" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Handlers\Events\ItemSoldOutEventHandlerTests.cs" />
-    </ItemGroup>
-
 </Project>

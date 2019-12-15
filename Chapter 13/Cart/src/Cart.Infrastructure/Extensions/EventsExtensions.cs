@@ -1,14 +1,27 @@
 using Cart.Infrastructure.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 
 namespace Cart.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static IServiceCollection ConfigureEventBus(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<EventBusSettings>(configuration.GetSection("EventBus"));
+            var config = new EventBusSettings();
+            configuration.Bind("EventBus", config);
+            services.AddSingleton(config);
+
+            ConnectionFactory factory = new ConnectionFactory
+            {
+                HostName = config.HostName,
+                UserName = config.User,
+                Password = config.Password
+            };
+
+            services.AddSingleton(factory);
+
             return services;
         }
     }

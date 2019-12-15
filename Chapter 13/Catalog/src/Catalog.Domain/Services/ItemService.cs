@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -12,7 +11,7 @@ using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
-using Microsoft.AspNetCore.Connections;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
@@ -26,8 +25,8 @@ namespace Catalog.Domain.Services
         private readonly ILogger<ItemService> _logger;
         private readonly EventBusSettings _settings;
 
-
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ConnectionFactory eventBusConnectionFactory, ILogger<ItemService> logger, EventBusSettings settings)
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper,
+            ConnectionFactory eventBusConnectionFactory, ILogger<ItemService> logger, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
             _itemMapper = itemMapper;
@@ -95,7 +94,7 @@ namespace Catalog.Domain.Services
                 var connection = _eventBusConnectionFactory.CreateConnection();
 
                 using var channel = connection.CreateModel();
-                channel.QueueDeclare(queue: _settings.EventQueue);
+                channel.QueueDeclare(queue: _settings.EventQueue, true, false);
 
                 var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
 

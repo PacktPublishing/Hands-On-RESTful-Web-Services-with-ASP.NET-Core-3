@@ -2,6 +2,7 @@
 using AutoMapper;
 using Cart.Domain.Repositories;
 using Cart.Domain.Services;
+using Cart.Infrastructure.BackgroundServices;
 using Cart.Infrastructure.Configurations;
 using Cart.Infrastructure.Extensions;
 using Cart.Infrastructure.Repositories;
@@ -37,7 +38,8 @@ namespace Cart.API
                 .AddCatalogService(new Uri(Configuration["CatalogApiUrl"]))
                 .AddMediatR(AppDomain.CurrentDomain.GetAssemblies())
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-                .ConfigureEventBus(Configuration)
+                .AddEventBus(Configuration)
+                .AddHostedService<ItemSoldOutBackgroundService>()
                 .Configure<CartDataSourceSettings>(Configuration);
         }
 
