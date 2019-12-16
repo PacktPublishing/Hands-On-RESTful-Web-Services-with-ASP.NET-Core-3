@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Catalog.Domain.Settings;
+using Catalog.Domain.Configurations;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

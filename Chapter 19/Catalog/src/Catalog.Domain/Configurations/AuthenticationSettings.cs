@@ -1,4 +1,4 @@
-namespace Catalog.Domain.Settings
+namespace Catalog.Domain.Configurations
 {
     public class AuthenticationSettings
     {

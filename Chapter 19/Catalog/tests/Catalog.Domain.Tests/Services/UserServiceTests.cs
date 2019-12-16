@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Requests.User;
 using Catalog.Domain.Services;
-using Catalog.Domain.Settings;
 using Catalog.Fixtures;
 using Microsoft.Extensions.Options;
 using Shouldly;

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Logging;
 using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 
 namespace Catalog.Domain.Services
 {
@@ -17,12 +19,17 @@ namespace Catalog.Domain.Services
         private readonly IItemMapper _itemMapper;
         private readonly IItemRepository _itemRepository;
         private readonly ILogger<IItemService> _logger;
+        private readonly ConnectionFactory _eventBusConnectionFactory;
+        private readonly EventBusSettings _settings;
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger)
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger,
+            ConnectionFactory eventBusConnectionFactory, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
             _itemMapper = itemMapper;
             _logger = logger;
+            _eventBusConnectionFactory = eventBusConnectionFactory;
+            _settings = settings;
         }
 
         public async Task<IEnumerable<ItemResponse>> GetItemsAsync()
