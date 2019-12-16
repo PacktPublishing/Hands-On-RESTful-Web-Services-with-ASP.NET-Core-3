@@ -15,7 +15,7 @@ variables:
   workingDirCart: './Chapter 15/Cart'
   solutionPathCart: './Chapter 15/Cart/Cart.API.sln'
 steps:
-- task: DotNetCoreInstaller@0
+- task: DotNetCoreInstaller@2
   displayName: 'Install .net core 3.0 (preview)'
   inputs:
     version: '3.1.100'
