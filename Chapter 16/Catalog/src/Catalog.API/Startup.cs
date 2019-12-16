@@ -45,12 +45,7 @@ namespace Catalog.API
                 .AddValidation();
 
 
-            services.AddRabbitMq(
-                    Configuration.GetSection("ESB:EndPointName").Value,
-                Configuration.GetSection("ESB:ConnectionString").Value,
-                    CurrentEnvironment.EnvironmentName)
-            .GetAwaiter()
-            .GetResult();
+            services.AddEventBus(Configuration);
 
             services.AddLinks(config =>
             {
