@@ -32,17 +32,17 @@ namespace Cart.Domain.Handlers.Cart.Events
             return Unit.Value;
         }
 
-        private async Task RemoveItemsInCart(string itemToRemove, Entities.Cart cart)
+        private async Task RemoveItemsInCart(string itemToRemove, Entities.CartSession cartSession)
         {
             if (string.IsNullOrEmpty(itemToRemove)) return;
 
-            var toDelete = cart?.Items?.Where(x => x.CartItemId.ToString() == itemToRemove).ToList();
+            var toDelete = cartSession?.Items?.Where(x => x.CartItemId.ToString() == itemToRemove).ToList();
 
             if (toDelete == null || toDelete.Count == 0) return;
 
-            foreach (var item in toDelete) cart.Items?.Remove(item);
+            foreach (var item in toDelete) cartSession.Items?.Remove(item);
 
-            await _cartRepository.AddOrUpdateAsync(cart);
+            await _cartRepository.AddOrUpdateAsync(cartSession);
         }
     }
 }
