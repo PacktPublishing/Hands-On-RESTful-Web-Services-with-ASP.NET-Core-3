@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Cart.API\Cart.API.csproj" />
+        <ProjectReference Include="..\..\src\Cart.Domain\Cart.Domain.csproj" />
+        <ProjectReference Include="..\..\src\Cart.Infrastructure\Cart.Infrastructure.csproj" />
+        <ProjectReference Include="..\Cart.Fixtures\Cart.Fixtures.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Moq" Version="4.13.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Shouldly" Version="4.0.0-beta0002" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+        <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+    </ItemGroup>
+</Project>

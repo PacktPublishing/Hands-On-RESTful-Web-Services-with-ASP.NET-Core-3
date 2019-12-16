@@ -1,0 +1,85 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+variables:
+  workingDirCatalog: './Chapter 14/Catalog'
+  solutionPathCatalog: './Chapter 14/Catalog/Catalog.API.sln'
+  workingDirCart: './Chapter 14/Cart'
+  solutionPathCart: './Chapter 14/Cart/Cart.API.sln'
+steps:
+- task: DotNetCoreInstaller@2
+  displayName: 'Install .net core 3.0 (preview)'
+  inputs:
+    version: '3.1.100'
+- task: DotNetCoreCLI@2
+  displayName: 'Building Catalog'
+  inputs:
+    command: 'build'
+    projects: $(solutionPathCatalog)
+- task: DotNetCoreCLI@2
+  displayName: 'Testing Catalog'
+  inputs:
+    command: 'test'
+    workingDirectory: $(workingDirCatalog)
+- task: DotNetCoreCLI@2
+  displayName: 'Building Cart'
+  inputs:
+    command: 'build'
+    projects: $(solutionPathCart)
+- task: DotNetCoreCLI@2
+  displayName: 'Testing Cart'
+  inputs:
+    command: 'test'
+    workingDirectory: $(workingDirCart)
+- script: |
+    docker-compose up --force-recreate --build --detach
+  workingDirectory: $(workingDirCatalog)
+  displayName: 'Catalog - Docker compose build'
+- task: Bash@3
+  displayName: "Catalog - Verify Docker container"
+  inputs:
+    targetType: 'inline'
+    script: |
+      sleep 30
+              testCondition=$(docker inspect --format="{{.State.Running}}" catalog_api)
+              if [ "$testCondition" == "false" ]; then
+                echo "The container is not running" >&2
+                exit 1;
+              else
+                echo "The container is running" >&2
+                exit 0
+              fi
+- script: |
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDirCatalog)
+  displayName: 'Catalog - Docker compose down'
+- script: |
+    docker-compose up --force-recreate --build --detach
+  workingDirectory: $(workingDirCart)
+  displayName: 'Cart - Docker compose build'
+- task: Bash@3
+  displayName: "Cart - Verify Docker container"
+  inputs:
+    targetType: 'inline'
+    script: |
+      sleep 30
+              testCondition=$(docker inspect --format="{{.State.Running}}" cart_api)
+              if [ "$testCondition" == "false" ]; then
+                echo "The container is not running" >&2
+                exit 1;
+              else
+                echo "The container is running" >&2
+                exit 0
+              fi
+- script: |
+    docker-compose -f docker-compose.yml down
+  workingDirectory: $(workingDirCart)
+  displayName: 'Cart - Docker compose down'
