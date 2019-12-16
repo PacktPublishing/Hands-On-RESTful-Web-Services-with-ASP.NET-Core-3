@@ -1,4 +1,7 @@
-﻿using Catalog.API.Controllers;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Catalog.API.Controllers;
 using Catalog.API.Extensions;
 using Catalog.API.Middleware;
 using Catalog.API.ResponseModels;
@@ -9,10 +12,13 @@ using Catalog.Infrastructure.Extensions;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Polly;
 using RiskFirst.Hateoas;
 
 namespace Catalog.API
@@ -62,17 +68,29 @@ namespace Catalog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            if (env.EnvironmentName != "Testing")
-            {
-                while (!app.ApplicationServices.GetService<CatalogContext>().Database.CanConnect()){
-                    app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
-                }
-            }
 
+            ExecuteMigrations(app, env);
+            
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.EnvironmentName == "Testing") return;
+            
+            var retry = Policy.Handle<SqlException>()
+                .WaitAndRetry(new TimeSpan[]
+                {
+                    TimeSpan.FromSeconds(3),
+                    TimeSpan.FromSeconds(5),
+                    TimeSpan.FromSeconds(8),
+                });
+            
+            retry.Execute(() => 
+                app.ApplicationServices.GetService<CatalogContext>().Database.EnsureCreated());
         }
     }
 }
