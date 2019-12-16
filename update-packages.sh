@@ -5,6 +5,8 @@ dotnet outdated "Chapter 11/Catalog" -u
 dotnet outdated "Chapter 12/Catalog" -u 
 dotnet outdated "Chapter 13/Catalog" -u 
 dotnet outdated "Chapter 13/Cart" -u 
+dotnet outdated "Chapter 14/Catalog" -u 
+dotnet outdated "Chapter 14/Cart" -u 
 dotnet outdated "Chapter 15/Catalog" -u 
 dotnet outdated "Chapter 15/Cart" -u 
 dotnet outdated "Chapter 16/Catalog" -u 
