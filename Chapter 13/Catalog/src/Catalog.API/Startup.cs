@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Catalog.API.Controllers;
 using Catalog.API.Extensions;
 using Catalog.API.Middleware;
@@ -17,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Polly;
 using RiskFirst.Hateoas;
 
@@ -33,7 +30,6 @@ namespace Catalog.API
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
         }
-
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -84,13 +80,13 @@ namespace Catalog.API
             var retry = Policy.Handle<SqlException>()
                 .WaitAndRetry(new TimeSpan[]
                 {
-                    TimeSpan.FromSeconds(3),
-                    TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(8),
+                    TimeSpan.FromSeconds(2),
+                    TimeSpan.FromSeconds(6),
+                    TimeSpan.FromSeconds(12)
                 });
             
             retry.Execute(() => 
-                app.ApplicationServices.GetService<CatalogContext>().Database.EnsureCreated());
+                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
         }
     }
 }
