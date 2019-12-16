@@ -37,13 +37,13 @@ namespace Cart.Infrastructure.Repositories
         }
 
 
-        public async Task<Domain.Entities.Cart> GetAsync(Guid id)
+        public async Task<Domain.Entities.CartSession> GetAsync(Guid id)
         {
             var data = await _database.StringGetAsync(id.ToString());
-            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<Domain.Entities.Cart>(data);
+            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<Domain.Entities.CartSession>(data);
         }
 
-        public async Task<Domain.Entities.Cart> AddOrUpdateAsync(Domain.Entities.Cart item)
+        public async Task<Domain.Entities.CartSession> AddOrUpdateAsync(Domain.Entities.CartSession item)
         {
             var created = await _database.StringSetAsync(item.Id, JsonConvert.SerializeObject(item));
             if (!created) return null;

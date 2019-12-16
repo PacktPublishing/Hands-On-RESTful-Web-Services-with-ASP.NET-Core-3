@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cart.Domain.Entities;
 using Cart.Domain.Repositories;
 using Cart.Infrastructure.Configurations;
 using Microsoft.Extensions.Options;
@@ -37,13 +38,13 @@ namespace Cart.Infrastructure.Repositories
         }
 
 
-        public async Task<Domain.Entities.Cart> GetAsync(Guid id)
+        public async Task<CartSession> GetAsync(Guid id)
         {
             var data = await _database.StringGetAsync(id.ToString());
-            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<Domain.Entities.Cart>(data);
+            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<CartSession>(data);
         }
 
-        public async Task<Domain.Entities.Cart> AddOrUpdateAsync(Domain.Entities.Cart item)
+        public async Task<CartSession> AddOrUpdateAsync(CartSession item)
         {
             var created = await _database.StringSetAsync(item.Id, JsonConvert.SerializeObject(item));
             if (!created) return null;

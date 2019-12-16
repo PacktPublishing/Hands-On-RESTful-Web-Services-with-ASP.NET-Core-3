@@ -29,7 +29,7 @@ namespace Cart.Domain.Handlers.Cart
             CreateCartCommand command,
             CancellationToken cancellationToken)
         {
-            var entity = new Entities.Cart
+            var entity = new Entities.CartSession
             {
                 Items = command.ItemsIds.Select(x => new CartItem { CartItemId = new Guid(x), Quantity = 1 }).ToList(),
                 User = new CartUser { Email = command.UserEmail },

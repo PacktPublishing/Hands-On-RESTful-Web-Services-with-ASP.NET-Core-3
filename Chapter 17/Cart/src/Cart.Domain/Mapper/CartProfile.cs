@@ -9,7 +9,7 @@ namespace Cart.Domain.Infrastructure.Mapper
         public CartProfile()
         {
             CreateMap<CartItemResponse, CartItem>().ReverseMap();
-            CreateMap<CartExtendedResponse, Entities.Cart>().ReverseMap();
+            CreateMap<CartExtendedResponse, CartSession>().ReverseMap();
             CreateMap<CartUserResponse, CartUser>().ReverseMap();
         }
     }

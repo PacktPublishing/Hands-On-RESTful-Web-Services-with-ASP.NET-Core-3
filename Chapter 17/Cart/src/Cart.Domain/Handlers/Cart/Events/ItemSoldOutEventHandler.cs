@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Cart.Domain.Entities;
 using Cart.Domain.Events;
 using Cart.Domain.Repositories;
 using MediatR;
@@ -32,17 +33,17 @@ namespace Cart.Domain.Handlers.Cart.Events
             return Unit.Value;
         }
 
-        private async Task RemoveItemsInCart(string itemToRemove, Entities.Cart cartSessionSession)
+        private async Task RemoveItemsInCart(string itemToRemove, CartSession cartSessionSessionSession)
         {
             if (string.IsNullOrEmpty(itemToRemove)) return;
 
-            var toDelete = cartSessionSession?.Items?.Where(x => x.CartItemId.ToString() == itemToRemove).ToList();
+            var toDelete = cartSessionSessionSession?.Items?.Where(x => x.CartItemId.ToString() == itemToRemove).ToList();
 
             if (toDelete == null || toDelete.Count == 0) return;
 
-            foreach (var item in toDelete) cartSessionSession.Items?.Remove(item);
+            foreach (var item in toDelete) cartSessionSessionSession.Items?.Remove(item);
 
-            await _cartRepository.AddOrUpdateAsync(cartSessionSession);
+            await _cartRepository.AddOrUpdateAsync(cartSessionSessionSession);
         }
     }
 }
