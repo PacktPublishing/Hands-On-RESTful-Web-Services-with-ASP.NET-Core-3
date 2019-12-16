@@ -1,6 +1,6 @@
 using System.Text;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Entities;
-using Catalog.Domain.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

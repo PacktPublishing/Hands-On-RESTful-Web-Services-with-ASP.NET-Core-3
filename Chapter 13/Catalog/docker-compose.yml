@@ -14,7 +14,7 @@ services:
     depends_on:
       - catalog_db
       - catalog_esb
-      
+
   catalog_db:
     container_name: catalog_db
     image: microsoft/mssql-server-linux

@@ -1,13 +1,14 @@
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Cart.Domain.Events;
 using Cart.Domain.Repositories;
-using Cart.Events;
-using NServiceBus;
+using MediatR;
 
 namespace Cart.Domain.Handlers.Cart.Events
 {
-    public class ItemSoldOutEventHandler : IHandleMessages<ItemSoldOutEvent>
+    public class ItemSoldOutEventHandler : IRequestHandler<ItemSoldOutEvent>
     {
         private readonly ICartRepository _cartRepository;
 
@@ -16,7 +17,7 @@ namespace Cart.Domain.Handlers.Cart.Events
             _cartRepository = cartRepository;
         }
 
-        public Task Handle(ItemSoldOutEvent @event, IMessageHandlerContext context)
+        public async Task<Unit> Handle(ItemSoldOutEvent @event, CancellationToken cancellationToken)
         {
             var cartIds = _cartRepository.GetCarts().ToList();
 
@@ -26,8 +27,9 @@ namespace Cart.Domain.Handlers.Cart.Events
                 await RemoveItemsInCart(@event.Id, cart);
             });
 
-            Task.WhenAll(tasks);
-            return Task.CompletedTask;
+            await Task.WhenAll(tasks);
+
+            return Unit.Value;
         }
 
         private async Task RemoveItemsInCart(string itemToRemove, Entities.Cart cart)

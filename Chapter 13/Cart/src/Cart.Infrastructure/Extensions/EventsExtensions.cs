@@ -1,45 +1,26 @@
-using System;
+using Cart.Infrastructure.Configurations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NServiceBus;
+using RabbitMQ.Client;
 
 namespace Cart.Infrastructure.Extensions
 {
     public static class EventsExtensions
     {
-        public static IServiceCollection AddRabbitMQ(this IServiceCollection services, string endpointName,
-            string connectionString, string environmentName)
+        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-            if (environmentName.Equals("Testing")) return services;
-            var endpointConfiguration = new EndpointConfiguration(endpointName);
+            var config = new EventBusSettings();
+            configuration.Bind("EventBus", config);
+            services.AddSingleton(config);
 
-            endpointConfiguration
-                .UseTransport<RabbitMQTransport>()
-                .UseConventionalRoutingTopology()
-                .ConnectionString(connectionString);
-
-            endpointConfiguration.UseContainer<ServicesBuilder>(
-                customizations => { customizations.ExistingServices(services); });
-
-            endpointConfiguration.EnableInstallers();
-
-            endpointConfiguration
-                .Conventions()
-                .DefiningEventsAs(
-                    type => type.Namespace?.Contains("Cart.Events") ?? false);
-
-            try
+            ConnectionFactory factory = new ConnectionFactory
             {
-                var endpointInstance = Endpoint.Start(endpointConfiguration)
-                    .ConfigureAwait(false)
-                    .GetAwaiter()
-                    .GetResult();
+                HostName = config.HostName,
+                UserName = config.User,
+                Password = config.Password
+            };
 
-                services.AddSingleton(endpointInstance);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error in initializing the event bus: {e.Message}");
-            }
+            services.AddSingleton(factory);
 
             return services;
         }

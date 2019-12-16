@@ -4,10 +4,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.User;
 using Catalog.Domain.Responses;
-using Catalog.Domain.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

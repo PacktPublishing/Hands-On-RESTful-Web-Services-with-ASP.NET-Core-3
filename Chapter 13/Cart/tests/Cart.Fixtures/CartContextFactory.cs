@@ -29,17 +29,17 @@ namespace Cart.Fixtures
                 .Setup(x => x.GetAsync(It.IsAny<Guid>()))
                 .Returns((Guid id) =>
                     Task.FromResult(
-                        JsonConvert.DeserializeObject<Domain.Entities.Cart>(memoryCollection[id.ToString()])));
+                        JsonConvert.DeserializeObject<Domain.Entities.CartSession>(memoryCollection[id.ToString()])));
 
             cartRepository
-                .Setup(x => x.AddOrUpdateAsync(It.IsAny<Domain.Entities.Cart>()))
-                .Callback((Domain.Entities.Cart x) =>
+                .Setup(x => x.AddOrUpdateAsync(It.IsAny<Domain.Entities.CartSession>()))
+                .Callback((Domain.Entities.CartSession x) =>
                 {
                     memoryCollection.AddOrUpdate(x.Id, JsonConvert.SerializeObject(x),
                         (id, value) => JsonConvert.SerializeObject(x));
                 })
-                .ReturnsAsync((Domain.Entities.Cart x) =>
-                    JsonConvert.DeserializeObject<Domain.Entities.Cart>(memoryCollection[x.Id]));
+                .ReturnsAsync((Domain.Entities.CartSession x) =>
+                    JsonConvert.DeserializeObject<Domain.Entities.CartSession>(memoryCollection[x.Id]));
 
             return cartRepository.Object;
         }
@@ -70,7 +70,7 @@ namespace Cart.Fixtures
             using (var reader = new StreamReader("./Data/cart.json"))
             {
                 var json = reader.ReadToEnd();
-                var data = JsonConvert.DeserializeObject<Domain.Entities.Cart[]>(json);
+                var data = JsonConvert.DeserializeObject<Domain.Entities.CartSession[]>(json);
 
                 var memoryCollection = data.ToDictionary(cart => cart.Id, JsonConvert.SerializeObject);
 

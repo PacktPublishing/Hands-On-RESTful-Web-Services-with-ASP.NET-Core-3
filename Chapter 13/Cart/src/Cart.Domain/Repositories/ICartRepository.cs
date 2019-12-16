@@ -7,7 +7,7 @@ namespace Cart.Domain.Repositories
     public interface ICartRepository
     {
         IEnumerable<string> GetCarts();
-        Task<Entities.Cart> GetAsync(Guid id);
-        Task<Entities.Cart> AddOrUpdateAsync(Entities.Cart item);
+        Task<Entities.CartSession> GetAsync(Guid id);
+        Task<Entities.CartSession> AddOrUpdateAsync(Entities.CartSession item);
     }
 }

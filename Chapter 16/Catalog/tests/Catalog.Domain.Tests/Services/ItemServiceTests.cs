@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Mappers;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Services;
 using Catalog.Fixtures;
 using Catalog.Infrastructure.Repositories;
+using Microsoft.Extensions.Logging.Abstractions;
+using RabbitMQ.Client;
 using Shouldly;
 using Xunit;
 
@@ -40,10 +43,10 @@ namespace Catalog.Domain.Tests.Services
                 ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
             };
 
-            IItemService sut = new ItemService(_itemRepository, _mapper);
+            var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
 
             var result =
-                await sut.AddItemAsync(testItem);
+                await sut.AddItemAsync(testItem, CancellationToken.None);
 
             result.Name.ShouldBe(testItem.Name);
             result.Description.ShouldBe(testItem.Description);
@@ -71,7 +74,7 @@ namespace Catalog.Domain.Tests.Services
                 ArtistId = new Guid("f08a333d-30db-4dd1-b8ba-3b0473c7cdab")
             };
 
-            var sut = new ItemService(_itemRepository, _mapper);
+            var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
 
             var result =
                 await sut.EditItemAsync(testItem, CancellationToken.None);
@@ -87,14 +90,14 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public void getitem_should_thrown_exception_with_null_id()
         {
-            var sut = new ItemService(_itemRepository, _mapper);
+            var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
             sut.GetItemAsync(null).ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
         public async Task getitems_should_return_right_data()
         {
-            var sut = new ItemService(_itemRepository, _mapper);
+            var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
 
             var result =
                 await sut.GetItemsAsync();

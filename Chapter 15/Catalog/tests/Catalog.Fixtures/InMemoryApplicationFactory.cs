@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using NServiceBus;
-using NServiceBus.Testing;
 
 namespace Catalog.Fixtures
 {
@@ -25,7 +23,6 @@ namespace Catalog.Fixtures
                         .Options;
 
                     services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options));
-                    services.AddSingleton<IEndpointInstance>(x => new TestableEndpointInstance());
                     services.Replace(ServiceDescriptor.Scoped(_ => new UsersContextFactory().InMemoryUserManager));
 
                     var sp = services.BuildServiceProvider();

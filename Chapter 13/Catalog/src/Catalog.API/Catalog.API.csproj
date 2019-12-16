@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Polly" Version="7.2.0" />
     <PackageReference Include="RiskFirst.Hateoas" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>

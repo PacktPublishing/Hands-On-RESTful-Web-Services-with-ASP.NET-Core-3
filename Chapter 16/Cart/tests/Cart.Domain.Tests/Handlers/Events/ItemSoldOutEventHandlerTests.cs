@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Cart.Domain.Events;
 using Cart.Domain.Handlers.Cart.Events;
-using Cart.Events;
 using Cart.Fixtures;
-using NServiceBus.Testing;
 using Shouldly;
 using Xunit;
 
@@ -22,13 +22,12 @@ namespace Cart.Domain.Tests.Handlers.Events
         [Fact]
         public async Task should_not_remove_records_when_soldout_message_contains_not_existing_id()
         {
-            var context = new TestableMessageHandlerContext();
             var repository = _contextFactory.GetCartRepository();
             var itemSoldOutEventHandler = new ItemSoldOutEventHandler(repository);
             var found = false;
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent { Id = Guid.NewGuid().ToString() }, context);
+                new ItemSoldOutEvent { Id = Guid.NewGuid().ToString() }, CancellationToken.None);
 
             var cartsIds = repository.GetCarts();
 
@@ -45,14 +44,13 @@ namespace Cart.Domain.Tests.Handlers.Events
         public async Task should_remove_records_when_soldout_messages_contains_existing_ids()
         {
             var itemSoldOutId = "be05537d-5e80-45c1-bd8c-aa21c0f1251e";
-            var context = new TestableMessageHandlerContext();
             var repository = _contextFactory.GetCartRepository();
             var itemSoldOutEventHandler = new ItemSoldOutEventHandler(repository);
             var found = false;
 
 
             await itemSoldOutEventHandler.Handle(
-                new ItemSoldOutEvent { Id = itemSoldOutId }, context);
+                new ItemSoldOutEvent { Id = itemSoldOutId }, CancellationToken.None);
 
             foreach (var cartId in repository.GetCarts())
             {

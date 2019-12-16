@@ -9,7 +9,4 @@
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\Cart.Events\Cart.Events.csproj" />
-    </ItemGroup>
 </Project>

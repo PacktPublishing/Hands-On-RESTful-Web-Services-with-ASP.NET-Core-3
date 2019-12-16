@@ -7,6 +7,7 @@ using Cart.Infrastructure.Configurations;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using Cart.Domain.Entities;
 
 namespace Cart.Infrastructure.Repositories
 {
@@ -36,14 +37,13 @@ namespace Cart.Infrastructure.Repositories
             return keys?.Select(k => k.ToString());
         }
 
-
-        public async Task<Domain.Entities.Cart> GetAsync(Guid id)
+        public async Task<CartSession> GetAsync(Guid id)
         {
             var data = await _database.StringGetAsync(id.ToString());
-            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<Domain.Entities.Cart>(data);
+            return data.IsNullOrEmpty ? null : JsonConvert.DeserializeObject<CartSession>(data);
         }
 
-        public async Task<Domain.Entities.Cart> AddOrUpdateAsync(Domain.Entities.Cart item)
+        public async Task<CartSession> AddOrUpdateAsync(CartSession item)
         {
             var created = await _database.StringSetAsync(item.Id, JsonConvert.SerializeObject(item));
             if (!created) return null;

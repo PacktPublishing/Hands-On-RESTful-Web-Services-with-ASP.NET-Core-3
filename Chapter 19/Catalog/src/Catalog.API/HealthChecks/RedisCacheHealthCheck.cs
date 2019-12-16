@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
-using Catalog.Domain.Settings;
 
 namespace Catalog.API.HealthChecks
 {
