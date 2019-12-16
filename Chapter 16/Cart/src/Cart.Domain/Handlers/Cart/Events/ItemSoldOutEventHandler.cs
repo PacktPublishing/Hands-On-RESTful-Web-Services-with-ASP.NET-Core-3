@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Cart.Domain.Entities;
 using Cart.Domain.Events;
 using Cart.Domain.Repositories;
 using MediatR;
@@ -32,7 +33,7 @@ namespace Cart.Domain.Handlers.Cart.Events
             return Unit.Value;
         }
 
-        private async Task RemoveItemsInCart(string itemToRemove, Entities.CartSession cartSessionSessionSession)
+        private async Task RemoveItemsInCart(string itemToRemove, CartSession cartSessionSessionSession)
         {
             if (string.IsNullOrEmpty(itemToRemove)) return;
 
