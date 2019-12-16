@@ -1,4 +1,5 @@
-﻿using Catalog.API.Controllers;
+﻿using System;
+using Catalog.API.Controllers;
 using Catalog.API.Extensions;
 using Catalog.API.Middleware;
 using Catalog.API.ResponseModels;
@@ -9,9 +10,12 @@ using Catalog.Infrastructure.Extensions;
 using Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Polly;
 using RiskFirst.Hateoas;
 
 namespace Catalog.API
@@ -66,8 +70,9 @@ namespace Catalog.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (!env.IsTesting())
-                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate();
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            
+            ExecuteMigrations(app, env);
 
             app.UseResponseCaching();
             app.UseRouting();
@@ -76,6 +81,22 @@ namespace Catalog.API
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+        
+        private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.EnvironmentName == "Testing") return;
+
+            var retry = Policy.Handle<SqlException>()
+                .WaitAndRetry(new TimeSpan[]
+                {
+                    TimeSpan.FromSeconds(2),
+                    TimeSpan.FromSeconds(6),
+                    TimeSpan.FromSeconds(12)
+                });
+
+            retry.Execute(() =>
+                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
         }
     }
 }
