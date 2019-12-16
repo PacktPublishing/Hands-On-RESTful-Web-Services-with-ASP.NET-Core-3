@@ -26,7 +26,7 @@ namespace Catalog.Domain.Services
         private readonly EventBusSettings _settings;
 
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger, 
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger,
             ConnectionFactory eventBusConnectionFactory, EventBusSettings settings)
         {
             _itemRepository = itemRepository;

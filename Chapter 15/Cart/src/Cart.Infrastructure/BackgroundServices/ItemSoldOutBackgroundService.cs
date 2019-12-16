@@ -42,7 +42,7 @@ namespace Cart.Infrastructure.BackgroundServices
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-            
+
             consumer.Received += async (ch, ea) =>
             {
                 var content = System.Text.Encoding.UTF8.GetString(ea.Body);
@@ -50,7 +50,7 @@ namespace Cart.Infrastructure.BackgroundServices
 
                 _logger.LogInformation("Consuming the following message from the event bus: {message}",
                     JsonConvert.SerializeObject(@event));
-                
+
                 await _mediator.Send(@event, stoppingToken);
                 _channel.BasicAck(ea.DeliveryTag, false);
             };

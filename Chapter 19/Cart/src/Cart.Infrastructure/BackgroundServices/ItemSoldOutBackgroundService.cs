@@ -19,7 +19,7 @@ namespace Cart.Infrastructure.BackgroundServices
         private readonly EventBusSettings _settings;
         private readonly IModel _channel;
 
-        public ItemSoldOutBackgroundService( IMediator mediator,
+        public ItemSoldOutBackgroundService(IMediator mediator,
             EventBusSettings settings, ConnectionFactory factory, ILogger<ItemSoldOutBackgroundService> logger)
         {
             _settings = settings;
@@ -42,8 +42,8 @@ namespace Cart.Infrastructure.BackgroundServices
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-          
-            
+
+
             consumer.Received += async (ch, ea) =>
             {
                 var content = System.Text.Encoding.UTF8.GetString(ea.Body);
@@ -51,7 +51,7 @@ namespace Cart.Infrastructure.BackgroundServices
 
                 _logger.LogInformation("Consuming the following message from the event bus: {message}",
                     JsonConvert.SerializeObject(@event));
-                
+
                 await _mediator.Send(@event, stoppingToken);
                 _channel.BasicAck(ea.DeliveryTag, false);
             };

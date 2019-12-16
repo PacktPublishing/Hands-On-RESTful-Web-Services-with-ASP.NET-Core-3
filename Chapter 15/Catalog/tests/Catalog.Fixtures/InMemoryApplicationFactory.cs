@@ -22,7 +22,7 @@ namespace Catalog.Fixtures
                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
                         .Options;
 
-                    services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options)); 
+                    services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options));
                     services.Replace(ServiceDescriptor.Scoped(_ => new UsersContextFactory().InMemoryUserManager));
 
                     var sp = services.BuildServiceProvider();

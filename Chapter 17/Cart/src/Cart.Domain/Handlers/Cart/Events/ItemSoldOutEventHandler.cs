@@ -16,7 +16,7 @@ namespace Cart.Domain.Handlers.Cart.Events
         {
             _cartRepository = cartRepository;
         }
-        
+
         public async Task<Unit> Handle(ItemSoldOutEvent @event, CancellationToken cancellationToken)
         {
             var cartIds = _cartRepository.GetCarts().ToList();
@@ -28,7 +28,7 @@ namespace Cart.Domain.Handlers.Cart.Events
             });
 
             await Task.WhenAll(tasks);
-            
+
             return Unit.Value;
         }
 

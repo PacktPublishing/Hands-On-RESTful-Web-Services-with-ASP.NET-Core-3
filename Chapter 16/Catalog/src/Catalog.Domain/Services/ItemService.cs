@@ -24,7 +24,7 @@ namespace Catalog.Domain.Services
         private readonly ILogger<ItemService> _logger;
         private readonly EventBusSettings _settings;
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ConnectionFactory eventBusConnectionFactory, 
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ConnectionFactory eventBusConnectionFactory,
             ILogger<ItemService> logger, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
@@ -81,12 +81,12 @@ namespace Catalog.Domain.Services
 
             _itemRepository.Update(result);
             await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            
+
             SendDeleteMessage(new ItemSoldOutEvent { Id = request.Id.ToString() });
 
             return _itemMapper.Map(result);
         }
-        
+
         private void SendDeleteMessage(ItemSoldOutEvent message)
         {
             try

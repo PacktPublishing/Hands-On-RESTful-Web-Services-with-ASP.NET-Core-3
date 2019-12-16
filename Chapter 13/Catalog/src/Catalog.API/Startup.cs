@@ -66,7 +66,7 @@ namespace Catalog.API
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             ExecuteMigrations(app, env);
-            
+
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
@@ -76,7 +76,7 @@ namespace Catalog.API
         private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.EnvironmentName == "Testing") return;
-            
+
             var retry = Policy.Handle<SqlException>()
                 .WaitAndRetry(new TimeSpan[]
                 {
@@ -84,8 +84,8 @@ namespace Catalog.API
                     TimeSpan.FromSeconds(6),
                     TimeSpan.FromSeconds(12)
                 });
-            
-            retry.Execute(() => 
+
+            retry.Execute(() =>
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
         }
     }

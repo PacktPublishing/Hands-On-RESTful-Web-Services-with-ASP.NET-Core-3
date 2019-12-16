@@ -56,7 +56,7 @@ namespace Catalog.Domain.Tests.Services
         [LoadData("item")]
         public async Task additem_should_log_information(AddItemRequest request)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
             await sut.AddItemAsync(request, CancellationToken.None);
 
             _logger
@@ -83,14 +83,14 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public void getitem_should_thrown_exception_with_null_id()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
             sut.GetItemAsync(null).ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
         public async Task getitems_should_return_right_data()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
                 await sut.GetItemsAsync();

@@ -28,7 +28,7 @@ namespace Cart.Domain.Handlers.Cart.Events
             });
 
             await Task.WhenAll(tasks);
-            
+
             return Unit.Value;
         }
 

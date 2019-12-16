@@ -47,7 +47,7 @@ namespace Catalog.API
                 .AddValidation();
 
             services.AddEventBus(Configuration);
-            
+
             services.AddLinks(config =>
             {
                 config.AddPolicy<ItemHateoasResponse>(policy =>
@@ -68,9 +68,9 @@ namespace Catalog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-           
+
             ExecuteMigrations(app, env);
-            
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -78,11 +78,11 @@ namespace Catalog.API
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-        
+
         private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.EnvironmentName == "Testing") return;
-            
+
             var retry = Policy.Handle<SqlException>()
                 .WaitAndRetry(new TimeSpan[]
                 {
@@ -90,8 +90,8 @@ namespace Catalog.API
                     TimeSpan.FromSeconds(6),
                     TimeSpan.FromSeconds(12)
                 });
-            
-            retry.Execute(() => 
+
+            retry.Execute(() =>
                 app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
         }
     }

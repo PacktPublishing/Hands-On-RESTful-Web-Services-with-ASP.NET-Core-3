@@ -56,7 +56,7 @@ namespace Catalog.Domain.Tests.Services
         [LoadData("item")]
         public async Task additem_should_log_information(AddItemRequest request)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
             await sut.AddItemAsync(request, CancellationToken.None);
 
             _logger
@@ -113,7 +113,7 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public async Task getitems_should_log_right_information()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             await sut.GetItemsAsync();
 
