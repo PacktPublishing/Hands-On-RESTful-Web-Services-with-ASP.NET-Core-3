@@ -9,8 +9,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using NServiceBus;
-using NServiceBus.Testing;
 using Xunit.Abstractions;
 
 namespace Catalog.Fixtures
@@ -41,7 +39,6 @@ namespace Catalog.Fixtures
                     }
 
                     services.AddScoped<CatalogContext>(serviceProvider => new TestCatalogContext(options));
-                    services.AddSingleton<IEndpointInstance>(x => new TestableEndpointInstance());
                     services.Replace(ServiceDescriptor.Scoped(_ => new UsersContextFactory().InMemoryUserManager));
                     services.AddSingleton<IDistributedCache, MemoryDistributedCache>();
 

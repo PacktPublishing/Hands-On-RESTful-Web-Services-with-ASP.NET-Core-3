@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
 using Catalog.Domain.Entities;
 using Catalog.Domain.Mappers;
 using Catalog.Domain.Requests.Item;
@@ -10,6 +11,7 @@ using Catalog.Infrastructure.Repositories;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
@@ -37,7 +39,7 @@ namespace Catalog.Domain.Tests.Services
         [LoadData("item")]
         public async Task additem_should_add_right_entity(AddItemRequest request)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
                 await sut.AddItemAsync(request, CancellationToken.None);
@@ -54,7 +56,7 @@ namespace Catalog.Domain.Tests.Services
         [LoadData("item")]
         public async Task additem_should_log_information(AddItemRequest request)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
             await sut.AddItemAsync(request, CancellationToken.None);
 
             _logger
@@ -65,7 +67,7 @@ namespace Catalog.Domain.Tests.Services
         [LoadData("item")]
         public async Task edititem_should_add_right_entity(EditItemRequest request)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
                 await sut.EditItemAsync(request, CancellationToken.None);
@@ -81,14 +83,14 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public void getitem_should_thrown_exception_with_null_id()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
             sut.GetItemAsync(null).ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
         public async Task getitems_should_return_right_data()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
                 await sut.GetItemsAsync();
@@ -100,7 +102,7 @@ namespace Catalog.Domain.Tests.Services
         [InlineData("b5b05534-9263-448c-a69e-0bbd8b3eb90e")]
         public async Task getitem_should_log_right_information(string guid)
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             await sut.GetItemAsync(new GetItemRequest { Id = new Guid(guid) });
 
@@ -111,7 +113,7 @@ namespace Catalog.Domain.Tests.Services
         [Fact]
         public async Task getitems_should_log_right_information()
         {
-            var sut = new ItemService(_itemRepository, _mapper, _logger.Object);
+            var sut = new ItemService(_itemRepository, _mapper, _logger.Object,new ConnectionFactory(), new EventBusSettings());
 
             await sut.GetItemsAsync();
 
