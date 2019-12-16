@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Domain.Configurations;
+using Catalog.Domain.Events;
 using Catalog.Domain.Logging;
 using Catalog.Domain.Mappers;
 using Catalog.Domain.Repositories;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 
 namespace Catalog.Domain.Services
 {
@@ -17,19 +22,25 @@ namespace Catalog.Domain.Services
         private readonly IItemMapper _itemMapper;
         private readonly IItemRepository _itemRepository;
         private readonly ILogger<IItemService> _logger;
+        private readonly ConnectionFactory _eventBusConnectionFactory;
+        private readonly EventBusSettings _settings;
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger)
+
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger, 
+            ConnectionFactory eventBusConnectionFactory, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
             _itemMapper = itemMapper;
             _logger = logger;
+            _eventBusConnectionFactory = eventBusConnectionFactory;
+            _settings = settings;
         }
 
         public async Task<IEnumerable<ItemResponse>> GetItemsAsync()
         {
             var result = await _itemRepository.GetAsync();
 
-            _logger.LogInformation(Events.GetById, Messages.NumberOfRecordAffected_modifiedRecords,
+            _logger.LogInformation(Logging.Events.GetById, Messages.NumberOfRecordAffected_modifiedRecords,
                 result.Count());
 
             return result
@@ -41,7 +52,7 @@ namespace Catalog.Domain.Services
             if (request?.Id == null) throw new ArgumentNullException();
             var entity = await _itemRepository.GetAsync(request.Id);
 
-            _logger.LogInformation(Events.GetById, Messages.TargetEntityChanged_id, entity?.Id);
+            _logger.LogInformation(Logging.Events.GetById, Messages.TargetEntityChanged_id, entity?.Id);
 
             return _itemMapper.Map(entity);
         }
@@ -53,8 +64,8 @@ namespace Catalog.Domain.Services
             var result = _itemRepository.Add(item);
             var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation(Events.Add, Messages.NumberOfRecordAffected_modifiedRecords, modifiedRecords);
-            _logger.LogInformation(Events.Add, Messages.ChangesApplied_id, result?.Id);
+            _logger.LogInformation(Logging.Events.Add, Messages.NumberOfRecordAffected_modifiedRecords, modifiedRecords);
+            _logger.LogInformation(Logging.Events.Add, Messages.ChangesApplied_id, result?.Id);
 
             return _itemMapper.Map(result);
         }
@@ -70,9 +81,9 @@ namespace Catalog.Domain.Services
 
             var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation(Events.Edit, Messages.NumberOfRecordAffected_modifiedRecords,
+            _logger.LogInformation(Logging.Events.Edit, Messages.NumberOfRecordAffected_modifiedRecords,
                 modifiedRecords);
-            _logger.LogInformation(Events.Edit, Messages.ChangesApplied_id, result?.Id);
+            _logger.LogInformation(Logging.Events.Edit, Messages.ChangesApplied_id, result?.Id);
 
             return _itemMapper.Map(result);
         }
@@ -86,12 +97,31 @@ namespace Catalog.Domain.Services
             result.IsInactive = false;
 
             _itemRepository.Update(result);
-            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation(Events.Delete, Messages.NumberOfRecordAffected_modifiedRecords,
-                modifiedRecords);
-
+            SendDeleteMessage(new ItemSoldOutEvent { Id = request.Id.ToString() });
             return _itemMapper.Map(result);
+        }
+
+        private void SendDeleteMessage(ItemSoldOutEvent message)
+        {
+            try
+            {
+                var connection = _eventBusConnectionFactory.CreateConnection();
+
+                using var channel = connection.CreateModel();
+                channel.QueueDeclare(queue: _settings.EventQueue, true, false);
+
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+
+                channel.ConfirmSelect();
+                channel.BasicPublish(exchange: "", routingKey: _settings.EventQueue, body: body);
+                channel.WaitForConfirmsOrDie();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning("Unable to initialize the event bus: {message}", e.Message);
+            }
         }
     }
 }
