@@ -7,10 +7,7 @@ using Catalog.API.ResponseModels;
 using Catalog.Domain.Requests.Item;
 using Catalog.Domain.Responses;
 using Catalog.Domain.Services;
-using Catalog.Infrastructure;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NServiceBus;
 
 namespace Catalog.API.Controllers
 {
