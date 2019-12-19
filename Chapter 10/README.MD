@@ -57,7 +57,7 @@ curl -X POST \
    - Create a new artist:
 ```
 curl -X POST \
-  http://localhost:5000/api/genre \
+  http://localhost:5000/api/artist \
   -H 'Content-Type: application/json' \
   -d ' {
             "artistName": "My Artist"
