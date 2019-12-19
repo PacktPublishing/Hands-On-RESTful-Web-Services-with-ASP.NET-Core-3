@@ -8,7 +8,7 @@ namespace Catalog.Infrastructure.SchemaDefinitions
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
-            builder.ToTable("Genres", CatalogContext.DEFAULT_SCHEMA);
+            builder.ToTable("Genres");
             builder.HasKey(x => x.GenreId);
             builder.Property(x => x.GenreId);
             builder.Property(x => x.GenreDescription)

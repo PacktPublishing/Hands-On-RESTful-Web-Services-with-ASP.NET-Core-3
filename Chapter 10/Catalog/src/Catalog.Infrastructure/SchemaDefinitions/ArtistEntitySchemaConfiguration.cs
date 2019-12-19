@@ -8,7 +8,7 @@ namespace Catalog.Infrastructure.SchemaDefinitions
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
-            builder.ToTable("Artists", CatalogContext.DEFAULT_SCHEMA);
+            builder.ToTable("Artists");
             builder.HasKey(x => x.ArtistId);
             builder.Property(x => x.ArtistId);
 
