@@ -46,42 +46,42 @@ dotnet run
 7. Verify the implementation:
 
    - Create a new genre:
-      ```
-         POST /api/genre HTTP/1.1
-         Host: localhost:5000
-         Content-Type: application/json
-         {
-            "genreDescription": "R&B"
-         }
-      ```
+```
+curl -X POST \
+  http://localhost:5000/api/genre \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "genreDescription": "My Genre"
+}'
+```
    - Create a new artist:
-      ```
-         POST /api/artist HTTP/1.1
-         Host: localhost:5000
-         Content-Type: application/json
-         {
-            "artistName": "Anderson .Paak"
-         }
-      ```
+```
+curl -X POST \
+  http://localhost:5000/api/genre \
+  -H 'Content-Type: application/json' \
+  -d ' {
+            "artistName": "My Artist"
+         }'
+```
    - Create a new item:
-      ```
-         POST /api/items HTTP/1.1
-         Host: localhost:5000
-         Content-Type: application/json
-         {
+```
+curl -X POST \
+  http://localhost:5000/api/items \
+  -H 'Content-Type: application/json' \
+  -d '{
             "name": "Test",
             "description": "Description",
             "labelName": "Label",
             "price": {
-            "currency": "EUR",
-            "amount": 34.3
-         },
+               "currency": "EUR",
+               "amount": 34.3
+            },
             "pictureUri": "",
             "releaseDate": "2019-11-21T16:18:42+00:00",
             "format": "",
             "availableStock": 4,
             "genreId":"<genre_id>",
             "artistId":"<artist_id>"
-         }
-      ```
+         }'
+```
 
