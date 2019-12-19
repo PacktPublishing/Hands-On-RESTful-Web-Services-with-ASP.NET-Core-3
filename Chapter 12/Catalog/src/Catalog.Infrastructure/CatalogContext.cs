@@ -9,8 +9,6 @@ namespace Catalog.Infrastructure
 {
     public class CatalogContext : DbContext, IUnitOfWork
     {
-        public const string DEFAULT_SCHEMA = "catalog";
-
 
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
         {

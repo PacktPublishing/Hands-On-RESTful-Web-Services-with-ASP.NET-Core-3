@@ -4,13 +4,14 @@ using Catalog.API.Middleware;
 using Catalog.API.ResponseModels;
 using Catalog.Domain.Extensions;
 using Catalog.Domain.Repositories;
+using Catalog.Domain.Responses;
 using Catalog.Infrastructure.Repositories;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using RiskFirst.Hateoas;
 
 namespace Catalog.API
@@ -27,14 +28,18 @@ namespace Catalog.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                    .AddCatalogContext(Configuration.GetSection("DataSource:ConnectionString").Value)
-                    .AddScoped<IItemRepository, ItemRepository>()
-                    .AddScoped<IArtistRepository, ArtistRepository>()
-                    .AddScoped<IGenreRepository, GenreRepository>()
-                    .AddMappers()
-                    .AddServices()
-                    .AddControllers()
-                    .AddValidation();
+                .AddCatalogContext(Configuration.GetSection("DataSource:ConnectionString").Value)
+                .AddScoped<IItemRepository, ItemRepository>()
+                .AddScoped<IArtistRepository, ArtistRepository>()
+                .AddScoped<IGenreRepository, GenreRepository>()
+                .AddMappers()
+                .AddServices()
+                .AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                })
+                .AddValidation();
 
             services.AddLinks(config =>
             {

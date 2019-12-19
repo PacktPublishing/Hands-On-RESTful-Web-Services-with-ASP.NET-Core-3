@@ -12,7 +12,6 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateTable(
                 "Artists",
-                schema: "catalog",
                 columns: table => new
                 {
                     ArtistId = table.Column<Guid>(),
@@ -22,7 +21,6 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateTable(
                 "Genres",
-                schema: "catalog",
                 columns: table => new
                 {
                     GenreId = table.Column<Guid>(),
@@ -32,7 +30,6 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateTable(
                 "Items",
-                schema: "catalog",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(),
@@ -69,13 +66,11 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateIndex(
                 "IX_Items_ArtistId",
-                schema: "catalog",
                 table: "Items",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 "IX_Items_GenreId",
-                schema: "catalog",
                 table: "Items",
                 column: "GenreId");
         }
@@ -83,16 +78,13 @@ namespace Catalog.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "Items",
-                "catalog");
+                "Items");
 
             migrationBuilder.DropTable(
-                "Artists",
-                "catalog");
+                "Artists");
 
             migrationBuilder.DropTable(
-                "Genres",
-                "catalog");
+                "Genres");
         }
     }
 }

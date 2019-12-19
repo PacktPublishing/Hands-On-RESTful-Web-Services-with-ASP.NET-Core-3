@@ -7,7 +7,7 @@ namespace Catalog.Domain.Mappers
     {
         public GenreResponse Map(Genre genre)
         {
-            if (genre == null) return new GenreResponse();
+            if (genre == null) return null;
 
             return new GenreResponse
             {

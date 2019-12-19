@@ -34,7 +34,7 @@ namespace Catalog.API.Migrations
 
                     b.HasKey("ArtistId");
 
-                    b.ToTable("Artists","catalog");
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Entities.Genre", b =>
@@ -50,7 +50,7 @@ namespace Catalog.API.Migrations
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("Genres","catalog");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Entities.Item", b =>
@@ -101,7 +101,7 @@ namespace Catalog.API.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Items","catalog");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Entities.Item", b =>
