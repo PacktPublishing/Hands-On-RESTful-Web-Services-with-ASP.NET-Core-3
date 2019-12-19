@@ -19,14 +19,14 @@ sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssw0rd" \
 3. Build the project:
 
 ```
-cd "Chapter 10/Catalog"
+cd "Chapter 11/Catalog"
 dotnet build
 ```
 
 4. Test the project:
 
 ```
-cd "Chapter 10/Catalog"
+cd "Chapter 11/Catalog"
 dotnet test
 ```
 
