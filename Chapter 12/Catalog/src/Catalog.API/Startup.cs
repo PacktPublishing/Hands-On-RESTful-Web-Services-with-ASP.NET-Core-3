@@ -33,7 +33,8 @@ namespace Catalog.API
                 .AddMappers()
                 .AddServices()
                 .AddControllers()
-                .AddValidation();
+                .AddValidation()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services.AddLinks(config =>
             {

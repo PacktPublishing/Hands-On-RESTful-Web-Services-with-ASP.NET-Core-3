@@ -46,7 +46,8 @@ namespace Catalog.API
                 .AddResponseCaching()
                 .AddDistributedRedisCache(Configuration)
                 .AddControllers()
-                .AddValidation();
+                .AddValidation()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services
                 .AddHealthChecks()
@@ -87,22 +88,22 @@ namespace Catalog.API
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-        
-                private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
+
+        private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.EnvironmentName == "Testing") return;
+
+            var retry = Policy.Handle<SqlException>()
+                .WaitAndRetry(new TimeSpan[]
                 {
-                    if (env.EnvironmentName == "Testing") return;
-        
-                    var retry = Policy.Handle<SqlException>()
-                        .WaitAndRetry(new TimeSpan[]
-                        {
                             TimeSpan.FromSeconds(2),
                             TimeSpan.FromSeconds(6),
                             TimeSpan.FromSeconds(12)
-                        });
-        
-                    retry.Execute(() =>
-                        app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
-                }
+                });
+
+            retry.Execute(() =>
+                app.ApplicationServices.GetService<CatalogContext>().Database.Migrate());
+        }
 
     }
 }

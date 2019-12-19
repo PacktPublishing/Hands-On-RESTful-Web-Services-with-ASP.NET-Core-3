@@ -30,7 +30,8 @@ namespace Cart.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers();
+                .AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services
                 .AddScoped<ICartRepository, CartRepository>()

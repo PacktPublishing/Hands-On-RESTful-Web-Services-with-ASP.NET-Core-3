@@ -9,7 +9,7 @@ namespace Catalog.Domain.Mappers
         public ArtistResponse Map(Artist artist)
         {
             if (artist == null) return null;
- 
+
             return new ArtistResponse
             {
                 ArtistId = artist.ArtistId,

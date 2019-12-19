@@ -46,7 +46,8 @@ namespace Catalog.API
                 .AddResponseCaching()
                 .AddDistributedRedisCache(Configuration)
                 .AddControllers()
-                .AddValidation();
+                .AddValidation()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
 
 
             services.AddEventBus(Configuration);
@@ -71,7 +72,7 @@ namespace Catalog.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            
+
             ExecuteMigrations(app, env);
 
             app.UseResponseCaching();
@@ -82,7 +83,7 @@ namespace Catalog.API
             app.UseMiddleware<ResponseTimeMiddlewareAsync>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-        
+
         private void ExecuteMigrations(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.EnvironmentName == "Testing") return;
