@@ -7,9 +7,6 @@ namespace Catalog.API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "catalog");
-
             migrationBuilder.CreateTable(
                 name: "Artist",
                 columns: table => new
@@ -36,7 +33,6 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Items",
-                schema: "catalog",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -71,13 +67,11 @@ namespace Catalog.API.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ArtistId",
-                schema: "catalog",
                 table: "Items",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_GenreId",
-                schema: "catalog",
                 table: "Items",
                 column: "GenreId");
         }
@@ -85,8 +79,7 @@ namespace Catalog.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Items",
-                schema: "catalog");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Artist");
