@@ -5,13 +5,13 @@
 1. Build the project:
 
 ```
-cd "Chapter 8/Catalog"
+cd "Chapter 9/Catalog"
 dotnet build
 ```
 
 2. Test the project:
 
 ```
-cd "Chapter 8/Catalog"
+cd "Chapter 9/Catalog"
 dotnet test
 ```
