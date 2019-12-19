@@ -43,10 +43,13 @@ dotnet ef database update
 cd "src/Catalog.API"
 dotnet run
 ```
+_________
 
-7. Verify the HATEOAS implementation:
+## Verify implementation
 
-   - Create a new genre:
+### HATEOAS
+
+1. Create a new genre:
 ```
 curl -X POST \
   http://localhost:5000/api/genre \
@@ -55,7 +58,7 @@ curl -X POST \
     "genreDescription": "My Genre"
 }'
 ```
-   - Create a new artist:
+2. Create a new artist:
 ```
 curl -X POST \
   http://localhost:5000/api/artist \
@@ -64,7 +67,7 @@ curl -X POST \
             "artistName": "My Artist"
          }'
 ```
-   - Create a new item:
+3. Create a new item:
 ```
 curl -X POST \
   http://localhost:5000/api/items \
@@ -85,13 +88,33 @@ curl -X POST \
             "artistId":"<artist_id>"
          }'
 ```
+4. Get item data using HATEOAS controller
+```
+curl -X POST \
+  http://localhost:5000/api/hateoas/items \
+  -H 'Content-Type: application/json' \
 
-8. Verify the soft-delete implementation:
+```
 
-   - Delete the created item:
+### SOFT-DELETE implementation
+
+1. Delete the created item:
 ```
 curl -X DELETE \
   http://localhost:5000/api/items/<item_id> \
   -H 'Content-Type: application/json' \
 ```
 
+2. Fetch all the items:
+```
+curl -X GET \
+  http://localhost:5000/api/items/ \
+  -H 'Content-Type: application/json' \
+```
+
+3. Fetch the detail of the item:
+```
+curl -X GET \
+  http://localhost:5000/api/items/<item_id> \
+  -H 'Content-Type: application/json' \
+```
