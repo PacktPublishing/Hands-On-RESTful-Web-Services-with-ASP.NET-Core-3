@@ -23,12 +23,12 @@ namespace Catalog.Domain.Tests.Requests.Item.Validators
             _artistServiceMock = new Mock<IArtistService>();
             _artistServiceMock
                 .Setup(x => x.GetArtistAsync(It.IsAny<GetArtistRequest>()))
-                .ReturnsAsync(() => new ArtistResponse());
+                .ReturnsAsync(() => null);
 
             _genreServiceMock = new Mock<IGenreService>();
             _genreServiceMock
                 .Setup(x => x.GetGenreAsync(It.IsAny<GetGenreRequest>()))
-                .ReturnsAsync(() => new GenreResponse());
+                .ReturnsAsync(() => null);
 
             _validator = new AddItemRequestValidator(_artistServiceMock.Object, _genreServiceMock.Object);
         }
