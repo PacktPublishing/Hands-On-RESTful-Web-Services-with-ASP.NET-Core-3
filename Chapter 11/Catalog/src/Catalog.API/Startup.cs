@@ -39,7 +39,8 @@ namespace Catalog.API
                 {
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 })
-                .AddValidation();
+                .AddValidation()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services.AddLinks(config =>
             {
