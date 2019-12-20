@@ -46,7 +46,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
 
             var result =
-                await sut.AddItemAsync(testItem, CancellationToken.None);
+                await sut.AddItemAsync(testItem);
 
             result.Name.ShouldBe(testItem.Name);
             result.Description.ShouldBe(testItem.Description);
@@ -77,7 +77,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ItemService(_itemRepository, _mapper, new ConnectionFactory(), new NullLogger<ItemService>(), new EventBusSettings());
 
             var result =
-                await sut.EditItemAsync(testItem, CancellationToken.None);
+                await sut.EditItemAsync(testItem);
 
             result.Name.ShouldBe(testItem.Name);
             result.Description.ShouldBe(testItem.Description);

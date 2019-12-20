@@ -10,8 +10,8 @@ namespace Catalog.Domain.Services
     {
         Task<IEnumerable<ItemResponse>> GetItemsAsync();
         Task<ItemResponse> GetItemAsync(GetItemRequest request);
-        Task<ItemResponse> AddItemAsync(AddItemRequest request, CancellationToken cancellationToken = default);
-        Task<ItemResponse> EditItemAsync(EditItemRequest request, CancellationToken cancellationToken = default);
-        Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request, CancellationToken cancellationToken = default);
+        Task<ItemResponse> AddItemAsync(AddItemRequest request);
+        Task<ItemResponse> EditItemAsync(EditItemRequest request);
+        Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request);
     }
 }

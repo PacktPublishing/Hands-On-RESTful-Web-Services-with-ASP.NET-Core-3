@@ -11,6 +11,6 @@ namespace Catalog.Domain.Services
         Task<IEnumerable<ArtistResponse>> GetArtistsAsync();
         Task<ArtistResponse> GetArtistAsync(GetArtistRequest request);
         Task<IEnumerable<ItemResponse>> GetItemByArtistIdAsync(GetArtistRequest request);
-        Task<ArtistResponse> AddArtistAsync(AddArtistRequest request, CancellationToken cancellationToken);
+        Task<ArtistResponse> AddArtistAsync(AddArtistRequest request);
     }
 }

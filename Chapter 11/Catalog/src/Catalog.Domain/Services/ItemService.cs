@@ -35,17 +35,17 @@ namespace Catalog.Domain.Services
             return _itemMapper.Map(entity);
         }
 
-        public async Task<ItemResponse> AddItemAsync(AddItemRequest request, CancellationToken cancellationToken)
+        public async Task<ItemResponse> AddItemAsync(AddItemRequest request)
         {
             var item = _itemMapper.Map(request);
 
             var result = _itemRepository.Add(item);
-            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _itemRepository.UnitOfWork.SaveChangesAsync();
 
             return _itemMapper.Map(result);
         }
 
-        public async Task<ItemResponse> EditItemAsync(EditItemRequest request, CancellationToken cancellationToken)
+        public async Task<ItemResponse> EditItemAsync(EditItemRequest request)
         {
             var existingRecord = await _itemRepository.GetAsync(request.Id);
 
@@ -57,11 +57,11 @@ namespace Catalog.Domain.Services
             var entity = _itemMapper.Map(request);
             var result = _itemRepository.Update(entity);
 
-            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _itemRepository.UnitOfWork.SaveChangesAsync();
             return _itemMapper.Map(result);
         }
 
-        public async Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request, CancellationToken cancellationToken = default)
+        public async Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request)
         {
             if (request?.Id == null) throw new ArgumentNullException();
 
@@ -69,7 +69,7 @@ namespace Catalog.Domain.Services
             result.IsInactive = false;
 
             _itemRepository.Update(result);
-            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _itemRepository.UnitOfWork.SaveChangesAsync();
 
             return _itemMapper.Map(result);
         }

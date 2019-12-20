@@ -25,7 +25,8 @@ namespace Catalog.Domain.Services
         private readonly ConnectionFactory _eventBusConnectionFactory;
         private readonly EventBusSettings _settings;
 
-        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger, ConnectionFactory eventBusConnectionFactory, EventBusSettings settings)
+        public ItemService(IItemRepository itemRepository, IItemMapper itemMapper, ILogger<IItemService> logger,
+            ConnectionFactory eventBusConnectionFactory, EventBusSettings settings)
         {
             _itemRepository = itemRepository;
             _itemMapper = itemMapper;
@@ -54,12 +55,12 @@ namespace Catalog.Domain.Services
             return _itemMapper.Map(entity);
         }
 
-        public async Task<ItemResponse> AddItemAsync(AddItemRequest request, CancellationToken cancellationToken)
+        public async Task<ItemResponse> AddItemAsync(AddItemRequest request)
         {
             var item = _itemMapper.Map(request);
 
             var result = _itemRepository.Add(item);
-            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync();
 
             _logger.LogInformation(Logging.Events.Add, Messages.NumberOfRecordAffected_modifiedRecords, modifiedRecords);
             _logger.LogInformation(Logging.Events.Add, Messages.ChangesApplied_id, result?.Id);
@@ -67,7 +68,7 @@ namespace Catalog.Domain.Services
             return _itemMapper.Map(result);
         }
 
-        public async Task<ItemResponse> EditItemAsync(EditItemRequest request, CancellationToken cancellationToken)
+        public async Task<ItemResponse> EditItemAsync(EditItemRequest request)
         {
             var existingRecord = await _itemRepository.GetAsync(request.Id);
 
@@ -76,7 +77,7 @@ namespace Catalog.Domain.Services
             var entity = _itemMapper.Map(request);
             var result = _itemRepository.Update(entity);
 
-            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync();
 
             _logger.LogInformation(Logging.Events.Edit, Messages.NumberOfRecordAffected_modifiedRecords,
                 modifiedRecords);
@@ -85,8 +86,7 @@ namespace Catalog.Domain.Services
             return _itemMapper.Map(result);
         }
 
-        public async Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request,
-            CancellationToken cancellationToken = default)
+        public async Task<ItemResponse> DeleteItemAsync(DeleteItemRequest request)
         {
             if (request?.Id == null) throw new ArgumentNullException();
 
@@ -94,7 +94,7 @@ namespace Catalog.Domain.Services
             result.IsInactive = false;
 
             _itemRepository.Update(result);
-            await _itemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _itemRepository.UnitOfWork.SaveChangesAsync();
 
             SendDeleteMessage(new ItemSoldOutEvent { Id = request.Id.ToString() });
             return _itemMapper.Map(result);

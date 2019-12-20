@@ -42,7 +42,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
-                await sut.AddItemAsync(request, CancellationToken.None);
+                await sut.AddItemAsync(request);
 
             result.Name.ShouldBe(request.Name);
             result.Description.ShouldBe(request.Description);
@@ -57,7 +57,7 @@ namespace Catalog.Domain.Tests.Services
         public async Task additem_should_log_information(AddItemRequest request)
         {
             var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
-            await sut.AddItemAsync(request, CancellationToken.None);
+            await sut.AddItemAsync(request);
 
             _logger
                 .Verify(x => x.Log(It.IsAny<LogLevel>(), It.IsAny<Exception>(), It.IsAny<string>()), Times.AtMost(2));
@@ -70,7 +70,7 @@ namespace Catalog.Domain.Tests.Services
             var sut = new ItemService(_itemRepository, _mapper, _logger.Object, new ConnectionFactory(), new EventBusSettings());
 
             var result =
-                await sut.EditItemAsync(request, CancellationToken.None);
+                await sut.EditItemAsync(request);
 
             result.Name.ShouldBe(request.Name);
             result.Description.ShouldBe(request.Description);

@@ -57,7 +57,7 @@ namespace Catalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(AddArtistRequest request)
         {
-            var result = await _artistService.AddArtistAsync(request, CancellationToken.None);
+            var result = await _artistService.AddArtistAsync(request);
             return CreatedAtAction(nameof(GetById), new { id = result.ArtistId }, null);
         }
     }

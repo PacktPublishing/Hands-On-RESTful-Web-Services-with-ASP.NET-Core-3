@@ -93,7 +93,7 @@ namespace Catalog.Domain.Tests.Services
             ItemService sut = new ItemService(_itemRepository, _mapper);
 
             var result =
-                await sut.EditItemAsync(testItem, CancellationToken.None);
+                await sut.EditItemAsync(testItem);
 
             result.Name.ShouldBe(testItem.Name);
             result.Description.ShouldBe(testItem.Description);
