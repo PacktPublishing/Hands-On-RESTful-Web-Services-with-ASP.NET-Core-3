@@ -57,7 +57,7 @@ namespace Catalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(AddGenreRequest request)
         {
-            var result = await _genreService.AddGenreAsync(request, CancellationToken.None);
+            var result = await _genreService.AddGenreAsync(request);
             return CreatedAtAction(nameof(GetById), new { id = result.GenreId }, null);
         }
     }

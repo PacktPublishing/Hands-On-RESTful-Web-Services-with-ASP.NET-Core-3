@@ -50,12 +50,12 @@ namespace Catalog.Domain.Services
             return result.Select(_itemMapper.Map);
         }
 
-        public async Task<ArtistResponse> AddArtistAsync(AddArtistRequest request, CancellationToken cancellationToken)
+        public async Task<ArtistResponse> AddArtistAsync(AddArtistRequest request)
         {
             var item = new Entities.Artist { ArtistName = request.ArtistName };
             var result = _artistRepository.Add(item);
 
-            await _artistRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _artistRepository.UnitOfWork.SaveChangesAsync();
 
             return _artistMapper.Map(result);
         }

@@ -54,7 +54,7 @@ namespace Catalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(AddItemRequest request)
         {
-            var result = await _itemService.AddItemAsync(request, CancellationToken.None);
+            var result = await _itemService.AddItemAsync(request);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, null);
         }
 
@@ -63,7 +63,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Put(Guid id, EditItemRequest request)
         {
             request.Id = id;
-            var result = await _itemService.EditItemAsync(request, CancellationToken.None);
+            var result = await _itemService.EditItemAsync(request);
             return Ok(result);
         }
 

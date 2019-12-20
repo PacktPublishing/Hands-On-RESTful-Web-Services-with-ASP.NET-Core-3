@@ -48,12 +48,12 @@ namespace Catalog.Domain.Services
             return result.Select(_itemMapper.Map);
         }
 
-        public async Task<GenreResponse> AddGenreAsync(AddGenreRequest request, CancellationToken cancellationToken)
+        public async Task<GenreResponse> AddGenreAsync(AddGenreRequest request)
         {
             var item = new Genre { GenreDescription = request.GenreDescription };
 
             var result = _genreRepository.Add(item);
-            await _genreRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _genreRepository.UnitOfWork.SaveChangesAsync();
 
             return _genreMapper.Map(result);
         }

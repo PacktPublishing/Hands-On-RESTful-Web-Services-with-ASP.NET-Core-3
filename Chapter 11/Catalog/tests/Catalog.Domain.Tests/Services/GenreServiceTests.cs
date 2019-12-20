@@ -88,7 +88,7 @@ namespace Catalog.Domain.Tests.Services
                 _catalogContextFactory.GenreMapper, _catalogContextFactory.ItemMapper);
 
             var result =
-                await sut.AddGenreAsync(genre, CancellationToken.None);
+                await sut.AddGenreAsync(genre);
 
             result.GenreId.ShouldNotBeNull();
             result.GenreDescription.ShouldBe(genre.GenreDescription);

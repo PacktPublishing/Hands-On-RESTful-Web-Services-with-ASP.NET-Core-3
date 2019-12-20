@@ -11,6 +11,6 @@ namespace Catalog.Domain.Services
         Task<IEnumerable<GenreResponse>> GetGenreAsync();
         Task<GenreResponse> GetGenreAsync(GetGenreRequest request);
         Task<IEnumerable<ItemResponse>> GetItemByGenreIdAsync(GetGenreRequest request);
-        Task<GenreResponse> AddGenreAsync(AddGenreRequest request, CancellationToken cancellationToken);
+        Task<GenreResponse> AddGenreAsync(AddGenreRequest request);
     }
 }

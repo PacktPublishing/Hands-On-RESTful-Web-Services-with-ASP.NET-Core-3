@@ -90,7 +90,7 @@ namespace Catalog.Domain.Tests.Services
             var artist = JsonConvert.DeserializeObject<AddArtistRequest>(json);
 
             var result =
-                await sut.AddArtistAsync(artist, CancellationToken.None);
+                await sut.AddArtistAsync(artist);
 
             result.ArtistId.ShouldNotBeNull();
             result.ArtistName.ShouldBe(artist.ArtistName);
