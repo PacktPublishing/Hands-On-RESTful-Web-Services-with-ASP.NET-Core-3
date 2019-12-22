@@ -32,7 +32,6 @@ namespace Catalog.Infrastructure.Repositories
         {
             var item = await _context.Items
                 .AsNoTracking()
-                .Where(x => !x.IsInactive)
                 .Where(x => x.Id == id)
                 .Include(x => x.Genre)
                 .Include(x => x.Artist).FirstOrDefaultAsync();
