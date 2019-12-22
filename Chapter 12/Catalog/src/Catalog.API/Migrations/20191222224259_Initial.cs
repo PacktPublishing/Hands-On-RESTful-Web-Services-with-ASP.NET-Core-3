@@ -7,70 +7,71 @@ namespace Catalog.API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                "catalog");
-
             migrationBuilder.CreateTable(
-                "Artists",
+                name: "Artists",
                 columns: table => new
                 {
-                    ArtistId = table.Column<Guid>(),
-                    ArtistName = table.Column<string>(maxLength: 200)
+                    ArtistId = table.Column<Guid>(nullable: false),
+                    ArtistName = table.Column<string>(maxLength: 200, nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Artists", x => x.ArtistId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artists", x => x.ArtistId);
+                });
 
             migrationBuilder.CreateTable(
-                "Genres",
+                name: "Genres",
                 columns: table => new
                 {
-                    GenreId = table.Column<Guid>(),
-                    GenreDescription = table.Column<string>(maxLength: 1000)
+                    GenreId = table.Column<Guid>(nullable: false),
+                    GenreDescription = table.Column<string>(maxLength: 1000, nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Genres", x => x.GenreId); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.GenreId);
+                });
 
             migrationBuilder.CreateTable(
-                "Items",
+                name: "Items",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    Name = table.Column<string>(),
-                    Description = table.Column<string>(maxLength: 1000),
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: false),
                     LabelName = table.Column<string>(nullable: true),
                     Price = table.Column<string>(nullable: true),
                     PictureUri = table.Column<string>(nullable: true),
-                    ReleaseDate = table.Column<DateTimeOffset>(),
+                    ReleaseDate = table.Column<DateTimeOffset>(nullable: false),
                     Format = table.Column<string>(nullable: true),
-                    AvailableStock = table.Column<int>(),
-                    GenreId = table.Column<Guid>(),
-                    ArtistId = table.Column<Guid>(),
-                    IsInactive = table.Column<bool>()
+                    AvailableStock = table.Column<int>(nullable: false),
+                    GenreId = table.Column<Guid>(nullable: false),
+                    ArtistId = table.Column<Guid>(nullable: false),
+                    IsInactive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        "FK_Items_Artists_ArtistId",
-                        x => x.ArtistId,
-                        principalSchema: "catalog",
+                        name: "FK_Items_Artists_ArtistId",
+                        column: x => x.ArtistId,
                         principalTable: "Artists",
                         principalColumn: "ArtistId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        "FK_Items_Genres_GenreId",
-                        x => x.GenreId,
-                        principalSchema: "catalog",
+                        name: "FK_Items_Genres_GenreId",
+                        column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                "IX_Items_ArtistId",
+                name: "IX_Items_ArtistId",
                 table: "Items",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                "IX_Items_GenreId",
+                name: "IX_Items_GenreId",
                 table: "Items",
                 column: "GenreId");
         }
@@ -78,13 +79,13 @@ namespace Catalog.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "Items");
+                name: "Items");
 
             migrationBuilder.DropTable(
-                "Artists");
+                name: "Artists");
 
             migrationBuilder.DropTable(
-                "Genres");
+                name: "Genres");
         }
     }
 }
