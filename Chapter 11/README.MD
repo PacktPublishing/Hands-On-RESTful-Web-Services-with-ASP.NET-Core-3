@@ -90,7 +90,7 @@ curl -X POST \
 ```
 4. Get item data using HATEOAS controller
 ```
-curl -X POST \
+curl -X GET \
   http://localhost:5000/api/hateoas/items \
   -H 'Content-Type: application/json' \
 
