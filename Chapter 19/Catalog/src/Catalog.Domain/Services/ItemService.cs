@@ -91,7 +91,7 @@ namespace Catalog.Domain.Services
             if (request?.Id == null) throw new ArgumentNullException();
 
             var result = await _itemRepository.GetAsync(request.Id);
-            result.IsInactive = false;
+            result.IsInactive = true;
 
             _itemRepository.Update(result);
             var modifiedRecords = await _itemRepository.UnitOfWork.SaveChangesAsync();
