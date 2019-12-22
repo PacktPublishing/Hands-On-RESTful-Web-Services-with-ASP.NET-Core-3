@@ -101,20 +101,20 @@ curl -X GET \
 1. Delete the created item:
 ```
 curl -X DELETE \
-  http://localhost:5000/api/items/<item_id> \
-  -H 'Content-Type: application/json' \
+  http://localhost:5000/api/items/item_id \
+  -H 'Content-Type: application/json'
 ```
 
 2. Fetch all the items:
 ```
 curl -X GET \
   http://localhost:5000/api/items/ \
-  -H 'Content-Type: application/json' \
+  -H 'Content-Type: application/json'
 ```
 
 3. Fetch the detail of the item:
 ```
 curl -X GET \
-  http://localhost:5000/api/items/<item_id> \
-  -H 'Content-Type: application/json' \
+  http://localhost:5000/api/items/item_id \
+  -H 'Content-Type: application/json'
 ```
