@@ -27,25 +27,31 @@ _________
 
 1. Create a new user:
 ```
- curl -X POST "https://localhost:5001/api/users" "Content-Type:
-   application/json" -d
-   "{\"email\":\"newuser@example.com\",\"password\":\"<my_secret_password>\",\
-   "name\":\"Your name\"}"
+curl -X POST \
+  https://localhost:5001/api/users \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "email": "newuser@example.com",
+    "password": "<my_secret_password>",
+    "name": "Your name"
+}'
 ```
 
 2. Login using the new user:
 
 ```
-curl -X POST "https://localhost:5001/api/users/auth" -H "accept:
-   application/octet-stream" -H "Content-Type: application/json" -d
-   "{\"email\":\"newuser@example.com\",\"password\":\"<my_secret_password>\"}"
+curl -X POST \
+  https://localhost:5001/api/users/auth \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "email": "newuser@example.com",
+    "password": "<my_secret_password>"
+}'
 
 ```
 
 3. Fetch user information using the JWT Token:
 
 ```
-curl -X GET \
-    https://localhost:5001/api/users \
-    -H 'Authorization: Bearer <my_token>'
+curl -X GET https://localhost:5001/api/users -H 'Authorization: Bearer <my_token>'
 ```
