@@ -1,4 +1,4 @@
-# Chapter 13 - Services ecosystem pattern
+# Chapter 13 - Services ecosystem patterns
 
 ## Run steps
 
