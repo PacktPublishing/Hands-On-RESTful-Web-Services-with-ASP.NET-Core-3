@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:latest AS base
 WORKDIR /app
 EXPOSE 5002
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:latest AS build
 WORKDIR /project
 COPY ["/src/Cart.API/Cart.API.csproj", "/src/Cart.API/"]
 RUN dotnet restore "/src/Cart.API/Cart.API.csproj"
