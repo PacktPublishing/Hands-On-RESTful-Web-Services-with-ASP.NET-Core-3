@@ -1,4 +1,4 @@
-# Chapter 13 - Services ecosystem patterns
+# Chapter 14 - Implementing Worker Services Using .NET Core
 
 ## Run steps
 
@@ -9,7 +9,7 @@ cd "Chapter 13/Catalog"
 docker-compose up --build
 ```
 
-Runs the `catalog` service on port `5000`
+Runs the `catalog` service on port `5000`.
 
 2. Run `cart` service: 
 
@@ -18,7 +18,7 @@ cd "Chapter 13/Cart"
 docker-compose up --build
 ```
 
-Runs the `cart` service on port `5002`
+Runs the `cart` service on port `5002`.
 _________
 
 ## Verify the implementaiton
@@ -98,3 +98,9 @@ curl -X DELETE \
 ```
 
 2. Check the message triggered in the RabbitMQ dashboard [http://localhost:15672](http://localhost:15672)
+
+3. Verify that the catalog item with `item_id` is correctly deleted form the cart:
+
+```
+curl -X GET http://localhost:5002/api/cart/item_id
+```
