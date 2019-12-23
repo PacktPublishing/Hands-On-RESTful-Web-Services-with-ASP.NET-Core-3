@@ -5,7 +5,7 @@
 1. Run `catalog` service:
 
 ```
-cd "Chapter 13/Catalog"
+cd Catalog
 docker-compose up --build
 ```
 
@@ -14,7 +14,7 @@ Runs the `catalog` service on port `5000`.
 2. Run `cart` service: 
 
 ```
-cd "Chapter 13/Cart"
+cd Cart
 docker-compose up --build
 ```
 
