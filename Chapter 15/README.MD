@@ -28,7 +28,7 @@ _________
 1. Create a new user:
 ```
 curl -X POST \
-  https://localhost:5001/api/users \
+  https://localhost:5001/api/user \
   -H 'Content-Type: application/json' \
   -d '{
     "email": "newuser@example.com",
@@ -41,7 +41,7 @@ curl -X POST \
 
 ```
 curl -X POST \
-  https://localhost:5001/api/users/auth \
+  https://localhost:5001/api/user/auth \
   -H 'Content-Type: application/json' \
   -d '{
     "email": "newuser@example.com",
@@ -53,5 +53,5 @@ curl -X POST \
 3. Fetch user information using the JWT Token:
 
 ```
-curl -X GET https://localhost:5001/api/users -H 'Authorization: Bearer <my_token>'
+curl -X GET https://localhost:5001/api/user -H 'Authorization: Bearer <my_token>'
 ```
