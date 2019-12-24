@@ -68,10 +68,9 @@ namespace Catalog.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-
             ExecuteMigrations(app, env);
 
+            app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
