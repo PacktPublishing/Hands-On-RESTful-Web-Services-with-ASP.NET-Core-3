@@ -7,8 +7,6 @@ services:
       dockerfile: containers/api/Dockerfile
     env_file:
       - containers/api/api.env
-    volumes:
-         - ./certificates/:/https
     networks:
       - my_network
     ports:
