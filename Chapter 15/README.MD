@@ -9,7 +9,7 @@ cd Catalog
 docker-compose up --build
 ```
 
-Runs the `catalog` service on port `5000`.
+Runs the `catalog` service on port `5001`.
 
 2. Run `cart` service: 
 
