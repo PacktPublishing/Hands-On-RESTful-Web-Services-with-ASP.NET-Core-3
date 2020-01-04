@@ -11,10 +11,6 @@ export environment=StageAppServices
 # Defines the ACR registry URL
 export registry_address=<registry_name>.azurecr.io
 
-# Create a resource group
-az group create \
-   --name ${resource_group} \
-   --location westeurope
 
 # Create the app service
 az webapp create --resource-group ${resource_group} \

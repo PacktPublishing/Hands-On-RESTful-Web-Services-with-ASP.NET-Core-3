@@ -61,7 +61,7 @@ az acr credential show -n <container_registry_name>
 5. Get the container resulting address from the [https://portal.azure.com](https://portal.azure.com)
 
 
-### Configuring Configuring app services
+### Configuring app services
 1. Create a new resource group: 
 
 ```
