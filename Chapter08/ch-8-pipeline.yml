@@ -10,8 +10,8 @@ pool:
   vmImage: 'ubuntu-16.04'
 
 variables:
-  workingDir: './Chapter8/Catalog'
-  solutionPath: './Chapter8/Catalog/Catalog.API.sln'
+  workingDir: './Chapter08/Catalog'
+  solutionPath: './Chapter08/Catalog/Catalog.API.sln'
 steps:
 - task: DotNetCoreInstaller@2
   displayName: 'Install .net core 3.0 (preview)'
