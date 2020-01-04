@@ -1,4 +1,4 @@
-# Chapter 18 - D
+# Chapter 18 - Deploying Services on Azure
 
 ## Verify the implementaiton
 
