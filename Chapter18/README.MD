@@ -27,7 +27,7 @@ az acr create --resource-group handsOn --name <container_registry_name> --sku Ba
 az acr login --name <container_registry_name>
 ```
 
-5. Run docker compose into the Catalog folder:
+5. Run docker compose into the `Catalog` folder:
 
 ```
 docker-compose build
@@ -42,3 +42,20 @@ docker tag catalog_api
 docker push <container_registry_name>.azurecr.io/catalog_api:v1
 ```
 
+
+### Configuring Azure Container Instances
+
+1. Create a new resource group: 
+
+```
+az group create --name handsOnContainerServices --location westeurope
+```
+2. Get container credentials:
+
+```
+az acr credential show -n <container_registry_name>
+```
+
+3. Populate the `registry_address`, `registry_username` and `registry_password` variables into the `aci-deploy.sh` script
+4. Run the `aci-deploy.sh` script
+5. Get the container resulting address from the [https://portal.azure.com](https://portal.azure.com)
