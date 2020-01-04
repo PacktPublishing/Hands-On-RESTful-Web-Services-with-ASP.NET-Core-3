@@ -59,3 +59,21 @@ az acr credential show -n <container_registry_name>
 3. Populate the `registry_address`, `registry_username` and `registry_password` variables into the `aci-deploy.sh` script
 4. Run the `aci-deploy.sh` script
 5. Get the container resulting address from the [https://portal.azure.com](https://portal.azure.com)
+
+
+### Configuring Configuring app services
+1. Create a new resource group: 
+
+```
+az group create --name handsOnAppService --location westeurope
+```
+2. Get container credentials:
+
+```
+az acr credential show -n <container_registry_name>
+```
+
+3. Populate the `registry_name` variable into the `appservice-deploy.sh` script
+4. Run the `azuresql-deploy.sh` script in order to create the database instance
+5. Run the `appservice-deploy.sh` script in order to setup the container
+5. Get the container resulting address from the [https://portal.azure.com](https://portal.azure.com)
