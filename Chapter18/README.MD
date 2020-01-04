@@ -41,3 +41,4 @@ docker tag catalog_api
 
 docker push <container_registry_name>.azurecr.io/catalog_api:v1
 ```
+
