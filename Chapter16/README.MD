@@ -10,15 +10,6 @@ docker-compose up --build
 ```
 
 Runs the `catalog` service on port `5001`.
-
-2. Run `cart` service: 
-
-```
-cd Cart
-docker-compose up --build
-```
-
-Runs the `cart` service on port `5002`.
 _________
 
 ## Verify the implementaiton
@@ -28,7 +19,7 @@ _________
 1. Create a new genre:
 ```
 curl -X POST \
-  http://localhost:5000/api/genre \
+  https://localhost:5001/api/genre \
   -H 'Content-Type: application/json' \
   -d '{
     "genreDescription": "My Genre"
@@ -38,7 +29,7 @@ curl -X POST \
 2. Create a new artist:
 ```
 curl -X POST \
-  http://localhost:5000/api/artist \
+  https://localhost:5001/api/artist \
   -H 'Content-Type: application/json' \
   -d ' {
             "artistName": "My Artist"
@@ -47,7 +38,7 @@ curl -X POST \
 3. Create a new item:
 ```
 curl -X POST \
-  http://localhost:5000/api/items \
+  https://localhost:5001/api/items \
   -H 'Content-Type: application/json' \
   -d '{
             "name": "Test",
@@ -76,7 +67,7 @@ redis-cli -h catalog-cache ping
 2. Fetch the detail of the created item:
 
 ```
-curl -X GET http://localhost:5000/api/items/item_id
+curl -X GET https://localhost:5001/api/items/item_id
 ```
 
 3. Scan the redis cache instance to verify the populated keys:
