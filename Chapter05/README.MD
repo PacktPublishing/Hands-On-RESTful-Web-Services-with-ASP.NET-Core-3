@@ -11,8 +11,7 @@ _________
 1. Get the empty list of orders:
 
 ```
-curl -H "Accept: application/json" /
--X GET http://localhost:5000/api/orders
+curl -X GET http://localhost:5000/api/orders
 ```
 
 2. Create a new order using the `POST` verb:
