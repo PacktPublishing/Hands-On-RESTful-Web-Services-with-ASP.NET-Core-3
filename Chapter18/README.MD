@@ -70,7 +70,7 @@ az group create --name handsOnAppService --location westeurope
 2. Create a new app service plan:
 
 ```
-az appservice plan create --name catalogServicePlan   --resource-group handsOnAppService--sku FREE --is-linux
+az appservice plan create --name catalogServicePlan   --resource-group handsOnAppService --sku FREE --is-linux
 ```
 
 3. Populate the `registry_name` variable into the `appservice-deploy.sh` script
