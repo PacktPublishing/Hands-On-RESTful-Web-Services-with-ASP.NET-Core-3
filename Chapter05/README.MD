@@ -1,4 +1,4 @@
-# Chapter 5 - Web Service Stack in ASP.NE5T Core
+# Chapter 5 - Web Service Stack in ASP.NET Core
 
 ## Run the application
 
@@ -11,8 +11,7 @@ _________
 1. Get the empty list of orders:
 
 ```
-curl -H "Accept: application/json" /
--X GET http://localhost:5000/api/orders
+curl -X GET https://localhost:5001/api/order
 ```
 
 2. Create a new order using the `POST` verb:
@@ -54,5 +53,5 @@ curl -X PATCH \
 6. Get the detail of the updated order:
 
 ```
-curl -X GET http://localhost:5000/api/orders/order_id
+curl -X GET http://localhost:5000/api/order/order_id
 ```
