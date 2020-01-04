@@ -17,7 +17,10 @@ namespace SampleAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+            .AddTransient<IPaymentService, PaymentService>()
+            .AddControllers();
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
