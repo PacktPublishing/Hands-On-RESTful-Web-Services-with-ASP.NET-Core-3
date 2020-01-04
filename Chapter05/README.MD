@@ -11,7 +11,7 @@ _________
 1. Get the empty list of orders:
 
 ```
-curl -X GET http://localhost:5000/api/orders
+curl -X GET https://localhost:5001/api/orders
 ```
 
 2. Create a new order using the `POST` verb:
