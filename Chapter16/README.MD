@@ -73,7 +73,13 @@ curl -X POST \
 redis-cli -h catalog-cache ping
 ```
 
-2. Scan the redis cache instance to verify the populated keys:
+2. Fetch the detail of the created item:
+
+```
+curl -X GET http://localhost:5000/api/items/item_id
+```
+
+3. Scan the redis cache instance to verify the populated keys:
 
 ```
 redis-cli -h localhost scan 0
