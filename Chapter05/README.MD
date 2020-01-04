@@ -53,5 +53,5 @@ curl -X PATCH \
 6. Get the detail of the updated order:
 
 ```
-curl -X GET http://localhost:5000/api/orders/order_id
+curl -X GET http://localhost:5000/api/order/order_id
 ```
