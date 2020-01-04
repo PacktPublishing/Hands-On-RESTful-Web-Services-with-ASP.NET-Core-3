@@ -1,4 +1,4 @@
-# Chapter 5 - Web Service Stack in ASP.NE5T Core
+# Chapter 5 - Web Service Stack in ASP.NET Core
 
 ## Run the application
 
