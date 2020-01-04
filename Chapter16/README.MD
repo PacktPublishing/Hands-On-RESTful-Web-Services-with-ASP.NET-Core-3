@@ -61,7 +61,7 @@ curl -X POST \
 1. Verify the redis cache instance:
 
 ```
-redis-cli -h catalog-cache ping
+redis-cli -h localhost ping
 ```
 
 2. Fetch the detail of the created item:
