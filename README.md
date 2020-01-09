@@ -7,7 +7,7 @@ This is the code repository for [](https://www.packtpub.com/in/application-devel
 **Design production-ready, testable, and flexible RESTful APIs for web applications and microservices**
 
 ## Code in Action
-To see the Code in Action please visit the following link: http://bit.ly/2Ndao78
+To see the Code in Action please visit the following link: http://bit.ly/2Ndao78.
 
 ## What is this book about?
 RESTful Web Services with ASP.NET Core is a hands-on guide that will get you familiar with the ASP.NET Core ecosystem and help you in building scalable and maintainable web services with all the latest features. The book will prepare you with an advanced approach while building real-world applications in business and enterprise solutions.
