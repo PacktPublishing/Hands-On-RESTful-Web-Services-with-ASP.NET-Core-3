@@ -1,10 +1,71 @@
 # Hands-On RESTful Web Services with ASP.NET Core
 
-<a href="https://www.packtpub.com/application-development/hands-restful-web-services-aspnet-core"><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/b/1/b11548_mockupcover.png" alt="Hands-On RESTful Web Services with ASP.NET Core" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/in/application-development/hands-restful-web-services-aspnet-core?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/9/7/9781789537611-original.png" alt="" height="256px" align="right"></a>
 
-This is the repository for [Hands-On RESTful Web Services with ASP.NET Core
-](), published by Packt.
-Discover how the ASP.NET Core framework helps us to build maintainable and performant web services with its fast, modular, and cloud-ready features.
+This is the code repository for [](https://www.packtpub.com/in/application-development/hands-restful-web-services-aspnet-core?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
+
+**Design production-ready, testable, and flexible RESTful APIs for web applications and microservices**
+
+## What is this book about?
+RESTful Web Services with ASP.NET Core is a hands-on guide that will get you familiar with the ASP.NET Core ecosystem and help you in building scalable and maintainable web services with all the latest features. The book will prepare you with an advanced approach while building real-world applications in business and enterprise solutions.
+
+## Code in Action
+To see the Code in Action please visit the following link: [] ()
+
+This book covers the following exciting features:
+
+* Gain a comprehensive working knowledge of ASP.NET Core
+* Integrate third-party tools and frameworks to build maintainable and efficient services
+* Implement patterns using dependency injection to reduce boilerplate code and improve flexibility
+* Use ASP.NET Core's out-of-the-box tools to test your applications
+* Use Docker to run your ASP.NET Core web service in an isolated and self-contained environment
+* Secure your information using HTTPS and token-based authentication
+* Integrate multiple web services using resiliency patterns and messaging techniques
+
+If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789537614) today!
+
+<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
+alt="https://www.packtpub.com/" border="5" /></a>
+
+## Instructions and Navigations
+All of the code is organized into folders. For example, Chapter02.
+
+The code will look like the following:
+```
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+<OutputType>Exe</OutputType>
+<TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+</PropertyGroup>
+</Project>
+```
+
+**Following is what you need for this book:**
+This book is for anyone who wants to learn how to build RESTful web services with the ASP.NET Core framework to improve the scalability and performance of their applications. Basic knowledge of C# and .NET Core will help you make the best use of the code samples included in the book.
+
+With the following software and hardware list you can run all code files present in the book (Chapter 1-20).
+### Software and Hardware List
+| Chapter | Software required | OS required |
+| -------- | ------------------------------------ | ----------------------------------- |
+| 1-20 | Visual Studio Code(*)  | Windows, Mac OS X, and Linux (Any) |
+
+We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789537611_ColorImages.pdf).
+
+### Related products
+* Hands-On Design Patterns with C# and .NET Core  [[Packt]](https://www.packtpub.com/application-development/hands-design-patterns-c-and-net-core?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789133645)
+
+* Mastering Visual Studio 2019 - Second Edition  [[Packt]](https://www.packtpub.com/in/programming/mastering-visual-studio-2019-second-edition?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789530091)
+
+## Get to Know the Author
+**Samuele Resca**
+is a software engineer working at Just Eat and primarily focused on web technologies. He is a Microsoft Most Valuable Professional in Visual Studio and development technologies. Samuele writes software engineering blog posts on Samuele Resca – Blog and The DEV Community, and he contributes to open source projects. He is continuously learning and developing around the web ecosystem with a focus on the .NET Core ecosystem, cloud computing, serverless computing, and reactive programming. Samuele is from Italy, and he currently lives in London.
+
+
+### Suggestions and Feedback
+[Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
+
+
+
 
 ## Learn
 
