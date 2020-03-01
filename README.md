@@ -27,6 +27,21 @@ If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
 
+## Build status
+| Chapter  | Build status |
+| ------------- | ------------- |
+| Chapter 8  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%208?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=8&branchName=master) |
+| Chapter 9  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%209?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=9&branchName=master) |
+| Chapter 10  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2010?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=10&branchName=master) |
+| Chapter 11  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2011?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=11&branchName=master) |
+| Chapter 12  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2012?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=12&branchName=master) |
+| Chapter 13  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2013?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=13&branchName=master) |
+| Chapter 15 | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2015?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=14&branchName=master) |
+| Chapter 16  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2016?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=15&branchName=master) |
+| Chapter 17  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2017?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=16&branchName=master) |
+| Chapter 18  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2018?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=17&branchName=master) |
+| Chapter 19  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2019?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=18&branchName=master) |
+
 ## Instructions and Navigations
 All of the code is organized into folders. For example, Chapter02.
 
@@ -77,19 +92,3 @@ is a software engineer working at Just Eat and primarily focused on web technolo
 - Secure your information using HTTPS and token-based authentication
 - Integrate multiple web service using techniques such as resilient-clients and messaging
 
-## Build status
-
-
-| Chapter  | Build status |
-| ------------- | ------------- |
-| Chapter 8  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%208?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=8&branchName=master) |
-| Chapter 9  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%209?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=9&branchName=master) |
-| Chapter 10  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2010?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=10&branchName=master) |
-| Chapter 11  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2011?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=11&branchName=master) |
-| Chapter 12  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2012?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=12&branchName=master) |
-| Chapter 13  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2013?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=13&branchName=master) |
-| Chapter 15 | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2015?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=14&branchName=master) |
-| Chapter 16  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2016?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=15&branchName=master) |
-| Chapter 17  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2017?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=16&branchName=master) |
-| Chapter 18  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2018?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=17&branchName=master) |
-| Chapter 19  | [![Build Status](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_apis/build/status/Chapter%2019?branchName=master)](https://dev.azure.com/samueleresca0753/Hands-On-RESTful-Web-Services-with-ASP.NET-Core/_build/latest?definitionId=18&branchName=master) |
