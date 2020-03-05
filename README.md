@@ -66,6 +66,12 @@ With the following software and hardware list you can run all code files present
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789537611_ColorImages.pdf).
 
+## Errata
+* Page 183 (Paragraph 1, Line 3): **the methods end with the Async prefix, which** _should be_ **the methods end with Async, which**
+* Page 198: **public async Task additem_should_add_right_entity()** _should be_ **public async Task additem_should_add_the_entity()**
+* Page 199: **public async Task edititem_should_add_right_entity()** _should be_ **public async Task edititem_should_edit_the_entity()**
+
+
 ### Related products
 * Hands-On Design Patterns with C# and .NET Core  [[Packt]](https://www.packtpub.com/application-development/hands-design-patterns-c-and-net-core?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789133645)
 
