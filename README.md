@@ -2,18 +2,14 @@
 
 <a href="https://www.packtpub.com/in/application-development/hands-restful-web-services-aspnet-core?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/9/7/9781789537611-original.png" alt="" height="256px" align="right"></a>
 
-This is the code repository for [](https://www.packtpub.com/in/application-development/hands-restful-web-services-aspnet-core?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
+This is the code repository for [Hands-On RESTful Web Services with ASP.NET Core](https://www.packtpub.com/in/application-development/hands-restful-web-services-aspnet-core?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
 
 **Design production-ready, testable, and flexible RESTful APIs for web applications and microservices**
-
-## Code in Action
-To see the Code in Action please visit the following link: http://bit.ly/2Ndao78.
 
 ## What is this book about?
 RESTful Web Services with ASP.NET Core is a hands-on guide that will get you familiar with the ASP.NET Core ecosystem and help you in building scalable and maintainable web services with all the latest features. The book will prepare you with an advanced approach while building real-world applications in business and enterprise solutions.
 
 This book covers the following exciting features:
-
 * Gain a comprehensive working knowledge of ASP.NET Core
 * Integrate third-party tools and frameworks to build maintainable and efficient services
 * Implement patterns using dependency injection to reduce boilerplate code and improve flexibility
@@ -65,6 +61,14 @@ With the following software and hardware list you can run all code files present
 | 1-20 | Visual Studio Code(*)  | Windows, Mac OS X, and Linux (Any) |
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789537611_ColorImages.pdf).
+
+## Code in Action
+To see the Code in Action please visit the following link: http://bit.ly/2Ndao78.
+
+## Errata
+* Page 183 (Paragraph 1, Line 3): **the methods end with the Async prefix, which** _should be_ **the methods end with Async, which**
+* Page 198: **public async Task additem_should_add_right_entity()** _should be_ **public async Task additem_should_add_the_entity()**
+* Page 199: **public async Task edititem_should_add_right_entity()** _should be_ **public async Task edititem_should_edit_the_entity()**
 
 ### Related products
 * Hands-On Design Patterns with C# and .NET Core  [[Packt]](https://www.packtpub.com/application-development/hands-design-patterns-c-and-net-core?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789133645)
