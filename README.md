@@ -67,6 +67,7 @@ To see the Code in Action please visit the following link: http://bit.ly/2Ndao78
 
 ## Errata
 * Page 183 (Paragraph 1, Line 3): **the methods end with the Async prefix, which** _should be_ **the methods end with Async, which**
+* Page 186: **public ItemResponse Map(Item item)** _should be_ **public ItemResponse Map(Item request)**
 * Page 198: **public async Task additem_should_add_right_entity()** _should be_ **public async Task additem_should_add_the_entity()**
 * Page 199: **public async Task edititem_should_add_right_entity()** _should be_ **public async Task edititem_should_edit_the_entity()**
 
