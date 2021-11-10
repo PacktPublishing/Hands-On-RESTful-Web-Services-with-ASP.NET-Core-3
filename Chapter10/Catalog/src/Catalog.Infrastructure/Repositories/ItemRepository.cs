@@ -35,9 +35,6 @@ namespace Catalog.Infrastructure.Repositories
                 .Include(x => x.Genre)
                 .Include(x => x.Artist).FirstOrDefaultAsync();
 
-            if (item == null) return null;
-
-            _context.Entry(item).State = EntityState.Detached;
             return item;
         }
 
