@@ -96,3 +96,7 @@ is a software engineer working at Just Eat and primarily focused on web technolo
 - Secure your information using HTTPS and token-based authentication
 - Integrate multiple web service using techniques such as resilient-clients and messaging
 
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781789537611">https://packt.link/free-ebook/9781789537611 </a> </p>
